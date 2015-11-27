@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/404.html</loc>
+    <lastmod>2015-11-27T07:44:07.713Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/categories/index.html</loc>
+    <lastmod>2015-11-27T07:39:22.306Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/tags/index.html</loc>
+    <lastmod>2015-11-27T07:36:37.024Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/about/index.html</loc>
+    <lastmod>2015-11-27T07:27:25.059Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2015/11/27/hello-world/</loc>
     <lastmod>2015-11-27T04:33:48.649Z</lastmod>
   </url>
