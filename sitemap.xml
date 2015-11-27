@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/2011/03/09/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</loc>
+    <lastmod>2015-11-27T09:53:54.965Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2014/11/13/PHP%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Composer%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2015-11-27T09:47:25.667Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2014/11/27/%E8%AE%B0%E4%B8%80%E6%AC%A1PHP%E4%B8%AD$_REQUEST%E8%B8%A9%E7%9A%84%E5%9D%91/</loc>
     <lastmod>2015-11-27T09:37:45.823Z</lastmod>
   </url>
@@ -14,16 +24,6 @@
   <url>
     <loc>http://sphenginx.github.io/2015/11/27/hexo/</loc>
     <lastmod>2015-11-27T09:06:44.941Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2014/11/13/PHP%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Composer%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2015-11-27T08:57:24.148Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2011/03/09/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</loc>
-    <lastmod>2015-11-27T08:46:15.650Z</lastmod>
   </url>
   
   <url>

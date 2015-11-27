@@ -117,11 +117,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[我的两年半聊大生活]]></title>
+    <title><![CDATA[PHP依赖管理工具Composer入门]]></title>
     <link href="http://sphenginx.github.io/2014/11/13/PHP%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Composer%E5%85%A5%E9%97%A8/"/>
     <id>http://sphenginx.github.io/2014/11/13/PHP依赖管理工具Composer入门/</id>
     <published>2014-11-13T06:43:25.000Z</published>
-    <updated>2015-11-27T08:57:24.148Z</updated>
+    <updated>2015-11-27T09:47:25.667Z</updated>
     <content type="html"><![CDATA[<p><strong>介绍</strong></p>
 <p>Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。</p>
 <p><strong>依赖管理</strong></p>
@@ -169,11 +169,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[面试成功有感]]></title>
+    <title><![CDATA[面试有感]]></title>
     <link href="http://sphenginx.github.io/2011/03/09/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/"/>
     <id>http://sphenginx.github.io/2011/03/09/面试有感/</id>
     <published>2011-03-09T08:29:00.000Z</published>
-    <updated>2015-11-27T08:46:15.650Z</updated>
+    <updated>2015-11-27T09:53:54.965Z</updated>
     <content type="html"><![CDATA[<p>自2011年一月25号培训毕业以来，我参加的大大小小的面试（不包括远程的）也有将近二十多次了，在这二十多次的面试中，我不知不觉当了一次‘面霸’，也发现了面试的一些好处，特作文以记之，也希望对即将参加工作的童鞋有一些帮助吧。</p>
 <p>首先，多次的面试可以很好的锻炼体力，在这么多次的面试中，我记得最长的一次是从北京的最北边到北京的最南边，那次面试从上午十一点出门到下午六点回家，很好的锻炼了我的‘艰苦奋斗’精神，我的抗疲劳能力也大大增强。</p>
 <p>其次，多次的面试可以加深对行业的了解，每次面试前，我都会上网查找面试企业的相关信息，以及该企业的优势与发展空间，甚至是我面试的岗位的发展空间，通过多次的面试，对网站开发行业有了更深层次的了解，对自己的职业定位更加明确。</p>
