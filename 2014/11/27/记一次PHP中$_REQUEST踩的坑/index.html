@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="聊城大学," />
+  <meta name="keywords" content="php,request," />
 
 
 
@@ -53,22 +53,28 @@
 
 
 
-<meta name="description" content="在聊大的这两年半，或许只是人生一个很小的片段，但是对于我们每一个人都是不可或缺，好似娘胎里带来的胎记。
-这是一群普通的人在一所年轻的高校一起走过的两年半，如青春的岁月并没有多少区别，时间也是如流水一样逝去。但在我们的内心，这是一个驿站，一个青春的驿站，一个梦想的驿站，一个不只是学更是问的驿站。
-我们原本并不熟悉，但并没有妨碍我们走在一起。现在，我们已经不是十八九的年纪，也少了许多激情与活力，但我们">
+<meta name="description" content="前记
+今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查
+既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的两年半聊大生活">
-<meta property="og:url" content="http://sphenginx.github.io/2010/09/24/我的两年半聊大生活/index.html">
+<meta property="og:title" content="记一次PHP中$_REQUEST踩的坑">
+<meta property="og:url" content="http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/index.html">
 <meta property="og:site_name" content="平常心">
-<meta property="og:description" content="在聊大的这两年半，或许只是人生一个很小的片段，但是对于我们每一个人都是不可或缺，好似娘胎里带来的胎记。
-这是一群普通的人在一所年轻的高校一起走过的两年半，如青春的岁月并没有多少区别，时间也是如流水一样逝去。但在我们的内心，这是一个驿站，一个青春的驿站，一个梦想的驿站，一个不只是学更是问的驿站。
-我们原本并不熟悉，但并没有妨碍我们走在一起。现在，我们已经不是十八九的年纪，也少了许多激情与活力，但我们">
-<meta property="og:updated_time" content="2015-11-27T08:44:28.913Z">
+<meta property="og:description" content="前记
+今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查
+既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现c">
+<meta property="og:updated_time" content="2015-11-27T09:17:09.355Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的两年半聊大生活">
-<meta name="twitter:description" content="在聊大的这两年半，或许只是人生一个很小的片段，但是对于我们每一个人都是不可或缺，好似娘胎里带来的胎记。
-这是一群普通的人在一所年轻的高校一起走过的两年半，如青春的岁月并没有多少区别，时间也是如流水一样逝去。但在我们的内心，这是一个驿站，一个青春的驿站，一个梦想的驿站，一个不只是学更是问的驿站。
-我们原本并不熟悉，但并没有妨碍我们走在一起。现在，我们已经不是十八九的年纪，也少了许多激情与活力，但我们">
+<meta name="twitter:title" content="记一次PHP中$_REQUEST踩的坑">
+<meta name="twitter:description" content="前记
+今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查
+既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现c">
 
 
 
@@ -80,7 +86,7 @@
   };
 </script>
 
-  <title> 我的两年半聊大生活 | 平常心 </title>
+  <title> 记一次PHP中$_REQUEST踩的坑 | 平常心 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +236,7 @@
             
             
               
-                我的两年半聊大生活
+                记一次PHP中$_REQUEST踩的坑
               
             
           </h1>
@@ -239,8 +245,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2010-09-24T15:15:00+08:00" content="2010-09-24">
-              2010-09-24
+            <time itemprop="dateCreated" datetime="2014-11-27T09:27:40+08:00" content="2014-11-27">
+              2014-11-27
             </time>
           </span>
 
@@ -249,8 +255,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/人生百态/" itemprop="url" rel="index">
-                    <span itemprop="name">人生百态</span>
+                  <a href="/categories/日新月异/" itemprop="url" rel="index">
+                    <span itemprop="name">日新月异</span>
                   </a>
                 </span>
 
@@ -278,16 +284,26 @@
       
 
       
-        <span itemprop="articleBody"><p>在聊大的这两年半，或许只是人生一个很小的片段，但是对于我们每一个人都是不可或缺，好似娘胎里带来的胎记。</p>
-<p>这是一群普通的人在一所年轻的高校一起走过的两年半，如青春的岁月并没有多少区别，时间也是如流水一样逝去。但在我们的内心，这是一个驿站，一个青春的驿站，一个梦想的驿站，一个不只是学更是问的驿站。</p>
-<p>我们原本并不熟悉，但并没有妨碍我们走在一起。现在，我们已经不是十八九的年纪，也少了许多激情与活力，但我们在思考人生的同时，也努力留住关于青春所有的记忆。<br>年龄让我们背负了更多的责任，这让我们更多的是努力规划自己人生的轨迹。虽然，我们并不能全部做主，但是我们也绝不能任其随意。</p>
-<p>这不是名校，也并非是一片神奇的土地。但是，勤劳的我们依然欣喜和努力，因为今天的每一个劳作总能期待一个丰收的美丽。因为，我们知道：不是每一个付出都有收获，但每一个收获都必须付出。这就是人生，这更是真谛。</p>
-<p>我们没有名师讲授，更没有外界推崇的华丽，但并没有阻碍朴实的老师和我们一起努力，或许他们正在培育未来的名师，更或许我们正在和未来的名师在一起。我们可能不能收获美丽，但是未来收获的每一份美丽都有我们拼搏的气息。</p>
-<p>这仅仅是江北一块平实的土地，我们也只是这块土地的过客，尝试着耕耘与收获，也经历挫折与失意。但是，我们不抛弃，因为我们正努力使这块土地镌刻我们所有的记忆。</p>
-<p>巍峨的光岳楼留给我们的并不仅是壮丽，更多的是这个城市关于历史的记忆；柔情的胭脂湖留给我们的并不仅是护城湖的遗迹，更多的是这个城市关于平和民风的一种写意；我们可能对这个城市说不上爱，但我们必须承认它留给了我们不可更替的记忆。</p>
-<p>长长的彩虹桥带来的并不仅是学习与生活的便利，更多的是品味我们走在上面时青春豪气；西校高高白桦树带来的并不仅是夏日的惬意，而是一个逐渐成长的校园关于学问的诸多墨迹；孔雀的鸣叫并不是多么悦耳，但是我们依然在旁边期待它开屏的美丽。</p>
-<p>我们可能对这个学校还不是很满意，甚至有些时候还有些怨气，我们可以不说爱，但我们确实很在意。也正是因为我们很在意，所以我们对这个学校是如此的苛求，就像眼里容不得沙粒。</p>
-<p>离开，并不是我们的本意，但这就是人生的轨迹。伤别的季节好像看不到我们的朝气，并不是我们在逃避与消极，而是希望凭借一些酒精保存更多关于这个学校的记忆。<br>背起行囊，我们就要远离，并努力带走这里一切的气息，何处是终点尚需再议。但每一个人生歇息的驿站，都连着聊城大学长长的记忆。<br>我不说爱你，更不说恨你，因为语言是如此的乏力。我只是告诉你，我永远记得你！</p>
+        <span itemprop="articleBody"><p><strong>前记</strong></p>
+<p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<p><strong>排查</strong></p>
+<p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
+<blockquote>
+<p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
+</blockquote>
+<p><strong>结论</strong></p>
+<p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
+<p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
+<p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
+<p>这个变量主要是在php执行时，对超级变量创建的设置。EGPCS对应的超级变量为$_ENV,$_GET,$_POST,$_COOKIE,$_SERVER。如果variables_order被设置为””,则对应的超级全局变量的值都为空数组。</p>
+<p>所以，要想$_REQUEST包含的预定义变量的值，variables_order必须有对应的设置。例如，variables_order = “G”，则$_REQUEST中肯定不会有post的值。</p>
+<p>在register_globals=on的情况，这个配置的顺序将影响对应变量的值，重复key，后边的会覆盖前边的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ request_order = &#34;PGC&#34;</span><br></pre></td></tr></table></figure></p>
+<p>这个变量，说明$_REQUEST包含哪些类型的外部数据、数据加载的顺序。这个是有顺序的，如果key重复，后边的就会覆盖前边的值。</p>
+<blockquote>
+<p>   比如:<br>$_GET里面有个$_GET[‘id’]=2,$_POST里有一个$_POST[‘id’]=3。<br>如果request_order = “PG”的形式设置，那么$_REQUEST[‘id’]=2。<br>如果request_order = “GP”的形式设置，则$_REQUEST[‘id’]=3。</p>
+</blockquote>
 </span>
       
     </div>
@@ -296,7 +312,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/聊城大学/" rel="tag">#聊城大学</a>
+            <a href="/tags/php/" rel="tag">#php</a>
+          
+            <a href="/tags/request/" rel="tag">#request</a>
           
         </div>
       
@@ -305,12 +323,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2014/11/13/PHP依赖管理工具Composer入门/" rel="next" title="我的两年半聊大生活">
+                <i class="fa fa-chevron-left"></i> 我的两年半聊大生活
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2011/02/16/写在年后的第一场雪，写在年后的第一次面试/" rel="prev" title="写在年后的第一场雪，写在年后的第一次面试">
-                写在年后的第一场雪，写在年后的第一次面试 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/01/17/未付款发货的逻辑太坑了！！！/" rel="prev" title="记一次PHP中$_REQUEST踩的坑">
+                记一次PHP中$_REQUEST踩的坑 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

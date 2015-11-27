@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2015-11-27T04:33:48.649Z</updated>
+  <updated>2015-11-27T09:06:44.941Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -15,12 +15,12 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <link href="http://sphenginx.github.io/2015/11/27/hello-world/"/>
-    <id>http://sphenginx.github.io/2015/11/27/hello-world/</id>
-    <published>2015-11-27T04:33:48.649Z</published>
-    <updated>2015-11-27T04:33:48.649Z</updated>
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+    <title><![CDATA[hexo]]></title>
+    <link href="http://sphenginx.github.io/2015/11/27/hexo/"/>
+    <id>http://sphenginx.github.io/2015/11/27/hexo/</id>
+    <published>2015-11-27T09:06:44.971Z</published>
+    <updated>2015-11-27T09:06:44.941Z</updated>
+    <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>!  Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -31,8 +31,88 @@
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>!  Check <a href="http://hexo.io/docs/" target="_blank" rel="]]>
     </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[记一次PHP中$_REQUEST踩的坑]]></title>
+    <link href="http://sphenginx.github.io/2015/01/17/%E6%9C%AA%E4%BB%98%E6%AC%BE%E5%8F%91%E8%B4%A7%E7%9A%84%E9%80%BB%E8%BE%91%E5%A4%AA%E5%9D%91%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81/"/>
+    <id>http://sphenginx.github.io/2015/01/17/未付款发货的逻辑太坑了！！！/</id>
+    <published>2015-01-17T08:03:01.000Z</published>
+    <updated>2015-11-27T09:30:30.096Z</updated>
+    <content type="html"><![CDATA[<p><strong>前记</strong></p>
+<p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
+<p><strong>排查</strong></p>
+<p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给你详细分析。</p>
+<p>先说下支付的逻辑：众所周知，不管是微信支付 还是 支付宝支付，都是异步进行的。也就是说用户在微信或者支付宝支付成功后，微信或者支付宝并不会第一时间把这个支付成功的消息返回给你，而是在接下来的一个小时或者更长时间内分N次给你支付成功的通知（有时候接收到第三方服务器返回success的时候还会发起多次的异步通知），所以一般业务逻辑在此处都会有一防止重复更新数据库的逻辑判断，在成功更新订单为已付款状态后，如果还收到异步通知，直接返回true。</p>
+<p>但是因为未付款发货这种逆天逻辑的存在，在网速慢或者服务器访问量大的时候，用户支付成功，服务器未收到支付成功的异步通知，这时候，脑残卖家点了发货，并且成功了更新了数据库的订单状态，这时候，服务器收到支付成功的通知（在收到支付成功时的业务逻辑是更新未付款的订单），这时候去更新数据表，发现数据不存在（因为订单状态为已发货，而不是未付款），更坑的是，订单表的类型居然是MyISAM类型的，居然不是InnoDB类型的，如此事务完全不能进行，在发现未更新数据的时候不能rollback，这样造成了，之前成功返回异步通知的逻辑不能执行，造成微信或者支付宝异步通知一次，则更新一次数据库…… </p>
+<p>这样的逻辑简直太坑爹了！！！以此提醒同僚们：<code>“ 程序有风险，入行需谨慎”</code> 啊！！！</p>
+<p><strong>解决方案</strong></p>
+<ul>
+<li>更新订单表以及订单相关表为Innodb类型（MyISAM不支持事务处理）；</li>
+<li>更新响应支付通知条件，只要支付方返回支付成功通知，这边就更新为已付款状态，而不关心订单状态是否是未付款；</li>
+</ul>
+<p>这种逻辑真的不要再出现了啊！！！</p>
+<p>不说了，继续修复脏数据了……o(╯□╰)o，囧…… </p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>前记</strong></p>
+<p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
+<p><strong>排查</strong></p>
+<p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值]]>
+    </summary>
+    
+      <category term="php" scheme="http://sphenginx.github.io/tags/php/"/>
+    
+      <category term="异步" scheme="http://sphenginx.github.io/tags/%E5%BC%82%E6%AD%A5/"/>
+    
+      <category term="支付" scheme="http://sphenginx.github.io/tags/%E6%94%AF%E4%BB%98/"/>
+    
+      <category term="No Zuo No Die" scheme="http://sphenginx.github.io/categories/No-Zuo-No-Die/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[记一次PHP中$_REQUEST踩的坑]]></title>
+    <link href="http://sphenginx.github.io/2014/11/27/%E8%AE%B0%E4%B8%80%E6%AC%A1PHP%E4%B8%AD$_REQUEST%E8%B8%A9%E7%9A%84%E5%9D%91/"/>
+    <id>http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/</id>
+    <published>2014-11-27T01:27:40.000Z</published>
+    <updated>2015-11-27T09:17:09.355Z</updated>
+    <content type="html"><![CDATA[<p><strong>前记</strong></p>
+<p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<p><strong>排查</strong></p>
+<p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
+<blockquote>
+<p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
+</blockquote>
+<p><strong>结论</strong></p>
+<p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
+<p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
+<p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
+<p>这个变量主要是在php执行时，对超级变量创建的设置。EGPCS对应的超级变量为$_ENV,$_GET,$_POST,$_COOKIE,$_SERVER。如果variables_order被设置为””,则对应的超级全局变量的值都为空数组。</p>
+<p>所以，要想$_REQUEST包含的预定义变量的值，variables_order必须有对应的设置。例如，variables_order = “G”，则$_REQUEST中肯定不会有post的值。</p>
+<p>在register_globals=on的情况，这个配置的顺序将影响对应变量的值，重复key，后边的会覆盖前边的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ request_order = &#34;PGC&#34;</span><br></pre></td></tr></table></figure></p>
+<p>这个变量，说明$_REQUEST包含哪些类型的外部数据、数据加载的顺序。这个是有顺序的，如果key重复，后边的就会覆盖前边的值。</p>
+<blockquote>
+<p>   比如:<br>$_GET里面有个$_GET[‘id’]=2,$_POST里有一个$_POST[‘id’]=3。<br>如果request_order = “PG”的形式设置，那么$_REQUEST[‘id’]=2。<br>如果request_order = “GP”的形式设置，则$_REQUEST[‘id’]=3。</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong>前记</strong></p>
+<p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<p><strong>排查</strong></p>
+<p>既然有了怀疑，那么我们来打印下]]>
+    </summary>
+    
+      <category term="php" scheme="http://sphenginx.github.io/tags/php/"/>
+    
+      <category term="request" scheme="http://sphenginx.github.io/tags/request/"/>
+    
+      <category term="日新月异" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E6%96%B0%E6%9C%88%E5%BC%82/"/>
     
   </entry>
   
