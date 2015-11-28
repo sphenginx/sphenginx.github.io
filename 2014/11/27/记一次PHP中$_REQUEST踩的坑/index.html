@@ -53,28 +53,22 @@
 
 
 
-<meta name="description" content="前记
-今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查
-既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现c">
+<meta name="description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次PHP中$_REQUEST踩的坑">
 <meta property="og:url" content="http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/index.html">
 <meta property="og:site_name" content="平常心">
-<meta property="og:description" content="前记
-今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查
-既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现c">
-<meta property="og:updated_time" content="2015-11-27T09:37:45.823Z">
+<meta property="og:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
+<meta property="og:updated_time" content="2015-11-28T04:47:40.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次PHP中$_REQUEST踩的坑">
-<meta name="twitter:description" content="前记
-今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查
-既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现c">
+<meta name="twitter:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
 
 
 
@@ -255,8 +249,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日新月异/" itemprop="url" rel="index">
-                    <span itemprop="name">日新月异</span>
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
                   </a>
                 </span>
 
@@ -284,16 +278,13 @@
       
 
       
-        <span itemprop="articleBody"><p><strong>前记</strong></p>
-<p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
-<p><strong>排查</strong></p>
-<p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h2 id="前记">前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<h2 id="排查">排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
 <p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
 <blockquote>
 <p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
 </blockquote>
-<p><strong>结论</strong></p>
-<p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
+<h2 id="结论">结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
 <p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
 <p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
 <p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
@@ -431,7 +422,7 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -495,7 +486,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前记"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

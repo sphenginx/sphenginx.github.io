@@ -54,33 +54,24 @@
 
 
 <meta name="description" content="前言如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。
-信息匹对
-认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
-
-方法  用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
-
-不足  接口通过HTTP通讯，中间一旦被人">
+信息匹对认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
+方法用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
+不足接口通过HTTP通讯，中间一旦被人窃听，以后就可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="API漫谈">
 <meta property="og:url" content="http://sphenginx.github.io/2015/06/01/API漫谈/index.html">
 <meta property="og:site_name" content="平常心">
 <meta property="og:description" content="前言如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。
-信息匹对
-认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
-
-方法  用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
-
-不足  接口通过HTTP通讯，中间一旦被人">
-<meta property="og:updated_time" content="2015-11-28T01:45:58.790Z">
+信息匹对认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
+方法用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
+不足接口通过HTTP通讯，中间一旦被人窃听，以后就可">
+<meta property="og:updated_time" content="2015-11-28T04:50:49.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="API漫谈">
 <meta name="twitter:description" content="前言如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。
-信息匹对
-认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
-
-方法  用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
-
-不足  接口通过HTTP通讯，中间一旦被人">
+信息匹对认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？
+方法用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
+不足接口通过HTTP通讯，中间一旦被人窃听，以后就可">
 
 
 
@@ -261,8 +252,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日新月异/" itemprop="url" rel="index">
-                    <span itemprop="name">日新月异</span>
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
                   </a>
                 </span>
 
@@ -290,47 +281,27 @@
       
 
       
-        <span itemprop="articleBody"><p><strong>前言</strong><br>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
-<p><strong>信息匹对</strong></p>
-<p>认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？</p>
-<ul>
-<li><p>方法<br>  用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。</p>
-</li>
-<li><p>不足<br>  接口通过HTTP通讯，中间一旦被人窃听，以后就可以拿 user_id 和 user_key 给我们发请求，而我们无法分辨出到底是谁才是真的齐天大圣。看来，不可以把 user_key 这样子发送。</p>
-<p>  就算认证是可靠的，黑客还是可以拦截住请求，对认证部分不修改但把参数修改了，然后让请求继续发送。例如把你准备给哈利文转账，但是请求在中间被拦截修改后，变成给变色龙转了。</p>
-</li>
-</ul>
-<p><strong>哈希</strong><br>我们密码存储的时候不是经常md5哈希后保存么，那么我们把 user_key 也哈希一下吧，嗯，正愁不知道拿user_key和谁哈希好，既然说参数会被替换，那么，我们拿 user_key 和 请求参数哈希后的字符串作为 auth_token 传输，而不发送 user_key不就可以了。这样参数也成为认证的一部分，就不会被替换掉了。</p>
-<ul>
-<li><p>做法<br>  把参数按某个规则排好序后，连接成字符串，然后和 user_key 哈希后作为 auth_token，发送。接受端接到请求后，把参数排序后和 user_key 哈希后的字符串和 auth_token 比较。</p>
-</li>
-<li><p>不足<br>  当参数很少，而 user_key 不复杂的情况下， auto_token 有被碰撞出 user_key的可能</p>
-</li>
-</ul>
-<p><strong>加强版哈希</strong><br>表示，这种情况对我们这种平时存密码都要多次哈希的孩子来说毫无鸭梨啊，我们可以分别对参数字符串哈希后取一定位数，然后把 user_key 哈希后取一定位数，再把两者连起来哈希作为 auth_token</p>
-<ul>
-<li><p>请求非法 ！<br>  什么转了9999次款？黑客大叔表示无法对我们请求下手了，不过他借你某次给他转款的时候拦截到了你的请求，然后不停的伪造一样的请求… 我们可以增加一些策略，防止这种请求重放，例如：在参数里面添加时间戳，最好精确到毫秒，然后把时间戳、user_id和接口方法作为唯一值检验，相同的值只能一次有效。</p>
-</li>
-<li><p>不足<br>  目前为止，我们能确保请求时持有user_key的user_id发出的，而且不会被修改，不会被重放，user_key也不会暴露，一切都很美好。但是我们的信息是明文的，会照成信息泄露。</p>
-</li>
-</ul>
-<p><strong>加密</strong></p>
-<ul>
-<li><p>可以把内容加密起来传输</p>
-</li>
-<li><p>方法<br>  HTTPS<br>  RSA<br>  利用user_key对整个请求的内容进行异或后重新编码之类的加密</p>
-</li>
-<li><p>不足<br>  成本高，操作麻烦，目前普通接口通讯一般不会有到这一步的处理。</p>
-</li>
-<li><p>这是双向的<br>  认证是接口双方都需要做的，不止指用户发给平台，还要包括用户接到平台应答后也应该进行相同的验证</p>
-</li>
-</ul>
-<p><strong>其他手段</strong>  </p>
-<blockquote>
+        <span itemprop="articleBody"><h2 id="前言">前言</h2><p>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
+<h2 id="信息匹对">信息匹对</h2><p>认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？</p>
+<h3 id="方法">方法</h3><pre><code>用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
+</code></pre><h3 id="不足">不足</h3><pre><code>接口通过HTTP通讯，中间一旦被人窃听，以后就可以拿 user_id 和 user_key 给我们发请求，而我们无法分辨出到底是谁才是真的齐天大圣。看来，不可以把 user_key 这样子发送。
+
+就算认证是可靠的，黑客还是可以拦截住请求，对认证部分不修改但把参数修改了，然后让请求继续发送。例如把你准备给哈利文转账，但是请求在中间被拦截修改后，变成给变色龙转了。
+</code></pre><h2 id="哈希">哈希</h2><p>我们密码存储的时候不是经常md5哈希后保存么，那么我们把 user_key 也哈希一下吧，嗯，正愁不知道拿user_key和谁哈希好，既然说参数会被替换，那么，我们拿 user_key 和 请求参数哈希后的字符串作为 auth_token 传输，而不发送 user_key不就可以了。这样参数也成为认证的一部分，就不会被替换掉了。</p>
+<h3 id="做法">做法</h3><p>把参数按某个规则排好序后，连接成字符串，然后和 user_key 哈希后作为 auth_token，发送。接受端接到请求后，把参数排序后和 user_key 哈希后的字符串和 auth_token 比较。</p>
+<h3 id="不足-1">不足</h3><p>当参数很少，而 user_key 不复杂的情况下， auto_token 有被碰撞出 user_key的可能</p>
+<h2 id="加强版哈希">加强版哈希</h2><p>表示，这种情况对我们这种平时存密码都要多次哈希的孩子来说毫无鸭梨啊，我们可以分别对参数字符串哈希后取一定位数，然后把 user_key 哈希后取一定位数，再把两者连起来哈希作为 auth_token</p>
+<h3 id="请求非法_！">请求非法 ！</h3><p>什么转了9999次款？黑客大叔表示无法对我们请求下手了，不过他借你某次给他转款的时候拦截到了你的请求，然后不停的伪造一样的请求… 我们可以增加一些策略，防止这种请求重放，例如：在参数里面添加时间戳，最好精确到毫秒，然后把时间戳、user_id和接口方法作为唯一值检验，相同的值只能一次有效。</p>
+<h3 id="不足-2">不足</h3><p>目前为止，我们能确保请求时持有user_key的user_id发出的，而且不会被修改，不会被重放，user_key也不会暴露，一切都很美好。但是我们的信息是明文的，会照成信息泄露。</p>
+<h2 id="加密">加密</h2><h3 id="可以把内容加密起来传输">可以把内容加密起来传输</h3><h3 id="方法-1">方法</h3><pre><code><span class="title">HTTPS</span>  
+RSA  
+利用user_key对整个请求的内容进行异或后重新编码之类的加密
+</code></pre><h3 id="不足-3">不足</h3><pre><code>成本高，操作麻烦，目前普通接口通讯一般不会有到这一步的处理。
+</code></pre><h3 id="这是双向的">这是双向的</h3><pre><code>认证是接口双方都需要做的，不止指用户发给平台，还要包括用户接到平台应答后也应该进行相同的验证
+</code></pre><h2 id="其他手段">其他手段</h2><blockquote>
 <p>   ip地址认证<br>    请求有效时间  </p>
 </blockquote>
-<p><strong>总之</strong> </p>
-<blockquote>
+<h2 id="总之">总之</h2><blockquote>
 <p>   来源正确，身份正确，内容正确，请求正确，信息安全</p>
 </blockquote>
 </span>
@@ -460,7 +431,7 @@
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -524,7 +495,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息匹对"><span class="nav-number">2.</span> <span class="nav-text">信息匹对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">2.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足"><span class="nav-number">2.2.</span> <span class="nav-text">不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希"><span class="nav-number">3.</span> <span class="nav-text">哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#做法"><span class="nav-number">3.1.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足-1"><span class="nav-number">3.2.</span> <span class="nav-text">不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加强版哈希"><span class="nav-number">4.</span> <span class="nav-text">加强版哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求非法_！"><span class="nav-number">4.1.</span> <span class="nav-text">请求非法 ！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足-2"><span class="nav-number">4.2.</span> <span class="nav-text">不足</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加密"><span class="nav-number">5.</span> <span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可以把内容加密起来传输"><span class="nav-number">5.1.</span> <span class="nav-text">可以把内容加密起来传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">5.2.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足-3"><span class="nav-number">5.3.</span> <span class="nav-text">不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这是双向的"><span class="nav-number">5.4.</span> <span class="nav-text">这是双向的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他手段"><span class="nav-number">6.</span> <span class="nav-text">其他手段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总之"><span class="nav-number">7.</span> <span class="nav-text">总之</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
