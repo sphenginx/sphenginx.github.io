@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hello world," />
+  <meta name="keywords" content="jquery," />
 
 
 
@@ -53,19 +53,28 @@
 
 
 
-<meta name="description" content="Welcome to Hexo!  Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hex">
+<meta name="description" content="\r是回车符,\n是换行符，各个系统的换行标志：
+
+   win                   用   \r\n    linux/unix            用   \n    Mac   OS              用   \r
+
+CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxODLF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A所以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo">
-<meta property="og:url" content="http://sphenginx.github.io/2015/01/17/hexo/index.html">
+<meta property="og:title" content="解决Unix-like、Windows系统之间文本换行符不同的问题">
+<meta property="og:url" content="http://sphenginx.github.io/2014/12/24/CRLF in Unix-like、Windows os/index.html">
 <meta property="og:site_name" content="平常心">
-<meta property="og:description" content="Welcome to Hexo!  Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hex">
-<meta property="og:updated_time" content="2015-11-28T00:48:04.496Z">
+<meta property="og:description" content="\r是回车符,\n是换行符，各个系统的换行标志：
+
+   win                   用   \r\n    linux/unix            用   \n    Mac   OS              用   \r
+
+CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxODLF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A所以">
+<meta property="og:updated_time" content="2015-11-28T01:42:51.653Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo">
-<meta name="twitter:description" content="Welcome to Hexo!  Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hex">
+<meta name="twitter:title" content="解决Unix-like、Windows系统之间文本换行符不同的问题">
+<meta name="twitter:description" content="\r是回车符,\n是换行符，各个系统的换行标志：
+
+   win                   用   \r\n    linux/unix            用   \n    Mac   OS              用   \r
+
+CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxODLF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A所以">
 
 
 
@@ -77,7 +86,7 @@ Quick StartCreate a new post1$ hex">
   };
 </script>
 
-  <title> hexo | 平常心 </title>
+  <title> 解决Unix-like、Windows系统之间文本换行符不同的问题 | 平常心 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -227,7 +236,7 @@ Quick StartCreate a new post1$ hex">
             
             
               
-                hexo
+                解决Unix-like、Windows系统之间文本换行符不同的问题
               
             
           </h1>
@@ -236,8 +245,8 @@ Quick StartCreate a new post1$ hex">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-01-17T16:03:01+08:00" content="2015-01-17">
-              2015-01-17
+            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
+              2014-12-24
             </time>
           </span>
 
@@ -246,8 +255,8 @@ Quick StartCreate a new post1$ hex">
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/日新月异/" itemprop="url" rel="index">
+                    <span itemprop="name">日新月异</span>
                   </a>
                 </span>
 
@@ -275,15 +284,56 @@ Quick StartCreate a new post1$ hex">
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>!  Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <span itemprop="articleBody"><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
+<blockquote>
+<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
+</blockquote>
+<p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
+<p>来历：</p>
+<blockquote>
+<p>   计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>    于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>    后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+</blockquote>
+<p>##问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错。</p>
+<ul>
+<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
+</li>
+<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
+<p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
+<p>再保存即可。</p>
+<p>##问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）。</p>
+<ul>
+<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
+</li>
+<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
+</li>
+<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
+</li>
+</ul>
+<p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
+<ol>
+<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
+<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
+<li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
+</ol>
+<p>PS：<br>    \r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。\r和\n的区别看下面的例子就知道了：<br>    \n和\r在C语言中的用法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
+<p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
+<p>##问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码。   </p>
+<ul>
+<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。    </li>
+</ul>
+<p>##问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化。   </p>
+<ul>
+<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。   </li>
+</ul>
 </span>
       
     </div>
@@ -292,7 +342,7 @@ Quick StartCreate a new post1$ hex">
       
         <div class="post-tags">
           
-            <a href="/tags/hello-world/" rel="tag">#hello world</a>
+            <a href="/tags/jquery/" rel="tag">#jquery</a>
           
         </div>
       
@@ -301,16 +351,16 @@ Quick StartCreate a new post1$ hex">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/24/CRLF in Unix-like、Windows os/" rel="next" title="解决Unix-like、Windows系统之间文本换行符不同的问题">
-                <i class="fa fa-chevron-left"></i> 解决Unix-like、Windows系统之间文本换行符不同的问题
+              <a href="/2014/12/24/jQuery中each如何跳出循环并终止后续代码执行？/" rel="next" title="jQuery中each如何跳出循环并终止后续代码执行？">
+                <i class="fa fa-chevron-left"></i> jQuery中each如何跳出循环并终止后续代码执行？
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/01/17/未付款发货的逻辑太坑了！！！/" rel="prev" title="记一次PHP中$_REQUEST踩的坑">
-                记一次PHP中$_REQUEST踩的坑 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/01/17/hexo/" rel="prev" title="hexo">
+                hexo <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -450,7 +500,7 @@ Quick StartCreate a new post1$ hex">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

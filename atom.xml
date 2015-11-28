@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2015-11-28T01:38:28.951Z</updated>
+  <updated>2015-11-28T01:43:20.805Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -15,78 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://sphenginx.github.io/2015/11/28/CRLF%20in%20Unix-like%E3%80%81Windows%20os/"/>
-    <id>http://sphenginx.github.io/2015/11/28/CRLF in Unix-like、Windows os/</id>
-    <published>2015-11-28T01:38:28.992Z</published>
-    <updated>2015-11-28T01:38:28.951Z</updated>
-    <content type="html"><![CDATA[<p>#解决Unix-like、Windows系统之间文本换行符不同的问题</p>
-<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
-<blockquote>
-<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
-</blockquote>
-<p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
-<p>来历：</p>
-<blockquote>
-<p>   计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>    于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>    后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-</blockquote>
-<p>##问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错。</p>
-<ul>
-<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
-</li>
-<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
-<p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
-<p>再保存即可。</p>
-<p>##问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）。</p>
-<ul>
-<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
-</li>
-<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
-</li>
-<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
-</li>
-</ul>
-<p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
-<ol>
-<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
-<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
-<li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
-</ol>
-<p>PS：<br>    \r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。\r和\n的区别看下面的例子就知道了：<br>    \n和\r在C语言中的用法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
-<p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
-<p>##问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码。   </p>
-<ul>
-<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。    </li>
-</ul>
-<p>##问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化。   </p>
-<ul>
-<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。   </li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>#解决Unix-like、Windows系统之间文本换行符不同的问题</p>
-<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
-<blockquote>
-<p>   win                   用   \r\n<br>    linux/uni]]>
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[hexo]]></title>
+    <title><![CDATA[健身]]></title>
     <link href="http://sphenginx.github.io/2015/06/29/%E5%81%A5%E8%BA%AB/"/>
     <id>http://sphenginx.github.io/2015/06/29/健身/</id>
     <published>2015-06-29T12:03:01.000Z</published>
-    <updated>2015-11-28T01:28:01.556Z</updated>
+    <updated>2015-11-28T01:43:20.805Z</updated>
     <content type="html"><![CDATA[<p>今天晚上在体育街打乒乓球，偶遇一退休乒乓球教练，他在看到洒家打球的时候，一针见血的指出了我的陋习，他说：因地球引力的存在，地球上的一切运动都是抛物线型的，在运动的时候身体的重心要放低，像扎马步那样最好，球拍和桌沿平行，击球时，运用肘部的力量，快速直线摆动小臂，球拍从腰部快速摆到鼻子部分，给球一个向上向前的力，不要做多余的动作，尤其是动腿的陋习必须改掉。</p>
 <p>洒家对老爷爷的说法深以为然，其实运动大道理是相通的，都是重心放低，做好扎马步的姿势，这样可以快速的进行身体姿势的变换，以应对即将到来的变化。运动时要运用相关关节的力量，快速带动关节相关身体部位向上前方向击出，不要做多余的动作。（陋习:打球时完全不需要动脚…… 囧）</p>
 <p>为了改变运动陋习，特作此文，已备翻阅。</p>
@@ -106,53 +39,54 @@
     <link href="http://sphenginx.github.io/2015/06/01/API%E6%BC%AB%E8%B0%88/"/>
     <id>http://sphenginx.github.io/2015/06/01/API漫谈/</id>
     <published>2015-06-01T01:27:40.000Z</published>
-    <updated>2015-11-28T01:33:57.822Z</updated>
-    <content type="html"><![CDATA[<p>###前言<br>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
-<p>###信息匹对<br>认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？</p>
+    <updated>2015-11-28T01:45:58.790Z</updated>
+    <content type="html"><![CDATA[<p><strong>前言</strong><br>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
+<p><strong>信息匹对</strong></p>
+<p>认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？</p>
 <ul>
-<li><p>方法<br>用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。</p>
+<li><p>方法<br>  用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。</p>
 </li>
-<li><p>不足<br>接口通过HTTP通讯，中间一旦被人窃听，以后就可以拿 user_id 和 user_key 给我们发请求，而我们无法分辨出到底是谁才是真的齐天大圣。看来，不可以把 user_key 这样子发送。</p>
-<p>就算认证是可靠的，黑客还是可以拦截住请求，对认证部分不修改但把参数修改了，然后让请求继续发送。例如把你准备给哈利文转账，但是请求在中间被拦截修改后，变成给变色龙转了。</p>
+<li><p>不足<br>  接口通过HTTP通讯，中间一旦被人窃听，以后就可以拿 user_id 和 user_key 给我们发请求，而我们无法分辨出到底是谁才是真的齐天大圣。看来，不可以把 user_key 这样子发送。</p>
+<p>  就算认证是可靠的，黑客还是可以拦截住请求，对认证部分不修改但把参数修改了，然后让请求继续发送。例如把你准备给哈利文转账，但是请求在中间被拦截修改后，变成给变色龙转了。</p>
 </li>
 </ul>
-<p>###哈希<br>我们密码存储的时候不是经常md5哈希后保存么，那么我们把 user_key 也哈希一下吧，嗯，正愁不知道拿user_key和谁哈希好，既然说参数会被替换，那么，我们拿 user_key 和 请求参数哈希后的字符串作为 auth_token 传输，而不发送 user_key不就可以了。这样参数也成为认证的一部分，就不会被替换掉了。</p>
+<p><strong>哈希</strong><br>我们密码存储的时候不是经常md5哈希后保存么，那么我们把 user_key 也哈希一下吧，嗯，正愁不知道拿user_key和谁哈希好，既然说参数会被替换，那么，我们拿 user_key 和 请求参数哈希后的字符串作为 auth_token 传输，而不发送 user_key不就可以了。这样参数也成为认证的一部分，就不会被替换掉了。</p>
 <ul>
-<li><p>做法<br>把参数按某个规则排好序后，连接成字符串，然后和 user_key 哈希后作为 auth_token，发送。接受端接到请求后，把参数排序后和 user_key 哈希后的字符串和 auth_token 比较。</p>
+<li><p>做法<br>  把参数按某个规则排好序后，连接成字符串，然后和 user_key 哈希后作为 auth_token，发送。接受端接到请求后，把参数排序后和 user_key 哈希后的字符串和 auth_token 比较。</p>
 </li>
-<li><p>不足<br>当参数很少，而 user_key 不复杂的情况下， auto_token 有被碰撞出 user_key的可能</p>
+<li><p>不足<br>  当参数很少，而 user_key 不复杂的情况下， auto_token 有被碰撞出 user_key的可能</p>
 </li>
 </ul>
-<p>###加强版哈希<br>表示，这种情况对我们这种平时存密码都要多次哈希的孩子来说毫无鸭梨啊，我们可以分别对参数字符串哈希后取一定位数，然后把 user_key 哈希后取一定位数，再把两者连起来哈希作为 auth_token</p>
+<p><strong>加强版哈希</strong><br>表示，这种情况对我们这种平时存密码都要多次哈希的孩子来说毫无鸭梨啊，我们可以分别对参数字符串哈希后取一定位数，然后把 user_key 哈希后取一定位数，再把两者连起来哈希作为 auth_token</p>
 <ul>
-<li><p>不足<br>什么转了9999次款？黑客大叔表示无法对我们请求下手了，不过他借你某次给他转款的时候拦截到了你的请求，然后不停的伪造一样的请求…</p>
+<li><p>请求非法 ！<br>  什么转了9999次款？黑客大叔表示无法对我们请求下手了，不过他借你某次给他转款的时候拦截到了你的请求，然后不停的伪造一样的请求… 我们可以增加一些策略，防止这种请求重放，例如：在参数里面添加时间戳，最好精确到毫秒，然后把时间戳、user_id和接口方法作为唯一值检验，相同的值只能一次有效。</p>
 </li>
-<li><p>请求非法 ！<br>我们可以增加一些策略，防止这种请求重放，例如：在参数里面添加时间戳，最好精确到毫秒，然后把时间戳、user_id和接口方法作为唯一值检验，相同的值只能一次有效。</p>
-</li>
-<li><p>不足<br>目前为止，我们能确保请求时持有user_key的user_id发出的，而且不会被修改，不会被重放，user_key也不会暴露，一切都很美好。但是我们的信息是明文的，会照成信息泄露。</p>
+<li><p>不足<br>  目前为止，我们能确保请求时持有user_key的user_id发出的，而且不会被修改，不会被重放，user_key也不会暴露，一切都很美好。但是我们的信息是明文的，会照成信息泄露。</p>
 </li>
 </ul>
-<p>###加密<br>可以把内容加密起来传输</p>
+<p><strong>加密</strong></p>
 <ul>
-<li><p>方法<br>HTTPS<br>RSA<br>利用user_key对整个请求的内容进行异或后重新编码之类的加密</p>
+<li><p>可以把内容加密起来传输</p>
 </li>
-<li><p>不足<br>成本高，操作麻烦，目前普通接口通讯一般不会有到这一步的处理。</p>
+<li><p>方法<br>  HTTPS<br>  RSA<br>  利用user_key对整个请求的内容进行异或后重新编码之类的加密</p>
 </li>
-<li><p>这是双向的<br>认证是接口双方都需要做的，不止指用户发给平台，还要包括用户接到平台应答后也应该进行相同的验证</p>
+<li><p>不足<br>  成本高，操作麻烦，目前普通接口通讯一般不会有到这一步的处理。</p>
+</li>
+<li><p>这是双向的<br>  认证是接口双方都需要做的，不止指用户发给平台，还要包括用户接到平台应答后也应该进行相同的验证</p>
 </li>
 </ul>
-<p>###其他手段  </p>
+<p><strong>其他手段</strong>  </p>
 <blockquote>
 <p>   ip地址认证<br>    请求有效时间  </p>
 </blockquote>
-<p>###总之  </p>
+<p><strong>总之</strong> </p>
 <blockquote>
 <p>   来源正确，身份正确，内容正确，请求正确，信息安全</p>
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>###前言<br>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
-<p>###信息匹对<br>认证不就是登陆么，用户给我发个身份和密码，我一匹对]]>
+    <![CDATA[<p><strong>前言</strong><br>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
+<p><strong>信息匹对</strong><]]>
     </summary>
     
       <category term="php" scheme="http://sphenginx.github.io/tags/php/"/>
@@ -306,6 +240,75 @@
       <category term="hello world" scheme="http://sphenginx.github.io/tags/hello-world/"/>
     
       <category term="hexo" scheme="http://sphenginx.github.io/categories/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[解决Unix-like、Windows系统之间文本换行符不同的问题]]></title>
+    <link href="http://sphenginx.github.io/2014/12/24/CRLF%20in%20Unix-like%E3%80%81Windows%20os/"/>
+    <id>http://sphenginx.github.io/2014/12/24/CRLF in Unix-like、Windows os/</id>
+    <published>2014-12-24T09:02:50.000Z</published>
+    <updated>2015-11-28T01:42:51.653Z</updated>
+    <content type="html"><![CDATA[<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
+<blockquote>
+<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
+</blockquote>
+<p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
+<p>来历：</p>
+<blockquote>
+<p>   计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>    于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>    后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+</blockquote>
+<p>##问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错。</p>
+<ul>
+<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
+</li>
+<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
+<p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
+<p>再保存即可。</p>
+<p>##问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）。</p>
+<ul>
+<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
+</li>
+<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
+</li>
+<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
+</li>
+</ul>
+<p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
+<ol>
+<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
+<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
+<li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
+</ol>
+<p>PS：<br>    \r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。\r和\n的区别看下面的例子就知道了：<br>    \n和\r在C语言中的用法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
+<p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
+<p>##问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码。   </p>
+<ul>
+<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。    </li>
+</ul>
+<p>##问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化。   </p>
+<ul>
+<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。   </li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
+<blockquote>
+<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS       ]]>
+    </summary>
+    
+      <category term="jquery" scheme="http://sphenginx.github.io/tags/jquery/"/>
+    
+      <category term="日新月异" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E6%96%B0%E6%9C%88%E5%BC%82/"/>
     
   </entry>
   
