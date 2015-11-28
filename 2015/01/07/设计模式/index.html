@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="composer,php," />
+  <meta name="keywords" content="php,设计模式," />
 
 
 
@@ -53,28 +53,25 @@
 
 
 
-<meta name="description" content="介绍
-Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理
-Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于">
+<meta name="description" content="设计模式
+设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。
+设计框架
+可复用面向对象软件系统一般划分为两大类：应用程序工具箱和框架（Frame">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP依赖管理工具Composer入门">
-<meta property="og:url" content="http://sphenginx.github.io/2015/11/07/PHP依赖管理工具Composer入门/index.html">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="http://sphenginx.github.io/2015/01/07/设计模式/index.html">
 <meta property="og:site_name" content="平常心">
-<meta property="og:description" content="介绍
-Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理
-Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于">
-<meta property="og:updated_time" content="2015-11-28T01:51:51.700Z">
+<meta property="og:description" content="设计模式
+设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。
+设计框架
+可复用面向对象软件系统一般划分为两大类：应用程序工具箱和框架（Frame">
+<meta property="og:updated_time" content="2015-11-28T02:02:02.358Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP依赖管理工具Composer入门">
-<meta name="twitter:description" content="介绍
-Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理
-Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="设计模式
+设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。
+设计框架
+可复用面向对象软件系统一般划分为两大类：应用程序工具箱和框架（Frame">
 
 
 
@@ -86,7 +83,7 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
   };
 </script>
 
-  <title> PHP依赖管理工具Composer入门 | 平常心 </title>
+  <title> 设计模式 | 平常心 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +233,7 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
             
             
               
-                PHP依赖管理工具Composer入门
+                设计模式
               
             
           </h1>
@@ -245,8 +242,8 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-07T14:43:25+08:00" content="2015-11-07">
-              2015-11-07
+            <time itemprop="dateCreated" datetime="2015-01-07T09:27:40+08:00" content="2015-01-07">
+              2015-01-07
             </time>
           </span>
 
@@ -284,36 +281,68 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
       
 
       
-        <span itemprop="articleBody"><p><strong>介绍</strong></p>
-<p>Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。</p>
-<p><strong>依赖管理</strong></p>
-<p>Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。</p>
-<p>这个想法并不新鲜，Composer的灵感是来自于node的npm和ruby的bundler。但是目前PHP还没有一个这样的工具。<br><code>Composer</code>解决的问题是：</p>
+        <span itemprop="articleBody"><p><strong>设计模式</strong></p>
+<p><a href="http://baike.baidu.com/view/66964.htm" target="_blank" rel="external">设计模式</a>（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
+<p><strong>设计框架</strong></p>
+<p>可复用面向对象软件系统一般划分为两大类：应用程序工具箱和框架（Framework），我们平时开发的具体软件都是应用程序，Java的API属于工具箱；而框架是构成一类特定软件可复用设计的一组相互协作的类，EJB（EnterpriseJavaBeans）是Java应用于企业计算的框架。<br>框架通常定义了应用体系的整体结构类和对象的关系等等设计参数，以便于具体应用实现者能集中精力于应用本身的特定细节。框架主要记录软件应用中共同的设计决策，框架强调设计复用，因此框架设计中必然要使用设计模式。<br>另外，设计模式有助于对框架结构的理解，成熟的框架通常使用了多种设计模式,如果你熟悉这些设计模式，毫无疑问，你将迅速掌握框架的结构，我们一般开发者如果突然接触EJB、Spring等框架，会觉得特别难学、难掌握，那么转而先掌握设计模式，无疑是给了你剖析EJB或J2EE系统的一把利器。  </p>
+<p><strong>设计原则</strong></p>
+<p>为什么要提倡“Design Pattern呢？根本原因是为了代码复用，增加可维护性。那么怎么才能实现代码复用呢？面向对象有几个原则：<br><a href="http://baike.baidu.com/view/866233.htm" target="_blank" rel="external">开闭原则</a>（Open Closed Principle，OCP）、<br><a href="http://baike.baidu.com/view/1638361.htm" target="_blank" rel="external">里氏代换原则</a>（Liskov Substitution Principle，LSP）、<br><a href="http://baike.baidu.com/view/2503920.htm" target="_blank" rel="external">依赖倒转原则</a>（Dependency Inversion Principle，DIP）、<br><a href="http://baike.baidu.com/view/1638378.htm" target="_blank" rel="external">接口隔离原则</a>（Interface Segregation Principle，ISP）、<br>合成/聚合复用原则（Composite/Aggregate Reuse Principle，CARP）、<br>最小知识原则（Principle of Least Knowledge，PLK，也叫迪米特法则）。<br>开闭原则具有理想主义的色彩，它是面向对象设计的终极目标。其他几条，则可以看做是开闭原则的实现方法。<br>设计模式就是实现了这些原则，从而达到了代码复用、增加可维护性的目的。<br><a href="http://baike.baidu.com/link?url=ZjnaTAyjSCCLQTdMyoqo43iLRTIfwqlbhwgKESkZsXNwsmEn0w54Xz-HZ1EoOX4CsUcSSNHUMCLkyq7uKeuBa_" target="_blank" rel="external">高内聚、低耦合</a></p>
+<p><strong>基本模式</strong></p>
+<p>设计模式分为三种类型，共23种。  </p>
 <ul>
-<li>你有一个依赖N多库的项目。</li>
-<li>这些库中一些又依赖于其他的库。</li>
-<li>你声明你所依赖的库。</li>
-<li>Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。</li>
+<li>创建型模式：单例模式、抽象工厂模式、建造者模式、工厂模式、原型模式。</li>
+<li>结构型模式：适配器模式、桥接模式、装饰模式、组合模式、外观模式、享元模式、代理模式。</li>
+<li>行为型模式：模版方法模式、命令模式、迭代器模式、观察者模式、中介者模式、备忘录模式、解释器模式、状态模式、策略模式、职责链模式、访问者模式。</li>
 </ul>
-<p><strong>声明依赖关系</strong></p>
-<p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;require&#34;: &#123;&#10;        &#34;monolog/monolog&#34;: &#34;1.2.*&#34;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们简单的描述说我们的项目依赖某个monolog/monolog包，版本只要是以1.2开头的就行。</p>
-<p><strong>系统要求</strong></p>
-<p>Composer需要PHP <strong>5.3.2+</strong> 才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序 <code>installer</code> 会警告你任何不兼容的地方。<br>如果想要从源码而不是简单的从zip压缩包中安装软件包的话，你将需要git，svn或者hg，这依赖于软件包是通过什么进行版本控制的。<br>Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。<br>安装 - *nix下载Composer可执行程序局部安装<br>为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br></pre></td></tr></table></figure></p>
-<p>这只会检查一些PHP设置，然后下载<strong>composer.phar</strong>到你的工作目录中。这个文件是Composer二进制文件。它是一个PHAR <code>PHP archive</code>，PHP的归档格式，也可以像其他命令一样在命令行上运行。<br>你可以使用<code>--install-dir</code>选项，并且提供一个目标目录（可以是绝对或者相对路径）从而把Composer安装到一个指定的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php -- --install-dir=bin</span><br></pre></td></tr></table></figure></p>
-<p>你可以把这个文件放到任何你想放的地方。如果你把它放到你的PATH中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要php。<br>你可以执行这些命令从而能够在你的系统上简单的访问composer：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br><span class="line">$ sudo mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br></pre></td></tr></table></figure></p>
-<p>然后，只需要执行composer命令来运行Composer，而不是php composer.phar。</p>
-<p><strong>Windows使用安装程序</strong></p>
-<p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;cd C:\bin&#10;C:\bin&#62;php -r &#34;eval(&#39;?&#62;&#39;.file_get_contents(&#39;https://getcomposer.org/installer&#39;));&#34;</span><br></pre></td></tr></table></figure></p>
-<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&#62;echo @php &#34;%~dp0composer.phar&#34; %*&#62;composer.bat</span><br></pre></td></tr></table></figure></p>
-<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;composer -V&#10;Composer version 27d8904&#10; &#10;C:\Users\username&#62;</span><br></pre></td></tr></table></figure></p>
-<p><strong>使用Composer</strong></p>
-<p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
-<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
-<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require &#39;vendor/autoload.php&#39;;</span><br></pre></td></tr></table></figure></p>
-<p>哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。 如果想要找需要的package，到Packagist。</p>
-<p>参考  英文原文：<a href="http://getcomposer.org/doc/00-intro.md" target="_blank" rel="external">http://getcomposer.org/doc/00-intro.md</a></p>
-<p>(完)</p>
+<p>按字典序排列简介如下:</p>
+<ul>
+<li><p>Abstract Factory（抽象工厂模式）：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。  </p>
+</li>
+<li><p>Adapter（适配器模式）：将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。  </p>
+</li>
+<li><p>Bridge（桥接模式）：将抽象部分与它的实现部分分离，使它们都可以独立地变化。  </p>
+</li>
+<li><p>Builder（建造者模式）：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。  </p>
+</li>
+<li><p>Chain of Responsibility（职责链模式）：为解除请求的发送者和接收者之间耦合，而使多个对象都有机会处理这个请求。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它。  </p>
+</li>
+<li><p>Command（命令模式）：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可取消的操作。</p>
+</li>
+<li><p>Composite（组合模式）：将对象组合成树形结构以表示“部分-整体”的层次结构。它使得客户对单个对象和复合对象的使用具有一致性。</p>
+</li>
+<li><p>Decorator（装饰模式）：动态地给一个对象添加一些额外的职责。就扩展功能而言， 它比生成子类方式更为灵活。</p>
+</li>
+<li><p>Facade（外观模式）：为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</p>
+</li>
+<li><p>Factory Method（工厂模式）：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。Factory Method使一个类的实例化延迟到其子类。</p>
+</li>
+<li><p>Flyweight（享元模式）：运用共享技术有效地支持大量细粒度的对象。</p>
+</li>
+<li><p>Interpreter（解析器模式）：给定一个语言, 定义它的文法的一种表示，并定义一个解释器, 该解释器使用该表示来解释语言中的句子。</p>
+</li>
+<li><p>Iterator（迭代器模式）：提供一种方法顺序访问一个聚合对象中各个元素，而又不需暴露该对象的内部表示。</p>
+</li>
+<li><p>Mediator（中介模式）：用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。</p>
+</li>
+<li><p>Memento（备忘录模式）：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。</p>
+</li>
+<li><p>Observer（观察者模式）：定义对象间的一种一对多的依赖关系,以便当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并自动刷新。</p>
+</li>
+<li><p>Prototype（原型模式）：用原型实例指定创建对象的种类，并且通过拷贝这个原型来创建新的对象。</p>
+</li>
+<li><p>Proxy（代理模式）：为其他对象提供一个代理以控制对这个对象的访问。</p>
+</li>
+<li><p>Singleton（单例模式）：保证一个类仅有一个实例，并提供一个访问它的全局访问点。 单例模式是最简单的设计模式之一，但是对于Java的开发者来说，它却有很多缺陷。在九月的专栏中，David Geary探讨了单例模式以及在面对多线程（multi-threading）、类装载器（class loaders）和序列化（serialization）时如何处理这些缺陷。</p>
+</li>
+<li><p>State（状态模式）：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它所属的类。</p>
+</li>
+<li><p>Strategy（策略模式）：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。本模式使得算法的变化可独立于使用它的客户。</p>
+</li>
+<li><p>Template Method（模板方法模式）：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</p>
+</li>
+<li><p>Visitor（访问者模式）：表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</p>
+</li>
+</ul>
 </span>
       
     </div>
@@ -322,9 +351,9 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
       
         <div class="post-tags">
           
-            <a href="/tags/composer/" rel="tag">#composer</a>
-          
             <a href="/tags/php/" rel="tag">#php</a>
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
           
         </div>
       
@@ -333,13 +362,17 @@ Composer不是包管理器。是的，它实际上和”包”或者库打交道
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/17/hexo/" rel="next" title="hexo">
-                <i class="fa fa-chevron-left"></i> hexo
+              <a href="/2014/12/24/CRLF in Unix-like、Windows os/" rel="next" title="解决Unix-like、Windows系统之间文本换行符不同的问题">
+                <i class="fa fa-chevron-left"></i> 解决Unix-like、Windows系统之间文本换行符不同的问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/17/未付款发货的逻辑太坑了！！！/" rel="prev" title="记一次PHP中$_REQUEST踩的坑">
+                记一次PHP中$_REQUEST踩的坑 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
