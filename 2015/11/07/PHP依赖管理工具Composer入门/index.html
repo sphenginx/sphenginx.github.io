@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="php,异步,支付," />
+  <meta name="keywords" content="composer,php," />
 
 
 
@@ -53,25 +53,28 @@
 
 
 
-<meta name="description" content="前记
-今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！
-排查
-因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给">
+<meta name="description" content="介绍
+Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
+依赖管理
+Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
+这个想法并不新鲜，Composer的灵感是来自于">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次PHP中$_REQUEST踩的坑">
-<meta property="og:url" content="http://sphenginx.github.io/2015/01/17/未付款发货的逻辑太坑了！！！/index.html">
+<meta property="og:title" content="PHP依赖管理工具Composer入门">
+<meta property="og:url" content="http://sphenginx.github.io/2015/11/07/PHP依赖管理工具Composer入门/index.html">
 <meta property="og:site_name" content="平常心">
-<meta property="og:description" content="前记
-今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！
-排查
-因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给">
-<meta property="og:updated_time" content="2015-11-27T09:30:30.096Z">
+<meta property="og:description" content="介绍
+Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
+依赖管理
+Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
+这个想法并不新鲜，Composer的灵感是来自于">
+<meta property="og:updated_time" content="2015-11-28T01:51:51.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次PHP中$_REQUEST踩的坑">
-<meta name="twitter:description" content="前记
-今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！
-排查
-因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给">
+<meta name="twitter:title" content="PHP依赖管理工具Composer入门">
+<meta name="twitter:description" content="介绍
+Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
+依赖管理
+Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
+这个想法并不新鲜，Composer的灵感是来自于">
 
 
 
@@ -83,7 +86,7 @@
   };
 </script>
 
-  <title> 记一次PHP中$_REQUEST踩的坑 | 平常心 </title>
+  <title> PHP依赖管理工具Composer入门 | 平常心 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +236,7 @@
             
             
               
-                记一次PHP中$_REQUEST踩的坑
+                PHP依赖管理工具Composer入门
               
             
           </h1>
@@ -242,8 +245,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-01-17T16:03:01+08:00" content="2015-01-17">
-              2015-01-17
+            <time itemprop="dateCreated" datetime="2015-11-07T14:43:25+08:00" content="2015-11-07">
+              2015-11-07
             </time>
           </span>
 
@@ -252,8 +255,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/No-Zuo-No-Die/" itemprop="url" rel="index">
-                    <span itemprop="name">No Zuo No Die</span>
+                  <a href="/categories/日新月异/" itemprop="url" rel="index">
+                    <span itemprop="name">日新月异</span>
                   </a>
                 </span>
 
@@ -281,20 +284,36 @@
       
 
       
-        <span itemprop="articleBody"><p><strong>前记</strong></p>
-<p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
-<p><strong>排查</strong></p>
-<p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给你详细分析。</p>
-<p>先说下支付的逻辑：众所周知，不管是微信支付 还是 支付宝支付，都是异步进行的。也就是说用户在微信或者支付宝支付成功后，微信或者支付宝并不会第一时间把这个支付成功的消息返回给你，而是在接下来的一个小时或者更长时间内分N次给你支付成功的通知（有时候接收到第三方服务器返回success的时候还会发起多次的异步通知），所以一般业务逻辑在此处都会有一防止重复更新数据库的逻辑判断，在成功更新订单为已付款状态后，如果还收到异步通知，直接返回true。</p>
-<p>但是因为未付款发货这种逆天逻辑的存在，在网速慢或者服务器访问量大的时候，用户支付成功，服务器未收到支付成功的异步通知，这时候，脑残卖家点了发货，并且成功了更新了数据库的订单状态，这时候，服务器收到支付成功的通知（在收到支付成功时的业务逻辑是更新未付款的订单），这时候去更新数据表，发现数据不存在（因为订单状态为已发货，而不是未付款），更坑的是，订单表的类型居然是MyISAM类型的，居然不是InnoDB类型的，如此事务完全不能进行，在发现未更新数据的时候不能rollback，这样造成了，之前成功返回异步通知的逻辑不能执行，造成微信或者支付宝异步通知一次，则更新一次数据库…… </p>
-<p>这样的逻辑简直太坑爹了！！！以此提醒同僚们：<code>“ 程序有风险，入行需谨慎”</code> 啊！！！</p>
-<p><strong>解决方案</strong></p>
+        <span itemprop="articleBody"><p><strong>介绍</strong></p>
+<p>Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。</p>
+<p><strong>依赖管理</strong></p>
+<p>Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。</p>
+<p>这个想法并不新鲜，Composer的灵感是来自于node的npm和ruby的bundler。但是目前PHP还没有一个这样的工具。<br><code>Composer</code>解决的问题是：</p>
 <ul>
-<li>更新订单表以及订单相关表为Innodb类型（MyISAM不支持事务处理）；</li>
-<li>更新响应支付通知条件，只要支付方返回支付成功通知，这边就更新为已付款状态，而不关心订单状态是否是未付款；</li>
+<li>你有一个依赖N多库的项目。</li>
+<li>这些库中一些又依赖于其他的库。</li>
+<li>你声明你所依赖的库。</li>
+<li>Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。</li>
 </ul>
-<p>这种逻辑真的不要再出现了啊！！！</p>
-<p>不说了，继续修复脏数据了……o(╯□╰)o，囧…… </p>
+<p><strong>声明依赖关系</strong></p>
+<p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;require&#34;: &#123;&#10;        &#34;monolog/monolog&#34;: &#34;1.2.*&#34;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们简单的描述说我们的项目依赖某个monolog/monolog包，版本只要是以1.2开头的就行。</p>
+<p><strong>系统要求</strong></p>
+<p>Composer需要PHP <strong>5.3.2+</strong> 才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序 <code>installer</code> 会警告你任何不兼容的地方。<br>如果想要从源码而不是简单的从zip压缩包中安装软件包的话，你将需要git，svn或者hg，这依赖于软件包是通过什么进行版本控制的。<br>Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。<br>安装 - *nix下载Composer可执行程序局部安装<br>为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br></pre></td></tr></table></figure></p>
+<p>这只会检查一些PHP设置，然后下载<strong>composer.phar</strong>到你的工作目录中。这个文件是Composer二进制文件。它是一个PHAR <code>PHP archive</code>，PHP的归档格式，也可以像其他命令一样在命令行上运行。<br>你可以使用<code>--install-dir</code>选项，并且提供一个目标目录（可以是绝对或者相对路径）从而把Composer安装到一个指定的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php -- --install-dir=bin</span><br></pre></td></tr></table></figure></p>
+<p>你可以把这个文件放到任何你想放的地方。如果你把它放到你的PATH中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要php。<br>你可以执行这些命令从而能够在你的系统上简单的访问composer：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br><span class="line">$ sudo mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br></pre></td></tr></table></figure></p>
+<p>然后，只需要执行composer命令来运行Composer，而不是php composer.phar。</p>
+<p><strong>Windows使用安装程序</strong></p>
+<p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;cd C:\bin&#10;C:\bin&#62;php -r &#34;eval(&#39;?&#62;&#39;.file_get_contents(&#39;https://getcomposer.org/installer&#39;));&#34;</span><br></pre></td></tr></table></figure></p>
+<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&#62;echo @php &#34;%~dp0composer.phar&#34; %*&#62;composer.bat</span><br></pre></td></tr></table></figure></p>
+<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;composer -V&#10;Composer version 27d8904&#10; &#10;C:\Users\username&#62;</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用Composer</strong></p>
+<p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
+<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
+<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require &#39;vendor/autoload.php&#39;;</span><br></pre></td></tr></table></figure></p>
+<p>哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。 如果想要找需要的package，到Packagist。</p>
+<p>参考  英文原文：<a href="http://getcomposer.org/doc/00-intro.md" target="_blank" rel="external">http://getcomposer.org/doc/00-intro.md</a></p>
+<p>(完)</p>
 </span>
       
     </div>
@@ -303,11 +322,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/composer/" rel="tag">#composer</a>
+          
             <a href="/tags/php/" rel="tag">#php</a>
-          
-            <a href="/tags/异步/" rel="tag">#异步</a>
-          
-            <a href="/tags/支付/" rel="tag">#支付</a>
           
         </div>
       
@@ -316,17 +333,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/12/24/CRLF in Unix-like、Windows os/" rel="next" title="解决Unix-like、Windows系统之间文本换行符不同的问题">
-                <i class="fa fa-chevron-left"></i> 解决Unix-like、Windows系统之间文本换行符不同的问题
+              <a href="/2015/09/17/hexo/" rel="next" title="hexo">
+                <i class="fa fa-chevron-left"></i> hexo
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/03/09/碎语/" rel="prev" title="闲言碎语">
-                闲言碎语 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
