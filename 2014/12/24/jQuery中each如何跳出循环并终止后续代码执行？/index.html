@@ -65,7 +65,7 @@
 今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。
 排查
 后来查看manual才发现：jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 con">
-<meta property="og:updated_time" content="2015-11-28T01:24:03.488Z">
+<meta property="og:updated_time" content="2015-11-28T02:47:03.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery中each如何跳出循环并终止后续代码执行？">
 <meta name="twitter:description" content="前记
@@ -286,9 +286,8 @@
 <p><strong>排查</strong></p>
 <p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
 <p><strong>解决</strong></p>
-<p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20986;&#29616;bug&#30340;&#20195;&#30721;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>这样return false，只是终止循环，并没有终止程序。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26356;&#26032;&#21518;&#30340;&#20195;&#30721;&#10;var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;&#9; alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;&#9;  real_true = false;&#10;         return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        real_true = false;&#10;        return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
 </span>
       
@@ -422,7 +421,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

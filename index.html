@@ -1232,22 +1232,21 @@
 <blockquote>
 <p>   计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>    于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>    后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
 </blockquote>
-<p>##问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错。</p>
+<p><strong>问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错</strong></p>
 <ul>
 <li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
 </li>
 <li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
-<li>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
+<li><p>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
 <p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
 <p>再保存即可。</p>
-<p>##问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）。</p>
+<p><strong>问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）</strong></p>
 <ul>
 <li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
 </li>
@@ -1265,11 +1264,11 @@
 <p>PS：<br>    \r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。\r和\n的区别看下面的例子就知道了：<br>    \n和\r在C语言中的用法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
 <p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
-<p>##问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码。   </p>
+<p><strong>问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码</strong>   </p>
 <ul>
 <li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。    </li>
 </ul>
-<p>##问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化。   </p>
+<p><strong>问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</strong>   </p>
 <ul>
 <li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。   </li>
 </ul>
@@ -1373,9 +1372,8 @@
 <p><strong>排查</strong></p>
 <p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
 <p><strong>解决</strong></p>
-<p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#20986;&#29616;bug&#30340;&#20195;&#30721;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>这样return false，只是终止循环，并没有终止程序。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#26356;&#26032;&#21518;&#30340;&#20195;&#30721;&#10;var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;&#9; alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;&#9;  real_true = false;&#10;         return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        real_true = false;&#10;        return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
 
             
@@ -1573,7 +1571,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

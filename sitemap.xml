@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/2015/11/07/PHP%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Composer%E5%85%A5%E9%97%A8/</loc>
+    <lastmod>2015-11-28T02:47:32.607Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2014/12/24/jQuery%E4%B8%ADeach%E5%A6%82%E4%BD%95%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%E5%B9%B6%E7%BB%88%E6%AD%A2%E5%90%8E%E7%BB%AD%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%9F/</loc>
+    <lastmod>2015-11-28T02:47:03.710Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2014/12/24/CRLF%20in%20Unix-like%E3%80%81Windows%20os/</loc>
+    <lastmod>2015-11-28T02:43:56.386Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2015/01/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2015-11-28T02:02:02.358Z</lastmod>
   </url>
@@ -17,11 +32,6 @@
   </url>
   
   <url>
-    <loc>http://sphenginx.github.io/2015/11/07/PHP%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Composer%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2015-11-28T01:51:51.700Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://sphenginx.github.io/2015/06/01/API%E6%BC%AB%E8%B0%88/</loc>
     <lastmod>2015-11-28T01:45:58.790Z</lastmod>
   </url>
@@ -29,16 +39,6 @@
   <url>
     <loc>http://sphenginx.github.io/2015/06/29/%E5%81%A5%E8%BA%AB/</loc>
     <lastmod>2015-11-28T01:43:20.805Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2014/12/24/CRLF%20in%20Unix-like%E3%80%81Windows%20os/</loc>
-    <lastmod>2015-11-28T01:42:51.653Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2014/12/24/jQuery%E4%B8%ADeach%E5%A6%82%E4%BD%95%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%E5%B9%B6%E7%BB%88%E6%AD%A2%E5%90%8E%E7%BB%AD%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%9F/</loc>
-    <lastmod>2015-11-28T01:24:03.488Z</lastmod>
   </url>
   
   <url>
