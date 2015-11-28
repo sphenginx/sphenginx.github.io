@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/2015/11/28/CRLF%20in%20Unix-like%E3%80%81Windows%20os/</loc>
+    <lastmod>2015-11-28T01:38:28.951Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2015/06/01/API%E6%BC%AB%E8%B0%88/</loc>
+    <lastmod>2015-11-28T01:33:57.822Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2015/06/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2015-11-28T01:32:06.599Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2015/06/29/%E5%81%A5%E8%BA%AB/</loc>
+    <lastmod>2015-11-28T01:28:01.556Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2014/12/24/jQuery%E4%B8%ADeach%E5%A6%82%E4%BD%95%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%E5%B9%B6%E7%BB%88%E6%AD%A2%E5%90%8E%E7%BB%AD%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%9F/</loc>
+    <lastmod>2015-11-28T01:24:03.488Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2011/03/09/%E7%A2%8E%E8%AF%AD/</loc>
+    <lastmod>2015-11-28T01:17:47.742Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sphenginx.github.io/2015/01/17/hexo/</loc>
+    <lastmod>2015-11-28T00:48:04.496Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2011/03/09/%E9%9D%A2%E8%AF%95%E6%9C%89%E6%84%9F/</loc>
     <lastmod>2015-11-27T09:53:54.965Z</lastmod>
   </url>
@@ -19,11 +54,6 @@
   <url>
     <loc>http://sphenginx.github.io/2015/01/17/%E6%9C%AA%E4%BB%98%E6%AC%BE%E5%8F%91%E8%B4%A7%E7%9A%84%E9%80%BB%E8%BE%91%E5%A4%AA%E5%9D%91%E4%BA%86%EF%BC%81%EF%BC%81%EF%BC%81/</loc>
     <lastmod>2015-11-27T09:30:30.096Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2015/11/27/hexo/</loc>
-    <lastmod>2015-11-27T09:06:44.941Z</lastmod>
   </url>
   
   <url>
