@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/about/index.html</loc>
+    <lastmod>2015-12-01T10:10:25.123Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2014/12/24/CRLF%20in%20Unix-like%E3%80%81Windows%20os/</loc>
     <lastmod>2015-12-01T05:44:48.465Z</lastmod>
   </url>
@@ -79,11 +84,6 @@
   <url>
     <loc>http://sphenginx.github.io/tags/index.html</loc>
     <lastmod>2015-11-27T07:36:37.024Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/about/index.html</loc>
-    <lastmod>2015-11-27T07:27:25.059Z</lastmod>
   </url>
   
 </urlset>
