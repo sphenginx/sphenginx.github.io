@@ -392,38 +392,58 @@ RSA
     <link href="http://sphenginx.github.io/2014/12/24/CRLF%20in%20Unix-like%E3%80%81Windows%20os/"/>
     <id>http://sphenginx.github.io/2014/12/24/CRLF in Unix-like、Windows os/</id>
     <published>2014-12-24T09:02:50.000Z</published>
-    <updated>2015-11-28T04:44:41.613Z</updated>
-    <content type="html"><![CDATA[<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
+    <updated>2015-12-01T05:44:48.465Z</updated>
+    <content type="html"><![CDATA[<h2 id="简介">简介</h2><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
 <blockquote>
 <p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
 </blockquote>
 <p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
-<p>来历：</p>
-<blockquote>
-<p>   计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>    于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>    后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-</blockquote>
-<h2 id="问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错">问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错</h2><h3 id="方法一：">方法一：</h3><p>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
-<h3 id="方法二：">方法二：</h3><p>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure></p>
-<h3 id="方法三：我的另一个方法">方法三：我的另一个方法</h3><p>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure></p>
+<h2 id="CRLF来历">CRLF来历</h2><p>计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
+<p>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。</p>
+<p>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+<h2 id="Q&amp;A">Q&amp;A</h2><h3 id="问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错">问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错</h3><ul>
+<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
+</li>
+<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 <p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
 <p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
 <p>再保存即可。</p>
-<h2 id="问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）">问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）</h2><h3 id="解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。">解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</h3><h3 id="另外，有两个偏方：">另外，有两个偏方：</h3><p>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
-<h3 id="打开文本文件可以用：">打开文本文件可以用：</h3><p>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
-<p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
+<h3 id="问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）">问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）</h3><ul>
+<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
+</li>
+<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
+</li>
+<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
+</li>
+<li><p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
+</li>
+</ul>
 <ol>
 <li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
 <li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
 <li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
 </ol>
-<p>PS：<br>    \r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。\r和\n的区别看下面的例子就知道了：<br>    \n和\r在C语言中的用法：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>PS：<br><code>\r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。</code></p>
+<p>\r和\n的区别看下面的例子就知道了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
 <p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
-<h2 id="问题三：Windows下编写的doc文档，在Linux下查看（用Open_Office）一般都会乱码">问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码</h2><h3 id="解决方法：先用Open_Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。">解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。</h3><h2 id="问题四：在不同平台间使用FTP软件传送文件时,_在ascii文本模式传输模式下,_一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化">问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</h2><h3 id="解决方法：如果你不想ftp修改原文件,_可以使用bin模式(二进制模式)传输文本。">解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。</h3>]]></content>
+<h3 id="问题三：Windows下编写的doc文档，在Linux下查看（用Open_Office）一般都会乱码">问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码</h3><ul>
+<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。</li>
+</ul>
+<h3 id="问题四：在不同平台间使用FTP软件传送文件时,_在ascii文本模式传输模式下,_一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化">问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</h3><ul>
+<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。</li>
+</ul>
+]]></content>
     <summary type="html">
-    <![CDATA[<p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
+    <![CDATA[<h2 id="简介">简介</h2><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
 <blockquote>
-<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS       ]]>
+<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>]]>
     </summary>
     
       <category term="CRLF" scheme="http://sphenginx.github.io/tags/CRLF/"/>
