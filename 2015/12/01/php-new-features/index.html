@@ -1,0 +1,814 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="feature,php," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小崔随想录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="说明最近公司要用lumen框架开发应用APP的接口，用到了PHP新版本，一些新特性必须要了解，且有些可以在开发时就使用，如果不使用，那么何必升级PHP版本呢，显得有些得不偿失了！所以整理了一下 一些特性，有可能不全，待添加。
+PHP5.3 new feature支持命名空间 （Namespace）毫无疑问，命名空间是PHP5.3所带来的最重要的新特性。在PHP5.3中，则只需要指定不同的命名空间即">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP5.3、5.4、5.5、5.6新特性">
+<meta property="og:url" content="http://sphenginx.github.io/2015/12/01/php-new-features/index.html">
+<meta property="og:site_name" content="小崔随想录">
+<meta property="og:description" content="说明最近公司要用lumen框架开发应用APP的接口，用到了PHP新版本，一些新特性必须要了解，且有些可以在开发时就使用，如果不使用，那么何必升级PHP版本呢，显得有些得不偿失了！所以整理了一下 一些特性，有可能不全，待添加。
+PHP5.3 new feature支持命名空间 （Namespace）毫无疑问，命名空间是PHP5.3所带来的最重要的新特性。在PHP5.3中，则只需要指定不同的命名空间即">
+<meta property="og:updated_time" content="2015-12-03T03:53:37.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP5.3、5.4、5.5、5.6新特性">
+<meta name="twitter:description" content="说明最近公司要用lumen框架开发应用APP的接口，用到了PHP新版本，一些新特性必须要了解，且有些可以在开发时就使用，如果不使用，那么何必升级PHP版本呢，显得有些得不偿失了！所以整理了一下 一些特性，有可能不全，待添加。
+PHP5.3 new feature支持命名空间 （Namespace）毫无疑问，命名空间是PHP5.3所带来的最重要的新特性。在PHP5.3中，则只需要指定不同的命名空间即">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> PHP5.3、5.4、5.5、5.6新特性 | 小崔随想录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">小崔随想录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">独立之精神, 自由之思想！</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PHP5.3、5.4、5.5、5.6新特性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-01T20:03:01+08:00" content="2015-12-01">
+              2015-12-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/01/php-new-features/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/01/php-new-features/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="说明">说明</h2><p>最近公司要用lumen框架开发应用APP的接口，用到了PHP新版本，一些新特性必须要了解，且有些可以在开发时就使用，如果不使用，那么何必升级PHP版本呢，显得有些得不偿失了！<br>所以整理了一下 一些特性，有可能不全，待添加。</p>
+<h2 id="PHP5-3_new_feature">PHP5.3 new feature</h2><h3 id="支持命名空间_（Namespace）">支持命名空间 （Namespace）</h3><p>毫无疑问，命名空间是PHP5.3所带来的最重要的新特性。<code>在PHP5.3中，则只需要指定不同的命名空间即可，命名空间的分隔符为反斜杆\。</code><br>Demo:<br>在select.php 中定义命名空间<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Zend</span>\<span class="title">Db</span>\<span class="title">Table</span>;    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Select</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样即使其它命名空间下存在名为Select的类，程序在调用时也不会产生冲突。代码的可读性也有所增加。<br>调用方法<br>call.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="comment">//namespace Zend\Db;    </span></span><br><span class="line"><span class="keyword">include</span>(<span class="string">'select.php'</span>);    </span><br><span class="line"><span class="variable">$s</span> = <span class="keyword">new</span> Zend\Db\Table\Select();</span><br><span class="line"><span class="variable">$s</span>-&gt;test();</span><br></pre></td></tr></table></figure></p>
+<h3 id="支持延迟静态绑定（Late_Static_Binding）">支持延迟静态绑定（Late Static Binding）</h3><p>在PHP5中，我们可以在类中通过self关键字或者<strong>CLASS</strong>来判断或调用当前类。但有一个问题，如果我们是在子类中调用，得到的结果将是父类。因为在继承父类的时候，静态成员就已经被绑定了。 例如：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">who</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__CLASS__</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">self</span>::who();    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">who</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">         <span class="keyword">echo</span> <span class="keyword">__CLASS__</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line">B::test();</span><br></pre></td></tr></table></figure></p>
+<p>以上代码输出的结果是：<br>A </p>
+<p>这和我们的预期不同，我们原来想得到子类的相应结果。<br><code>PHP 5.3.0中增加了一个static关键字来引用当前类，即实现了延迟静态绑定：</code><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">who</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__CLASS__</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">        <span class="keyword">static</span>::who(); <span class="comment">// 这里实现了延迟的静态绑定    </span></span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">who</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">         <span class="keyword">echo</span> <span class="keyword">__CLASS__</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">B::test();</span><br></pre></td></tr></table></figure></p>
+<p>以上代码输出的结果是：<br>B </p>
+<h3 id="支持goto语句">支持goto语句</h3><p>多数计算机程序设计语言中都支持无条件转向语句goto，当程序执行到goto语句时，即转向由goto语句中的标号指出的程序位置继续执行。尽管goto语句有可能会导致程序流程不清晰，可读性减弱，但在某些情况下具有其独特的方便之处，例如中断深度嵌套的循环和 if 语句。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="keyword">goto</span> a;    </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'Foo'</span>;    </span><br><span class="line">a:    </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'Bar'</span>;    </span><br><span class="line"><span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>,<span class="variable">$j</span>=<span class="number">50</span>; <span class="variable">$i</span>&lt;<span class="number">100</span>; <span class="variable">$i</span>++) &#123;    </span><br><span class="line">  <span class="keyword">while</span>(<span class="variable">$j</span>--) &#123;    </span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$j</span>==<span class="number">17</span>) <span class="keyword">goto</span> end;    </span><br><span class="line">  &#125;     </span><br><span class="line">&#125;    </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"i = $i"</span>;    </span><br><span class="line">end:    </span><br><span class="line"><span class="keyword">echo</span> <span class="string">'j hit 17'</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="支持闭包、Lambda/Anonymous函数">支持闭包、Lambda/Anonymous函数</h3><p>闭包（Closure）函数和Lambda函数的概念来自于函数编程领域。例如JavaScript 是支持闭包和 lambda 函数的最常见语言之一。<br>在PHP中，我们也可以通过create_function()在代码运行时创建函数。但有一个问题：创建的函数仅在运行时才被编译，而不与其它代码同时被编译成执行码，因此我们无法使用类似APC这样的执行码缓存来提高代码执行效率。<br>在PHP5.3中，我们可以使用Lambda/匿名函数来定义一些临时使用（即用即弃型）的函数，以作为array_map()/array_walk()等函数的回调函数。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="keyword">echo</span> preg_replace_callback(<span class="string">'~-([a-z])~'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(<span class="variable">$match</span>)</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">return</span> strtoupper(<span class="variable">$match</span>[<span class="number">1</span>]);    </span><br><span class="line">&#125;, <span class="string">'hello-world'</span>);    </span><br><span class="line"><span class="comment">// 输出 helloWorld    </span></span><br><span class="line"><span class="variable">$greet</span> = <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$name</span>)</span>    </span><br><span class="line"></span>&#123;    </span><br><span class="line">    printf(<span class="string">"Hello %s\r\n"</span>, <span class="variable">$name</span>);    </span><br><span class="line">&#125;;    </span><br><span class="line"><span class="variable">$greet</span>(<span class="string">'World'</span>);    </span><br><span class="line"><span class="variable">$greet</span>(<span class="string">'PHP'</span>);    </span><br><span class="line"><span class="comment">//...在某个类中    </span></span><br><span class="line"><span class="variable">$callback</span> =      <span class="function"><span class="keyword">function</span> <span class="params">(<span class="variable">$quantity</span>, <span class="variable">$product</span>)</span> <span class="title">use</span> <span class="params">(<span class="variable">$tax</span>, &amp;<span class="variable">$total</span>)</span>         </span>&#123;    </span><br><span class="line">   <span class="variable">$pricePerItem</span> = constant(<span class="keyword">__CLASS__</span> . <span class="string">"::PRICE_"</span> .  strtoupper(<span class="variable">$product</span>));    </span><br><span class="line">   <span class="variable">$total</span> += (<span class="variable">$pricePerItem</span> * <span class="variable">$quantity</span>) * (<span class="variable">$tax</span> + <span class="number">1.0</span>);    </span><br><span class="line"> &#125;;    </span><br><span class="line">array_walk(<span class="variable">$products</span>, <span class="variable">$callback</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="新增两个魔术方法__callStatic()和__invoke()">新增两个魔术方法<code>__callStatic()</code>和<code>__invoke()</code></h3><p>PHP中原本有一个魔术方法<code>__call()</code>，当代码调用对象的某个不存在的方法时该魔术方法会被自动调用。新增的<code>__callStatic()</code>方法则只用于静态类方法。当尝试调用类中不存在的静态方法时，<code>__callStatic()</code>魔术方法将被自动调用。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MethodTest</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> </span>&#123;    </span><br><span class="line">        <span class="comment">// 参数 $name 大小写敏感    </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"调用对象方法 '$name' "</span>    </span><br><span class="line">             . implode(<span class="string">' -- '</span>, <span class="variable">$arguments</span>). <span class="string">"\n"</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">    <span class="comment">/**  PHP 5.3.0 以上版本中本类方法有效  */</span>    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> </span>&#123;    </span><br><span class="line">        <span class="comment">// 参数 $name 大小写敏感    </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"调用静态方法 '$name' "</span>    </span><br><span class="line">             . implode(<span class="string">' -- '</span>, <span class="variable">$arguments</span>). <span class="string">"\n"</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line">  </span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> MethodTest;    </span><br><span class="line"><span class="variable">$obj</span>-&gt;runTest(<span class="string">'通过对象调用'</span>);    </span><br><span class="line">MethodTest::runTest(<span class="string">'静态调用'</span>);  <span class="comment">// As of PHP 5.3.0</span></span><br></pre></td></tr></table></figure></p>
+<p>以上代码执行后输出如下：<br>调用对象方法’runTest’ –- 通过对象调用调用静态方法’runTest’ –- 静态调用<br>以函数形式来调用对象时，<code>__invoke()</code>方法将被自动调用。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MethodTest</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> </span>&#123;    </span><br><span class="line">        <span class="comment">// 参数 $name 大小写敏感    </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Calling object method '$name' "</span>    </span><br><span class="line">             . implode(<span class="string">', '</span>, <span class="variable">$arguments</span>). <span class="string">"\n"</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**  PHP 5.3.0 以上版本中本类方法有效  */</span>    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">(<span class="variable">$name</span>, <span class="variable">$arguments</span>)</span> </span>&#123;    </span><br><span class="line">        <span class="comment">// 参数 $name 大小写敏感    </span></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Calling static method '$name' "</span>    </span><br><span class="line">             . implode(<span class="string">', '</span>, <span class="variable">$arguments</span>). <span class="string">"\n"</span>;    </span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> MethodTest;    </span><br><span class="line"><span class="variable">$obj</span>-&gt;runTest(<span class="string">'in object context'</span>);    </span><br><span class="line">MethodTest::runTest(<span class="string">'in static context'</span>);  <span class="comment">// As of PHP 5.3.0</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="三元运算符增加了一个快捷书写方式">三元运算符增加了一个快捷书写方式</h3><p>原本格式为是(expr1) ? (expr2) : (expr3)<br>如果expr1结果为True，则返回expr2的结果。<br>PHP5.3新增一种书写方式，可以省略中间部分，书写为expr1 ?: expr3<br>如果expr1结果为True,则返回expr1的结果<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原格式  </span></span><br><span class="line"><span class="variable">$expr</span> = <span class="variable">$expr1</span> ? <span class="variable">$expr1</span>  :<span class="variable">$expr2</span>  </span><br><span class="line"><span class="comment">//新格式  </span></span><br><span class="line"><span class="variable">$expr</span> = <span class="variable">$expr1</span> ? : <span class="variable">$expr2</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PHP5-3中其它值得注意的改变">PHP5.3中其它值得注意的改变</h3><p>1.1.1.修复了大量bug<br>1.1.2. PHP性能提高<br>1.1.3. php.ini中可使用变量<br>1.1.4. mysqlnd进入核心扩展 理论上说该扩展访问mysql速度会较之前的MySQL 和 MySQLi 扩展快（参见<a href="http://dev.mysql.com/downloads/connector/php-mysqlnd/）" target="_blank" rel="external">http://dev.mysql.com/downloads/connector/php-mysqlnd/）</a><br>1.1.5. ext/phar、ext/intl、ext/fileinfo、ext/sqlite3和ext/enchant等扩展默认随PHP绑定发布。其中Phar可用于打包PHP程序，类似于Java中的jar机制。<br>1.1.6. ereg 正则表达式函数 不再默认可用，请使用速度更快的PCRE 正则表达式函数</p>
+<h3 id="弃用功能">弃用功能</h3><p>PHP 5.3.0 新增了两个错误等级: E_DEPRECATED 和 E_USER_DEPRECATED. 错误等级 E_DEPRECATED 被用来说明一个函数或者功能已经被弃用. E_USER_DEPRECATED 等级目的在于表明用户代码中的弃用功能, 类似于 E_USER_ERROR 和 E_USER_WARNING 等级.<br>下面是被弃用的 INI 指令列表. 使用下面任何指令都将导致 E_DEPRECATED 错误.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define_syslog_variables</span><br><span class="line">register_globals</span><br><span class="line">register_long_arrays</span><br><span class="line">safe_mode</span><br><span class="line">magic_quotes_gpc</span><br><span class="line">magic_quotes_runtime</span><br><span class="line">magic_quotes_sybase</span><br></pre></td></tr></table></figure></p>
+<p>弃用 INI 文件中以 ‘#’ 开头的注释.<br>弃用函数:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">call_user_method() (使用 call_user_func() 替代)</span><br><span class="line">call_user_method_array() (使用 call_user_func_array() 替代)</span><br><span class="line">define_syslog_variables()</span><br><span class="line">dl()</span><br><span class="line">ereg() (使用 preg_match() 替代)</span><br><span class="line">ereg_replace() (使用 preg_replace() 替代)</span><br><span class="line">eregi() (使用 preg_match() 配合 <span class="string">'i'</span> 修正符替代)</span><br><span class="line">eregi_replace() (使用 preg_replace() 配合 <span class="string">'i'</span> 修正符替代)</span><br><span class="line">set_magic_quotes_runtime() 以及它的别名函数 magic_quotes_runtime()</span><br><span class="line">session_register() (使用 <span class="variable">$_SESSION</span> 超全部变量替代)</span><br><span class="line">session_unregister() (使用 <span class="variable">$_SESSION</span> 超全部变量替代)</span><br><span class="line">session_is_registered() (使用 <span class="variable">$_SESSION</span> 超全部变量替代)</span><br><span class="line">set_socket_blocking() (使用 stream_set_blocking() 替代)</span><br><span class="line">split() (使用 preg_split() 替代)</span><br><span class="line">spliti() (使用 preg_split() 配合 <span class="string">'i'</span> 修正符替代)</span><br><span class="line">sql_regcase()</span><br><span class="line">mysql_db_query() (使用 mysql_select_db() 和 mysql_query() 替代)</span><br><span class="line">mysql_escape_string() (使用 mysql_real_escape_string() 替代)</span><br></pre></td></tr></table></figure></p>
+<p>废弃以字符串传递区域设置名称. 使用 LC_* 系列常量替代.<br>mktime() 的 is_dst 参数. 使用新的时区处理函数替代.</p>
+<p><strong>更多新特性，参加官网：<a href="http://php.net/manual/en/migration53.new-features.php" target="_blank" rel="external">http://php.net/manual/en/migration53.new-features.php</a></strong></p>
+<h2 id="PHP_5-4_new_feature">PHP 5.4 new feature</h2><h3 id="Traits">Traits</h3><p>Traits提供了一种灵活的代码重用机制，即不像interface一样只能定义方法但不能实现，又不能像class一样只能单继承。至于在实践中怎样使用，还需要深入思考。<br>魔术常量为<code>__TRAIT__</code><br>官网的一个例子：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">trait</span> SayWorld &#123;  </span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">                <span class="keyword">parent</span>::sayHello();  </span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"World!\n"</span>;  </span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'ID:'</span> . <span class="variable">$this</span>-&gt;id . <span class="string">"\n"</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">                <span class="keyword">echo</span> <span class="string">'Hello '</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyHelloWorld</span> <span class="keyword">extends</span> <span class="title">Base</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">private</span> <span class="variable">$id</span>;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">                <span class="variable">$this</span>-&gt;id = <span class="number">123456</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">use</span> <span class="title">SayWorld</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line"><span class="variable">$o</span> = <span class="keyword">new</span> MyHelloWorld();  </span><br><span class="line"><span class="variable">$o</span>-&gt;sayHello();  </span><br><span class="line">  </span><br><span class="line"><span class="comment">/*will output: </span><br><span class="line">Hello World! </span><br><span class="line">ID:123456 </span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="Short_array_syntax_数组简短语法">Short array syntax 数组简短语法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$arr</span> = [<span class="number">1</span>,<span class="string">'james'</span>, <span class="string">'james@fwso.cn'</span>];  </span><br><span class="line"><span class="variable">$array</span> = [  </span><br><span class="line">　　<span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,  </span><br><span class="line">　　<span class="string">"bar"</span> =&gt; <span class="string">"foo"</span>  </span><br><span class="line">　　];</span><br></pre></td></tr></table></figure>
+<h3 id="Array_dereferencing_数组值">Array dereferencing 数组值</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myfunc</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">array</span>(<span class="number">1</span>,<span class="string">'james'</span>, <span class="string">'james@fwso.cn'</span>);  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">#以前我们需要这样：</span></span><br><span class="line"><span class="variable">$arr</span> = myfunc();  </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$arr</span>[<span class="number">1</span>];  </span><br><span class="line"><span class="comment">#在PHP5.4中这样就行了：</span></span><br><span class="line"><span class="keyword">echo</span> myfunc()[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+<p>本例要注意一个要点 <a href="http://www.laruence.com/2011/12/19/2409.html" target="_blank" rel="external">http://www.laruence.com/2011/12/19/2409.html</a></p>
+<h3 id="实例化类">实例化类</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">show</span><span class="params">()</span></span>&#123;  </span><br><span class="line">		<span class="keyword">return</span> <span class="string">'test'</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">echo</span> (<span class="keyword">new</span> test())-&gt;show();</span><br></pre></td></tr></table></figure>
+<h3 id="支持_Class::{expr}()_语法">支持 Class::{expr}() 语法</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> ([<span class="keyword">new</span> Human(<span class="string">"Gonzalo"</span>), <span class="keyword">new</span> Human(<span class="string">"Peter"</span>)] <span class="keyword">as</span> <span class="variable">$human</span>) &#123;  </span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$human</span>-&gt;&#123;<span class="string">'hello'</span>&#125;();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Callable_typehint">Callable typehint</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(callable <span class="variable">$callback</span>)</span> </span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">foo(<span class="string">"false"</span>); <span class="comment">//错误，因为false不是callable类型  </span></span><br><span class="line">foo(<span class="string">"printf"</span>); <span class="comment">//正确  </span></span><br><span class="line">foo(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;); <span class="comment">//正确  </span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;  </span><br><span class="line">　　<span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">show</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">foo(<span class="keyword">array</span>(<span class="string">"A"</span>, <span class="string">"show"</span>)); <span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数类型提示的增强">函数类型提示的增强</h3><p>由于php是弱类型的语言，因此在php 5.0后，引入了函数类型提示的功能，其含义为对于传入函数中的参数都进行类型检查，举个例子，有如下的类:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bar</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(bar <span class="variable">$foo</span>)</span> </span>&#123;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//其中函数foo中的参数规定了传入的参数必须为bar类的实例，否则系统会判断出错。同样对于数组来说，也可以进行判断，比如：  </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">(array <span class="variable">$foo</span>)</span> </span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">foo(<span class="keyword">array</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 正确，因为传入的是数组  </span></span><br><span class="line">foo(<span class="number">123</span>); <span class="comment">// 不正确，传入的不是数组</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PHP_5-4-0_性能大幅提升，_修复超过100个bug-">PHP 5.4.0 性能大幅提升， 修复超过100个bug.</h3><p>废除了register_globals, magic_quotes以及安全模式。<br>另外值得一提的是多字节支持已经默认启用了，<br>default_charset从ISO-8859-1已经变为UTF-8.<br>默认发送“Content-Type: text/html; charset=utf-8”，<br>你再也不需要在HTML里写meta tag，也无需为UTF-8兼容而传送额外的header了。</p>
+<p>删除的特性<br>最后，我们集中整理了几年来标记为已弃用的多个特性。这些特性包括 allow_call_time_pass_reference、define_syslog_variables、highlight.bg、register_globals、register_long_arrays、magic_quotes、safe_mode、zend.ze1_compatibility_mode、session.bug_compat42、session.bug_compat_warn 以及 y2k_compliance。<br>除了这些特性之外，magic_quotes 可能是最大的危险。在早期版本中，未考虑因 magic_quotes 出错导致的后果，简单编写且未采取任何举措使自身免受 SQL 注入攻击的应用程序都通过 magic_quotes 来保护。如果在升级到 PHP 5.4 时未验证已采取正确的 SQLi 保护措施，则可能导致安全漏洞。</p>
+<p>其他改动和特性<br>有一种新的“可调用的”类型提示，用于某方法采用回调作为参数的情况。<br><code>htmlspecialchars()</code> 和 <code>htmlentities()</code> 现在可更好地支持亚洲字符，如果未在 php.ini 文件中显式设置 PHP default_charset，这两个函数默认使用 UTF-8 而不是 ISO-8859-1。<br><code>&lt;?=</code>（精简回显语法）现在始终可用，无论 short_tags ini 设置的值为何。这应该使模板化系统创建者感到满意。<br>会话 ID 现在默认通过 /dev/urandom（或等效文件）中的熵生成，而不是与早期版本一样成为必须显式启用的一个选项。<br>mysqlnd 这一捆绑的 MySQL 原生驱动程序库现在默认用于与 MySQL 通信的各种扩展，除非在编译时通过 ./configure 被显式覆盖。<br>可能还有 100 个小的改动和特性。从 PHP 5.3 升级到 5.4 应该极为顺畅，但请阅读迁移指南加以确保。如果您从早期版本升级，执行的操作可能稍多一些。请查看以前的迁移指南再开始升级。</p>
+<p><strong>更多新特性，参照官网：<a href="http://php.net/manual/en/migration54.new-features.php" target="_blank" rel="external">http://php.net/manual/en/migration54.new-features.php</a></strong></p>
+<h2 id="PHP5-5_new_feature">PHP5.5 new feature</h2><h3 id="放弃对Windows_XP和2003_的支持">放弃对Windows XP和2003 的支持</h3><h3 id="弃用e修饰符">弃用e修饰符</h3><p>e修饰符是指示preg_replace函数用来评估替换字符串作为PHP代码，而不只是仅仅做一个简单的字符串替换。不出所料，这种行为会源源不断的出现安全问题。这就是为什么在PHP5.5 中使用这个修饰符将抛出一个弃用警告。作为替代，你应该使用preg_replace_callback函数。你可以从RFC找到更多关于这个变化相应的信息。</p>
+<h3 id="新增函数和类">新增函数和类</h3><p><strong>boolval()</strong><br>PHP已经实现了strval、intval和floatval的函数。为了达到一致性将添加boolval函数。它完全可以作为一个布尔值计算，也可以作为一个回调函数。<br><strong>hash_pbkdf2()</strong><br>PBKDF2全称“Password-Based Key Derivation Function 2”，正如它的名字一样，是一种从密码派生出加密密钥的算法。这就需要加密算法，也可以用于对密码哈希。更广泛的说明和用法示例<br><strong>array_column()</strong><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从数据库获取一列，但返回是数组。  </span></span><br><span class="line"><span class="variable">$userNames</span> = [];  </span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$users</span> <span class="keyword">as</span> <span class="variable">$user</span>) &#123;  </span><br><span class="line">    <span class="variable">$userNames</span>[] = <span class="variable">$user</span>[<span class="string">'name'</span>];  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">//以前获取数组某列值，现在如下  </span></span><br><span class="line"><span class="variable">$userNames</span> = array_column(<span class="variable">$users</span>, <span class="string">'name'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>intl 扩展 </strong><br>将有许多改进 intl的扩展。例如，将会有新的IntlCalendar,IntlGregorianCalendar,IntlTimeZone,IntlBreakIterator,IntlRuleBasedBreakIterator,IntlCodePointBreakIterator类。之前，我竟然不知道有这么多关于intl扩展，如果你想知道更多，我建议你去最新公告里找 Calendar和 BreakIterator。 </p>
+<h3 id="一个简单的密码散列API">一个简单的密码散列API</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$password</span> = <span class="string">"foo"</span>;    </span><br><span class="line"><span class="comment">// creating the hash    </span></span><br><span class="line"><span class="variable">$hash</span> = password_hash(<span class="variable">$password</span>, PASSWORD_BCRYPT);    </span><br><span class="line"><span class="comment">// verifying a password    </span></span><br><span class="line"><span class="keyword">if</span> (password_verify(<span class="variable">$password</span>, <span class="variable">$hash</span>)) &#123;    </span><br><span class="line">    <span class="comment">// password correct!    </span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;    </span><br><span class="line">    <span class="comment">// password wrong!    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="新的语言特性和增强功能。">新的语言特性和增强功能。</h3><p><strong>常量引用</strong><br>“常量引用”意味着数组可以直接操作字符串和数组字面值。举两个例子:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomHexString</span><span class="params">(<span class="variable">$length</span>)</span> </span>&#123;    </span><br><span class="line">    <span class="variable">$str</span> = <span class="string">''</span>;    </span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$length</span>; ++<span class="variable">$i</span>) &#123;    </span><br><span class="line">        <span class="variable">$str</span> .= <span class="string">"0123456789abcdef"</span>[mt_rand(<span class="number">0</span>, <span class="number">15</span>)]; <span class="comment">// direct dereference of string    </span></span><br><span class="line">    &#125;    </span><br><span class="line">&#125;    </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">randomBool</span><span class="params">()</span> </span>&#123;    </span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">false</span>, <span class="keyword">true</span>][mt_rand(<span class="number">0</span>, <span class="number">1</span>)]; <span class="comment">// direct dereference of array    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我不认为在实践中会使用此功能，但它使语言更加一致。请参阅 RFC。</p>
+<h3 id="调用empty()函数(和其他表达式)一起工作">调用empty()函数(和其他表达式)一起工作</h3><p>目前，empty()语言构造只能用在变量，而不能在其他表达式。<br>在特定的代码像empty($this-&gt;getFriends())将会抛出一个错误。作为PHP5.5 这将成为有效的代码</p>
+<h3 id="获取完整类别名称">获取完整类别名称</h3><p>PHP5.3 中引入命名空间的别名类和命名空间短版本的功能。虽然这并不适用于字符串类名称<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Some</span>\<span class="title">Deeply</span>\<span class="title">Nested</span>\<span class="title">Namespace</span>\<span class="title">FooBar</span>;    </span><br><span class="line"><span class="comment">// does not work, because this will try to use the global `FooBar` class    </span></span><br><span class="line"><span class="variable">$reflection</span> = <span class="keyword">new</span> ReflectionClass(<span class="string">'FooBar'</span>);   </span><br><span class="line"><span class="keyword">echo</span> FooBar::class;</span><br></pre></td></tr></table></figure></p>
+<p>为了解决这个问题采用新的<code>FooBar::class</code>语法，它返回类的完整类别名称, 这里::class 等价于get_class（）</p>
+<h3 id="参数跳跃">参数跳跃</h3><p>如果你有一个函数接受多个可选的参数，目前没有办法只改变最后一个参数，而让其他所有参数为默认值。<br>RFC上的例子，如果你有一个函数如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create_query</span><span class="params">(<span class="variable">$where</span>, <span class="variable">$order_by</span>, <span class="variable">$join_type</span>=<span class="string">''</span>, <span class="variable">$execute</span> = false, <span class="variable">$report_errors</span> = true)</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么有没有办法设置$report_errors=false，而其他两个为默认值。为了解决这个跳跃参数的问题而提出：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create_query(<span class="string">"deleted=0"</span>, <span class="string">"name"</span>, <span class="keyword">default</span>, <span class="keyword">default</span>, <span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>我个人不是特别喜欢这个提议。在我的眼睛里，代码需要这个功能，只是设计不当。函数不应该有12个可选参数。 </p>
+<h3 id="Getter_和_Setter">Getter 和 Setter</h3><p>如果你从不喜欢写这些getXYZ()和setXYZ($value)方法，那么这应该是你最受欢迎的改变。提议添加一个新的语法来定义一个属性的设置/读取:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimePeriod</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$seconds</span>;  </span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$hours</span> &#123;  </span><br><span class="line">        get &#123; <span class="keyword">return</span> <span class="variable">$this</span>-&gt;seconds / <span class="number">3600</span>; &#125;  </span><br><span class="line">        set &#123; <span class="variable">$this</span>-&gt;seconds = <span class="variable">$value</span> * <span class="number">3600</span>; &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="variable">$timePeriod</span> = <span class="keyword">new</span> TimePeriod;  </span><br><span class="line"><span class="variable">$timePeriod</span>-&gt;hours = <span class="number">10</span>;  </span><br><span class="line">var_dump(<span class="variable">$timePeriod</span>-&gt;seconds); <span class="comment">// int(36000)  </span></span><br><span class="line">var_dump(<span class="variable">$timePeriod</span>-&gt;hours);   <span class="comment">// int(10)</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="生成器_yield">生成器 yield</h3><p>目前，自定义迭代器很少使用，因为它们的实现，需要大量的样板代码。生成器解决这个问题，并提供了一种简单的样板代码来创建迭代器。<br>例如，你可以定义一个范围函数作为迭代器:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span>  </span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">xrange</span><span class="params">(<span class="variable">$start</span>, <span class="variable">$end</span>, <span class="variable">$step</span> = <span class="number">1</span>)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="variable">$start</span>; <span class="variable">$i</span> &lt; <span class="variable">$end</span>; <span class="variable">$i</span> += <span class="variable">$step</span>) &#123;  </span><br><span class="line">        <span class="keyword">yield</span> <span class="variable">$i</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">foreach</span> (xrange(<span class="number">10</span>, <span class="number">20</span>) <span class="keyword">as</span> <span class="variable">$i</span>) &#123;  </span><br><span class="line">    <span class="comment">// ...  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述xrange函数具有与内建函数相同的行为，但有一点区别：不是返回一个数组的所有值，而是返回一个迭代器动态生成的值。</p>
+<h3 id="foreach_支持list()">foreach 支持list()</h3><p>对于“数组的数组”进行迭代，之前需要使用两个foreach，现在只需要使用foreach + list了，但是这个数组的数组中的每个数组的个数需要一样。看文档的例子一看就明白了。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$array</span> = [  </span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>],  </span><br><span class="line">    [<span class="number">3</span>, <span class="number">4</span>],  </span><br><span class="line">];  </span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> <span class="keyword">list</span>(<span class="variable">$a</span>, <span class="variable">$b</span>)) &#123;  </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"A: $a; B: $b\n"</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>更多新特性，参照官网：<a href="http://php.net/manual/en/migration55.new-features.php" target="_blank" rel="external">http://php.net/manual/en/migration55.new-features.php</a></strong></p>
+<h2 id="PHP5-6_new_feature">PHP5.6 new feature</h2><h3 id="命名空间_use_操作符开始支持函数和常量的导入">命名空间 use 操作符开始支持函数和常量的导入</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">Name</span>\<span class="title">Space</span> &#123;  </span><br><span class="line">    <span class="title">const</span> <span class="title">FOO</span> = 42;  </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span><span class="params">()</span> </span>&#123; <span class="keyword">echo</span> <span class="keyword">__FUNCTION__</span>.<span class="string">"\n"</span>; &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">namespace</span> &#123;  </span><br><span class="line">    <span class="title">use</span> <span class="title">const</span> <span class="title">Name</span>\<span class="title">Space</span>\<span class="title">FOO</span>;  </span><br><span class="line">    <span class="keyword">use</span> <span class="title">function</span> <span class="title">Name</span>\<span class="title">Space</span>\<span class="title">f</span>;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">echo</span> FOO.<span class="string">"\n"</span>;  </span><br><span class="line">    f();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">42</span>  </span><br><span class="line">Name\Space\f</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用**操作符计算乘方">使用**操作符计算乘方</h3><h3 id="phpdbg">phpdbg</h3><p>PHP自带了一个交互式调试器phpdbg，它是一个SAPI模块，更多信息参考 phpdbg文档 。</p>
+<h3 id="php://input_可以被复用">php://input 可以被复用</h3><p>php://input 开始支持多次打开和读取，这给处理POST数据的模块的内存占用带来了极大的改善。</p>
+<h3 id="大文件上传支持">大文件上传支持</h3><p>可以上传超过2G的大文件。</p>
+<p><strong>更多新特性，参照官网：<a href="http://php.net/manual/en/migration56.new-features.php" target="_blank" rel="external">http://php.net/manual/en/migration56.new-features.php</a></strong></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/feature/" rel="tag">#feature</a>
+          
+            <a href="/tags/php/" rel="tag">#php</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/29/train-vs-education/" rel="next" title="培训机构毕业的程序员被歧视的背后逻辑">
+                <i class="fa fa-chevron-left"></i> 培训机构毕业的程序员被歧视的背后逻辑
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/12/01/php-new-features/"
+     data-title="PHP5.3、5.4、5.5、5.6新特性"
+     data-content=""
+     data-url="http://sphenginx.github.io/2015/12/01/php-new-features/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/01/php-new-features/"
+           data-title="PHP5.3、5.4、5.5、5.6新特性" data-url="http://sphenginx.github.io/2015/12/01/php-new-features/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars1.githubusercontent.com/u/1829395?v=3&s=460" alt="Sphenginx Cui" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Sphenginx Cui</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">sphenginx, just do it!</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sphenginx" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/sphenginx" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP5-3_new_feature"><span class="nav-number">2.</span> <span class="nav-text">PHP5.3 new feature</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#支持命名空间_（Namespace）"><span class="nav-number">2.1.</span> <span class="nav-text">支持命名空间 （Namespace）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持延迟静态绑定（Late_Static_Binding）"><span class="nav-number">2.2.</span> <span class="nav-text">支持延迟静态绑定（Late Static Binding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持goto语句"><span class="nav-number">2.3.</span> <span class="nav-text">支持goto语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持闭包、Lambda/Anonymous函数"><span class="nav-number">2.4.</span> <span class="nav-text">支持闭包、Lambda/Anonymous函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增两个魔术方法__callStatic()和__invoke()"><span class="nav-number">2.5.</span> <span class="nav-text">新增两个魔术方法__callStatic()和__invoke()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三元运算符增加了一个快捷书写方式"><span class="nav-number">2.6.</span> <span class="nav-text">三元运算符增加了一个快捷书写方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP5-3中其它值得注意的改变"><span class="nav-number">2.7.</span> <span class="nav-text">PHP5.3中其它值得注意的改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弃用功能"><span class="nav-number">2.8.</span> <span class="nav-text">弃用功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP_5-4_new_feature"><span class="nav-number">3.</span> <span class="nav-text">PHP 5.4 new feature</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Traits"><span class="nav-number">3.1.</span> <span class="nav-text">Traits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Short_array_syntax_数组简短语法"><span class="nav-number">3.2.</span> <span class="nav-text">Short array syntax 数组简短语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array_dereferencing_数组值"><span class="nav-number">3.3.</span> <span class="nav-text">Array dereferencing 数组值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化类"><span class="nav-number">3.4.</span> <span class="nav-text">实例化类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持_Class::{expr}()_语法"><span class="nav-number">3.5.</span> <span class="nav-text">支持 Class::{expr}() 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callable_typehint"><span class="nav-number">3.6.</span> <span class="nav-text">Callable typehint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数类型提示的增强"><span class="nav-number">3.7.</span> <span class="nav-text">函数类型提示的增强</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP_5-4-0_性能大幅提升，_修复超过100个bug-"><span class="nav-number">3.8.</span> <span class="nav-text">PHP 5.4.0 性能大幅提升， 修复超过100个bug.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP5-5_new_feature"><span class="nav-number">4.</span> <span class="nav-text">PHP5.5 new feature</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#放弃对Windows_XP和2003_的支持"><span class="nav-number">4.1.</span> <span class="nav-text">放弃对Windows XP和2003 的支持</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弃用e修饰符"><span class="nav-number">4.2.</span> <span class="nav-text">弃用e修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增函数和类"><span class="nav-number">4.3.</span> <span class="nav-text">新增函数和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的密码散列API"><span class="nav-number">4.4.</span> <span class="nav-text">一个简单的密码散列API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的语言特性和增强功能。"><span class="nav-number">4.5.</span> <span class="nav-text">新的语言特性和增强功能。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用empty()函数(和其他表达式)一起工作"><span class="nav-number">4.6.</span> <span class="nav-text">调用empty()函数(和其他表达式)一起工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取完整类别名称"><span class="nav-number">4.7.</span> <span class="nav-text">获取完整类别名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数跳跃"><span class="nav-number">4.8.</span> <span class="nav-text">参数跳跃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Getter_和_Setter"><span class="nav-number">4.9.</span> <span class="nav-text">Getter 和 Setter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器_yield"><span class="nav-number">4.10.</span> <span class="nav-text">生成器 yield</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach_支持list()"><span class="nav-number">4.11.</span> <span class="nav-text">foreach 支持list()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP5-6_new_feature"><span class="nav-number">5.</span> <span class="nav-text">PHP5.6 new feature</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间_use_操作符开始支持函数和常量的导入"><span class="nav-number">5.1.</span> <span class="nav-text">命名空间 use 操作符开始支持函数和常量的导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用**操作符计算乘方"><span class="nav-number">5.2.</span> <span class="nav-text">使用**操作符计算乘方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phpdbg"><span class="nav-number">5.3.</span> <span class="nav-text">phpdbg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php://input_可以被复用"><span class="nav-number">5.4.</span> <span class="nav-text">php://input 可以被复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大文件上传支持"><span class="nav-number">5.5.</span> <span class="nav-text">大文件上传支持</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2012 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sphenginx Cui</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sphenginx"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+</body>
+</html>

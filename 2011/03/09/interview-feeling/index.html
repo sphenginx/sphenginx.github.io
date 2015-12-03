@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="php,request," />
+  <meta name="keywords" content="面试," />
 
 
 
@@ -53,22 +53,19 @@
 
 
 
-<meta name="description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现coo">
+<meta name="description" content="自2011年一月25号培训毕业以来，我参加的大大小小的面试（不包括远程的）也有将近二十多次了，在这二十多次的面试中，我不知不觉当了一次‘面霸’，也发现了面试的一些好处，特作文以记之，也希望对即将参加工作的童鞋有一些帮助吧。
+首先，多次的面试可以很好的锻炼体力，在这么多次的面试中，我记得最长的一次是从北京的最北边到北京的最南边，那次面试从上午十一点出门到下午六点回家，很好的锻炼了我的‘艰苦奋斗’精神">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记一次PHP中$_REQUEST踩的坑">
-<meta property="og:url" content="http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/index.html">
+<meta property="og:title" content="面试有感">
+<meta property="og:url" content="http://sphenginx.github.io/2011/03/09/interview-feeling/index.html">
 <meta property="og:site_name" content="小崔随想录">
-<meta property="og:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现coo">
-<meta property="og:updated_time" content="2015-11-28T04:47:40.279Z">
+<meta property="og:description" content="自2011年一月25号培训毕业以来，我参加的大大小小的面试（不包括远程的）也有将近二十多次了，在这二十多次的面试中，我不知不觉当了一次‘面霸’，也发现了面试的一些好处，特作文以记之，也希望对即将参加工作的童鞋有一些帮助吧。
+首先，多次的面试可以很好的锻炼体力，在这么多次的面试中，我记得最长的一次是从北京的最北边到北京的最南边，那次面试从上午十一点出门到下午六点回家，很好的锻炼了我的‘艰苦奋斗’精神">
+<meta property="og:updated_time" content="2015-11-27T09:53:54.965Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记一次PHP中$_REQUEST踩的坑">
-<meta name="twitter:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
-排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
-打印EGPCS时发现coo">
+<meta name="twitter:title" content="面试有感">
+<meta name="twitter:description" content="自2011年一月25号培训毕业以来，我参加的大大小小的面试（不包括远程的）也有将近二十多次了，在这二十多次的面试中，我不知不觉当了一次‘面霸’，也发现了面试的一些好处，特作文以记之，也希望对即将参加工作的童鞋有一些帮助吧。
+首先，多次的面试可以很好的锻炼体力，在这么多次的面试中，我记得最长的一次是从北京的最北边到北京的最南边，那次面试从上午十一点出门到下午六点回家，很好的锻炼了我的‘艰苦奋斗’精神">
 
 
 
@@ -80,7 +77,7 @@
   };
 </script>
 
-  <title> 记一次PHP中$_REQUEST踩的坑 | 小崔随想录 </title>
+  <title> 面试有感 | 小崔随想录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +227,7 @@
             
             
               
-                记一次PHP中$_REQUEST踩的坑
+                面试有感
               
             
           </h1>
@@ -239,8 +236,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2014-11-27T09:27:40+08:00" content="2014-11-27">
-              2014-11-27
+            <time itemprop="dateCreated" datetime="2011-03-09T16:29:00+08:00" content="2011-03-09">
+              2011-03-09
             </time>
           </span>
 
@@ -249,8 +246,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
+                  <a href="/categories/人生百态/" itemprop="url" rel="index">
+                    <span itemprop="name">人生百态</span>
                   </a>
                 </span>
 
@@ -265,8 +262,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/11/27/记一次PHP中$_REQUEST踩的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/27/记一次PHP中$_REQUEST踩的坑/" itemprop="commentsCount"></span>
+                <a href="/2011/03/09/interview-feeling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2011/03/09/interview-feeling/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,23 +282,14 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="前记">前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
-<h2 id="排查">排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
-<p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
-<blockquote>
-<p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
-</blockquote>
-<h2 id="结论">结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
-<p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
-<p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
-<p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
-<p>这个变量主要是在php执行时，对超级变量创建的设置。EGPCS对应的超级变量为<code>$_ENV</code>, <code>$_GET</code>, <code>$_POST</code>, <code>$_COOKIE</code>, <code>$_SERVER</code>。如果variables_order被设置为””,则对应的超级全局变量的值都为空数组。</p>
-<p>所以，要想<code>$_REQUEST</code>包含的预定义变量的值，variables_order必须有对应的设置。例如，variables_order = “G”，则$_REQUEST中肯定不会有post的值。</p>
-<p>在<code>register_globals=on</code>的情况，这个配置的顺序将影响对应变量的值，重复key，后边的会覆盖前边的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ request_order = &#34;PGC&#34;</span><br></pre></td></tr></table></figure></p>
-<p>这个变量，说明<code>$_REQUEST</code>包含哪些类型的外部数据、数据加载的顺序。这个是有顺序的，如果key重复，后边的就会覆盖前边的值。</p>
-<blockquote>
-<p>   比如:<br><code>$_GET</code>里面有个 <code>$_GET[&#39;id&#39;]=2</code> ,  <code>$_POST</code> 里有一个 <code>$_POST[&#39;id&#39;] =3</code>。<br>如果request_order = “PG”的形式设置，那么 <code>$_REQUEST[&#39;id&#39;]=2</code>。<br>如果request_order = “GP”的形式设置，则 <code>$_REQUEST[&#39;id&#39;]=3</code>。</p>
-</blockquote>
+        <span itemprop="articleBody"><p>自2011年一月25号培训毕业以来，我参加的大大小小的面试（不包括远程的）也有将近二十多次了，在这二十多次的面试中，我不知不觉当了一次‘面霸’，也发现了面试的一些好处，特作文以记之，也希望对即将参加工作的童鞋有一些帮助吧。</p>
+<p>首先，多次的面试可以很好的锻炼体力，在这么多次的面试中，我记得最长的一次是从北京的最北边到北京的最南边，那次面试从上午十一点出门到下午六点回家，很好的锻炼了我的‘艰苦奋斗’精神，我的抗疲劳能力也大大增强。</p>
+<p>其次，多次的面试可以加深对行业的了解，每次面试前，我都会上网查找面试企业的相关信息，以及该企业的优势与发展空间，甚至是我面试的岗位的发展空间，通过多次的面试，对网站开发行业有了更深层次的了解，对自己的职业定位更加明确。</p>
+<p>再次，多次的面试可以更好的巩固职业相关知识，每次的面试题中，或多或少的都会出一些自己没有涉及到的知识面，通过面试可以更好的认识自己的不足，从而加深自己的知识储备，以备将来知识的升级换代起到很好的承上启下作用。</p>
+<p>再再次，多次面试可以很好的锻炼口才，由开始的内向不敢说到最后的侃侃而谈，甚至是主动挑起话题；这些都是面试时意想不到的收获；</p>
+<p>另外面试最重要的一点，就是认清自己的能力、价值和升值空间，不要因为怕没工作而不知所措的降低自己的身价，坚持自己的薪金要求，不仅仅是对自己能力的肯定，有时候还会换来HR的青睐有加，获得意想不到的收获。</p>
+<p>呵呵，以上都是一些经验心得，在我看来，面霸其实是最了解行业的人之一。</p>
+<p>最后，预祝我和童鞋们都能找到一份称心如意的工作。</p>
 </span>
       
     </div>
@@ -310,9 +298,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/php/" rel="tag">#php</a>
-          
-            <a href="/tags/request/" rel="tag">#request</a>
+            <a href="/tags/面试/" rel="tag">#面试</a>
           
         </div>
       
@@ -321,16 +307,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2011/03/09/面试有感/" rel="next" title="面试有感">
-                <i class="fa fa-chevron-left"></i> 面试有感
+              <a href="/2011/02/16/an-video-interview-after-spring-festival/" rel="next" title="写在年后的第一场雪，写在年后的第一次面试">
+                <i class="fa fa-chevron-left"></i> 写在年后的第一场雪，写在年后的第一次面试
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2014/12/24/jQuery中each如何跳出循环并终止后续代码执行？/" rel="prev" title="jQuery中each如何跳出循环并终止后续代码执行？">
-                jQuery中each如何跳出循环并终止后续代码执行？ <i class="fa fa-chevron-right"></i>
+              <a href="/2014/11/27/bug-in-global-request/" rel="prev" title="记一次PHP中$_REQUEST踩的坑">
+                记一次PHP中$_REQUEST踩的坑 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -346,10 +332,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2014/11/27/记一次PHP中$_REQUEST踩的坑/"
-     data-title="记一次PHP中$_REQUEST踩的坑"
+        <div class="ds-share flat" data-thread-key="2011/03/09/interview-feeling/"
+     data-title="面试有感"
      data-content=""
-     data-url="http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/">
+     data-url="http://sphenginx.github.io/2011/03/09/interview-feeling/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -377,8 +363,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2014/11/27/记一次PHP中$_REQUEST踩的坑/"
-           data-title="记一次PHP中$_REQUEST踩的坑" data-url="http://sphenginx.github.io/2014/11/27/记一次PHP中$_REQUEST踩的坑/">
+      <div class="ds-thread" data-thread-key="2011/03/09/interview-feeling/"
+           data-title="面试有感" data-url="http://sphenginx.github.io/2011/03/09/interview-feeling/">
       </div>
     
   </div>
@@ -422,7 +408,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -436,7 +422,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -493,7 +479,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前记"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

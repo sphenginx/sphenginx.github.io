@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="composer,php," />
+  <meta name="keywords" content="php,request," />
 
 
 
@@ -53,22 +53,22 @@
 
 
 
-<meta name="description" content="介绍Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于no">
+<meta name="description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP依赖管理工具Composer入门">
-<meta property="og:url" content="http://sphenginx.github.io/2015/11/07/PHP依赖管理工具Composer入门/index.html">
+<meta property="og:title" content="记一次PHP中$_REQUEST踩的坑">
+<meta property="og:url" content="http://sphenginx.github.io/2014/11/27/bug-in-global-request/index.html">
 <meta property="og:site_name" content="小崔随想录">
-<meta property="og:description" content="介绍Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于no">
-<meta property="og:updated_time" content="2015-11-28T04:45:50.668Z">
+<meta property="og:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
+<meta property="og:updated_time" content="2015-11-28T04:47:40.279Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP依赖管理工具Composer入门">
-<meta name="twitter:description" content="介绍Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。
-依赖管理Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。
-这个想法并不新鲜，Composer的灵感是来自于no">
+<meta name="twitter:title" content="记一次PHP中$_REQUEST踩的坑">
+<meta name="twitter:description" content="前记今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？
+排查既然有了怀疑，那么我们来打印下变量吧，通过实验发现： $_REQUEST获取的参数 和URL中的不一致，为啥会不一致呢，请教了下Google大神，查看ini的设置，发现1$ variables_order = &amp;#34;EGPCS&amp;#34;;
+打印EGPCS时发现coo">
 
 
 
@@ -80,7 +80,7 @@
   };
 </script>
 
-  <title> PHP依赖管理工具Composer入门 | 小崔随想录 </title>
+  <title> 记一次PHP中$_REQUEST踩的坑 | 小崔随想录 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -230,7 +230,7 @@
             
             
               
-                PHP依赖管理工具Composer入门
+                记一次PHP中$_REQUEST踩的坑
               
             
           </h1>
@@ -239,8 +239,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-07T14:43:25+08:00" content="2015-11-07">
-              2015-11-07
+            <time itemprop="dateCreated" datetime="2014-11-27T09:27:40+08:00" content="2014-11-27">
+              2014-11-27
             </time>
           </span>
 
@@ -265,8 +265,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/07/PHP依赖管理工具Composer入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/07/PHP依赖管理工具Composer入门/" itemprop="commentsCount"></span>
+                <a href="/2014/11/27/bug-in-global-request/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/27/bug-in-global-request/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -285,30 +285,23 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="介绍">介绍</h2><p>Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。</p>
-<h2 id="依赖管理">依赖管理</h2><p>Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。</p>
-<p>这个想法并不新鲜，Composer的灵感是来自于node的npm和ruby的bundler。但是目前PHP还没有一个这样的工具。<br><code>Composer</code>解决的问题是：</p>
-<ul>
-<li>你有一个依赖N多库的项目。</li>
-<li>这些库中一些又依赖于其他的库。</li>
-<li>你声明你所依赖的库。</li>
-<li>Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。</li>
-</ul>
-<h2 id="声明依赖关系">声明依赖关系</h2><p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;require&#34;: &#123;&#10;        &#34;monolog/monolog&#34;: &#34;1.2.*&#34;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>我们简单的描述说我们的项目依赖某个monolog/monolog包，版本只要是以1.2开头的就行。</p>
-<h2 id="系统要求">系统要求</h2><p>Composer需要PHP <strong>5.3.2+</strong> 才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序 <code>installer</code> 会警告你任何不兼容的地方。<br>如果想要从源码而不是简单的从zip压缩包中安装软件包的话，你将需要git，svn或者hg，这依赖于软件包是通过什么进行版本控制的。<br>Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。<br>安装 - *nix下载Composer可执行程序局部安装<br>为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br></pre></td></tr></table></figure></p>
-<p>这只会检查一些PHP设置，然后下载<strong>composer.phar</strong>到你的工作目录中。这个文件是Composer二进制文件。它是一个PHAR <code>PHP archive</code>，PHP的归档格式，也可以像其他命令一样在命令行上运行。<br>你可以使用<code>--install-dir</code>选项，并且提供一个目标目录（可以是绝对或者相对路径）从而把Composer安装到一个指定的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php -- --install-dir=bin</span><br></pre></td></tr></table></figure></p>
-<p>你可以把这个文件放到任何你想放的地方。如果你把它放到你的PATH中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要php。<br>你可以执行这些命令从而能够在你的系统上简单的访问composer：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br><span class="line">$ sudo mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br></pre></td></tr></table></figure></p>
-<p>然后，只需要执行composer命令来运行Composer，而不是php composer.phar。</p>
-<h2 id="Windows使用安装程序">Windows使用安装程序</h2><p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;cd C:\bin&#10;C:\bin&#62;php -r &#34;eval(&#39;?&#62;&#39;.file_get_contents(&#39;https://getcomposer.org/installer&#39;));&#34;</span><br></pre></td></tr></table></figure></p>
-<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&#62;echo @php &#34;%~dp0composer.phar&#34; %*&#62;composer.bat</span><br></pre></td></tr></table></figure></p>
-<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;composer -V&#10;Composer version 27d8904&#10; &#10;C:\Users\username&#62;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用Composer">使用Composer</h2><p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
-<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
-<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require &#39;vendor/autoload.php&#39;;</span><br></pre></td></tr></table></figure></p>
-<p>哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。 如果想要找需要的package，到Packagist。</p>
-<p>参考  英文原文：<a href="http://getcomposer.org/doc/00-intro.md" target="_blank" rel="external">http://getcomposer.org/doc/00-intro.md</a></p>
-<p>(完)</p>
+        <span itemprop="articleBody"><h2 id="前记">前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<h2 id="排查">排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
+<blockquote>
+<p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
+</blockquote>
+<h2 id="结论">结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
+<p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
+<p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+<p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
+<p>这个变量主要是在php执行时，对超级变量创建的设置。EGPCS对应的超级变量为<code>$_ENV</code>, <code>$_GET</code>, <code>$_POST</code>, <code>$_COOKIE</code>, <code>$_SERVER</code>。如果variables_order被设置为””,则对应的超级全局变量的值都为空数组。</p>
+<p>所以，要想<code>$_REQUEST</code>包含的预定义变量的值，variables_order必须有对应的设置。例如，variables_order = “G”，则$_REQUEST中肯定不会有post的值。</p>
+<p>在<code>register_globals=on</code>的情况，这个配置的顺序将影响对应变量的值，重复key，后边的会覆盖前边的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ request_order = &#34;PGC&#34;</span><br></pre></td></tr></table></figure></p>
+<p>这个变量，说明<code>$_REQUEST</code>包含哪些类型的外部数据、数据加载的顺序。这个是有顺序的，如果key重复，后边的就会覆盖前边的值。</p>
+<blockquote>
+<p>   比如:<br><code>$_GET</code>里面有个 <code>$_GET[&#39;id&#39;]=2</code> ,  <code>$_POST</code> 里有一个 <code>$_POST[&#39;id&#39;] =3</code>。<br>如果request_order = “PG”的形式设置，那么 <code>$_REQUEST[&#39;id&#39;]=2</code>。<br>如果request_order = “GP”的形式设置，则 <code>$_REQUEST[&#39;id&#39;]=3</code>。</p>
+</blockquote>
 </span>
       
     </div>
@@ -317,9 +310,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/composer/" rel="tag">#composer</a>
-          
             <a href="/tags/php/" rel="tag">#php</a>
+          
+            <a href="/tags/request/" rel="tag">#request</a>
           
         </div>
       
@@ -328,16 +321,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/17/hexo/" rel="next" title="hexo">
-                <i class="fa fa-chevron-left"></i> hexo
+              <a href="/2011/03/09/interview-feeling/" rel="next" title="面试有感">
+                <i class="fa fa-chevron-left"></i> 面试有感
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/11/29/培训机构毕业的程序员被歧视的背后逻辑/" rel="prev" title="培训机构毕业的程序员被歧视的背后逻辑">
-                培训机构毕业的程序员被歧视的背后逻辑 <i class="fa fa-chevron-right"></i>
+              <a href="/2014/12/24/CRLF-in-Unix-like_Windows-os/" rel="prev" title="解决Unix-like、Windows系统之间文本换行符不同的问题">
+                解决Unix-like、Windows系统之间文本换行符不同的问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -353,10 +346,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2015/11/07/PHP依赖管理工具Composer入门/"
-     data-title="PHP依赖管理工具Composer入门"
+        <div class="ds-share flat" data-thread-key="2014/11/27/bug-in-global-request/"
+     data-title="记一次PHP中$_REQUEST踩的坑"
      data-content=""
-     data-url="http://sphenginx.github.io/2015/11/07/PHP依赖管理工具Composer入门/">
+     data-url="http://sphenginx.github.io/2014/11/27/bug-in-global-request/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -384,8 +377,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/07/PHP依赖管理工具Composer入门/"
-           data-title="PHP依赖管理工具Composer入门" data-url="http://sphenginx.github.io/2015/11/07/PHP依赖管理工具Composer入门/">
+      <div class="ds-thread" data-thread-key="2014/11/27/bug-in-global-request/"
+           data-title="记一次PHP中$_REQUEST踩的坑" data-url="http://sphenginx.github.io/2014/11/27/bug-in-global-request/">
       </div>
     
   </div>
@@ -429,7 +422,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -443,7 +436,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -500,7 +493,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖管理"><span class="nav-number">2.</span> <span class="nav-text">依赖管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明依赖关系"><span class="nav-number">3.</span> <span class="nav-text">声明依赖关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统要求"><span class="nav-number">4.</span> <span class="nav-text">系统要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows使用安装程序"><span class="nav-number">5.</span> <span class="nav-text">Windows使用安装程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Composer"><span class="nav-number">6.</span> <span class="nav-text">使用Composer</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前记"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
