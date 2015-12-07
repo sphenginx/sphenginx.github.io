@@ -603,21 +603,177 @@
 <li>你声明你所依赖的库。</li>
 <li>Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。</li>
 </ul>
-<h2 id="声明依赖关系">声明依赖关系</h2><p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#10;    &#34;require&#34;: &#123;&#10;        &#34;monolog/monolog&#34;: &#34;1.2.*&#34;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="声明依赖关系">声明依赖关系</h2><p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"require"</span>: &#123;</span><br><span class="line">        <span class="string">"monolog/monolog"</span>: <span class="string">"1.2.*"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>我们简单的描述说我们的项目依赖某个monolog/monolog包，版本只要是以1.2开头的就行。</p>
 <h2 id="系统要求">系统要求</h2><p>Composer需要PHP <strong>5.3.2+</strong> 才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序 <code>installer</code> 会警告你任何不兼容的地方。<br>如果想要从源码而不是简单的从zip压缩包中安装软件包的话，你将需要git，svn或者hg，这依赖于软件包是通过什么进行版本控制的。<br>Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。<br>安装 - *nix下载Composer可执行程序局部安装<br>为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br></pre></td></tr></table></figure></p>
 <p>这只会检查一些PHP设置，然后下载<strong>composer.phar</strong>到你的工作目录中。这个文件是Composer二进制文件。它是一个PHAR <code>PHP archive</code>，PHP的归档格式，也可以像其他命令一样在命令行上运行。<br>你可以使用<code>--install-dir</code>选项，并且提供一个目标目录（可以是绝对或者相对路径）从而把Composer安装到一个指定的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php -- --install-dir=bin</span><br></pre></td></tr></table></figure></p>
 <p>你可以把这个文件放到任何你想放的地方。如果你把它放到你的PATH中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要php。<br>你可以执行这些命令从而能够在你的系统上简单的访问composer：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br><span class="line">$ sudo mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br></pre></td></tr></table></figure></p>
 <p>然后，只需要执行composer命令来运行Composer，而不是php composer.phar。</p>
-<h2 id="Windows使用安装程序">Windows使用安装程序</h2><p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;cd C:\bin&#10;C:\bin&#62;php -r &#34;eval(&#39;?&#62;&#39;.file_get_contents(&#39;https://getcomposer.org/installer&#39;));&#34;</span><br></pre></td></tr></table></figure></p>
-<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&#62;echo @php &#34;%~dp0composer.phar&#34; %*&#62;composer.bat</span><br></pre></td></tr></table></figure></p>
-<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&#62;composer -V&#10;Composer version 27d8904&#10; &#10;C:\Users\username&#62;</span><br></pre></td></tr></table></figure></p>
-<h2 id="使用Composer">使用Composer</h2><p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
-<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
-<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require &#39;vendor/autoload.php&#39;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Windows使用安装程序">Windows使用安装程序</h2><p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&gt;<span class="built_in">cd</span> C:\bin</span><br><span class="line">C:\bin&gt;php -r <span class="string">"eval('?&gt;'.file_get_contents('https://getcomposer.org/installer'));"</span></span><br></pre></td></tr></table></figure></p>
+<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&gt;<span class="built_in">echo</span> @php <span class="string">"%~dp0composer.phar"</span> %*&gt;composer.bat</span><br></pre></td></tr></table></figure></p>
+<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&gt;composer -V</span><br><span class="line">Composer version <span class="number">27</span>d8904</span><br><span class="line"> </span><br><span class="line">C:\Users\username&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用Composer">使用Composer</h2><p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
+<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
+<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require <span class="string">'vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p>
 <p>哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。 如果想要找需要的package，到Packagist。</p>
 <p>参考  英文原文：<a href="http://getcomposer.org/doc/00-intro.md" target="_blank" rel="external">http://getcomposer.org/doc/00-intro.md</a></p>
 <p>(完)</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/09/27/js-qrcode/" itemprop="url">
+                  二维码图片生成器QRCode.js
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-09-27T16:03:01+08:00" content="2015-09-27">
+              2015-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/27/js-qrcode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/27/js-qrcode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="二维码是什么？">二维码是什么？</h2><p>百度百科上是这样介绍二维码的：二维码（Quick Response Code），又称二维条码，它是用特定的几何图形按一定规律在平面（二维方向）上分布的黑白相间的图形，是所有信息数据的一把钥匙。在现代商业活动中，可实现的应用十分广泛，如：产品防伪/溯源、广告推送、网站链接、数据下载、商品交易、定位/导航、电子商务应用、车辆管理、信息传递等。如今智能手机扫一扫（简称313）功能的应用使得二维码更加普遍，随着国内物联网产业的蓬勃发展，更多的二维码技术应用解决方案被开发，二维码成为移动互联网入口真正成为现实。 </p>
+<h2 id="QRCode-js说明">QRCode.js说明</h2><p>QRCode.js是一个实现生成二维码(QRCode)的js插件。 QRCode.js有着良好的跨浏览器兼容性（高版本使用HTML5的 Canvas，低版本IE使用table元素绘制），而且QRCode.js没有任何依赖。只需要引用一个QRCode.js。</p>
+<h2 id="使用QRCode-js">使用QRCode.js</h2><h3 id="引入qrcode-js">引入qrcode.js</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=”qrcode.js” <span class="built_in">type</span>=”text/javascript”&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="HTML代码">HTML代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=”qrcode”&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="JS代码">JS代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//初始化QRCode对象</span><br><span class="line">var qrcode = new QRCode(document.getElementById(“qrcode”));</span><br><span class="line"></span><br><span class="line">//也可以在初始化QRCode对象，传入更多参数</span><br><span class="line">var qrcode = new QRCode(document.getElementById(“qrcode”),&#123;</span><br><span class="line">	width: <span class="number">128</span>,</span><br><span class="line">	height: <span class="number">128</span>,</span><br><span class="line">	colorDark : “<span class="comment">#000000″,</span></span><br><span class="line">	colorLight : “<span class="comment">#ffffff”,</span></span><br><span class="line">	correctLevel : QRCode.CorrectLevel.H</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//需要生成二维码的字符串</span><br><span class="line">qrcode.makeCode(“http://www.leixuesong.cn”);</span><br><span class="line"></span><br><span class="line">//清除二维码</span><br><span class="line">qrcode.clear();</span><br></pre></td></tr></table></figure>
+<h3 id="参数说明">参数说明</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>render</td>
+<td>string</td>
+<td>配置用哪个节点元素画二维码，选项有table、svg和canvas，默认的选择顺序为 canvas -&gt; svg -&gt; table</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>要编码的字符串，默认为空</td>
+</tr>
+<tr>
+<td>width</td>
+<td>number</td>
+<td>二维码的长，单位是px  需要注意的是，当使用table或者svg绘制二维码时，会适当减小，使得能够整除二维码矩阵的维度。  默认：256</td>
+</tr>
+<tr>
+<td>height</td>
+<td>number</td>
+<td>同width</td>
+</tr>
+<tr>
+<td>correctLevel</td>
+<td>number</td>
+<td>纠错级别，可取0、1、2、3，数字越大说明所需纠错级别越大，默认：3</td>
+</tr>
+<tr>
+<td>background</td>
+<td>color</td>
+<td>背景色，默认：<code>#FFFFFF</code></td>
+</tr>
+<tr>
+<td>foreground</td>
+<td>color</td>
+<td>前景色，默认：<code>#000000</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="浏览器兼容性">浏览器兼容性</h2><p>几乎支持所有浏览器： IE6~10, Chrome, Firefox, Safari, Opera, Mobile Safari, Android, Windows Mobile.</p>
+<p>到这里，js生成二维码插件-QRCode.js就介绍完了，QRCode.js非常的方便好用。需要注意的的是QRCode初始化传入DOM对象时，必须是js原生的DOM对象，不能是jQuery的DOM对象的，否则就会报错。</p>
+<h2 id="附">附</h2><p>GitHub地址: <a href="https://github.com/davidshimjs/qrcodejs" target="_blank" rel="external">https://github.com/davidshimjs/qrcodejs</a><br>二维码生成原理：<a href="http://www.thonky.com/qr-code-tutorial/" target="_blank" rel="external">http://www.thonky.com/qr-code-tutorial/</a></p>
 
             
           </span>
@@ -1465,113 +1621,6 @@ RSA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/24/jQuery-stop-each-jump-program/" itemprop="url">
-                  jQuery中each如何跳出循环并终止后续代码执行？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
-              2014-12-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/24/jQuery-stop-each-jump-program/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/24/jQuery-stop-each-jump-program/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="前记">前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
-<h2 id="排查">排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
-<h2 id="解决">解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        real_true = false;&#10;        return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1618,7 +1667,7 @@ RSA
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1632,7 +1681,7 @@ RSA
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

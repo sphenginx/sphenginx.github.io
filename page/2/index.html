@@ -232,6 +232,113 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/24/jQuery-stop-each-jump-program/" itemprop="url">
+                  jQuery中each如何跳出循环并终止后续代码执行？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
+              2014-12-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/24/jQuery-stop-each-jump-program/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/24/jQuery-stop-each-jump-program/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="前记">前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
+<h2 id="排查">排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
+<h2 id="解决">解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        real_true = false;&#10;        return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/24/CRLF-in-Unix-like_Windows-os/" itemprop="url">
                   解决Unix-like、Windows系统之间文本换行符不同的问题
                 </a>
@@ -853,7 +960,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -867,7 +974,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">19</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
