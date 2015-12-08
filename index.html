@@ -232,6 +232,301 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/07/markdown/" itemprop="url">
+                  Markdown学习笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-07T17:03:01+08:00" content="2015-12-07">
+              2015-12-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/07/markdown/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/07/markdown/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="Markdown概述">Markdown概述</h2><h3 id="宗旨">宗旨</h3><p>Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们 <code>使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档</code>。</p>
+<p>可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 <em>Setext</em>、<em>atx</em>、<em>Textile</em>、<em>reStructuredText</em>、<em>Grutatext</em> 和 <em>EtText</em>，而最大灵感来源其实是纯文本电子邮件的格式。</p>
+<p>总之， Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像<em>强调</em>。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
+<h3 id="兼容HTML">兼容HTML</h3><p>Markdown 语法的目标是：成为一种适用于网络的书写语言。</p>
+<p>Markdown 不是想要取代 HTML，甚至也没有要和它相近，它的语法种类很少，只对应 HTML 标记的一小部分。Markdown 的构想不是要使得 HTML 文档更容易书写。在我看来， HTML 已经很容易写了。Markdown 的理念是，能让文档更容易读、写和随意改。HTML 是一种发布的格式，Markdown 是一种书写的格式。就这样，Markdown 的格式语法只涵盖纯文本可以涵盖的范围。</p>
+<p>不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。不需要额外标注这是 HTML 或是 Markdown；只要直接加标签就可以了。</p>
+<p>要制约的只有一些 HTML 区块元素――比如 <code>&lt;div&gt;</code>、<code>&lt;table&gt;</code>、<code>&lt;pre&gt;</code>、<code>&lt;p&gt;</code> 等标签，必须在前后加上空行与其它内容区隔开，还要求它们的开始标签与结尾标签不能用制表符或空格来缩进。Markdown 的生成器有足够智能，不会在 HTML 区块标签外加上不必要的 <code>&lt;p&gt;</code> 标签。</p>
+<p>例子如下，在 Markdown 文件里加上一段 HTML 表格：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">这是一个普通段落。</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">td</span>&gt;</span>Foo<span class="tag">&lt;/<span class="title">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line">这是另一个普通段落。</span><br></pre></td></tr></table></figure></p>
+<p>请注意，在 HTML 区块标签间的 Markdown 格式语法将不会被处理。比如，你在 HTML 区块内使用 Markdown 样式的<em>强调</em>会没有效果。</p>
+<p>HTML 的区段（行内）标签如 <code>&lt;span&gt;</code>、<code>&lt;cite&gt;</code>、<code>&lt;del&gt;</code> 可以在 Markdown 的段落、列表或是标题里随意使用。依照个人习惯，甚至可以不用 Markdown 格式，而直接采用 HTML 标签来格式化。举例说明：如果比较喜欢 HTML 的 <code>&lt;a&gt;</code> 或 <code>&lt;img&gt;</code> 标签，可以直接使用这些标签，而不用 Markdown 提供的链接或是图像标签语法。</p>
+<p>和处在 HTML 区块标签间不同，Markdown 语法在 HTML 区段标签间是有效的。</p>
+<h2 id="Markdown基本语法">Markdown基本语法</h2><h3 id="代码区域">代码区域</h3><p>如果你只想高亮语句中的某个函数名或关键字，可以使用 <font color="red">`function_name()`</font>  实现</p>
+<p>通常编辑器根据代码片段适配合适的高亮方法，但你也可以用 ``` 包裹一段代码，并指定一种语言</p>
+<p>支持的语言：<code>actionscript</code>, <code>apache</code>, <code>bash</code>, <code>clojure</code>, <code>cmake</code>, <code>coffeescript</code>, <code>cpp</code>, <code>cs</code>, <code>css</code>, <code>d</code>, <code>delphi</code>, <code>django</code>, <code>erlang</code>, <code>go</code>, <code>haskell</code>, <code>html</code>, <code>http</code>, <code>ini</code>, <code>java</code>, <code>javascript</code>, <code>json</code>, <code>lisp</code>, <code>lua</code>, <code>matlab</code>, <code>nginx</code>, <code>objectivec</code>, <code>perl</code>, <code>php</code>, <code>python</code>, <code>r</code>, <code>ruby</code>, <code>scala</code>, <code>smalltalk</code>, <code>sql</code>, <code>tex</code>, <code>vbscript</code>, <code>xml</code></p>
+<pre><code><span class="comment"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'hello world'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>也可以使用 4 空格缩进，再贴上代码，实现相同的的效果</p>
+<pre>
+    def g(x):
+        yield from range(x, 0, -1)
+    yield from range(x)
+</pre>
+
+<h3 id="标题">标题</h3><p>Markdown提供了两种方式（Setext和Atx）来显示标题。<br>例:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Setext方式</span><br><span class="line"><span class="header">标题1</span><br><span class="line">=================</span></span><br><span class="line"><span class="header">标题2</span><br><span class="line">-----------------</span></span><br><span class="line"></span><br><span class="line">Atx方式</span><br><span class="line"># 标题1</span><br><span class="line">## 标题2</span><br><span class="line">###### 标题6</span><br></pre></td></tr></table></figure></p>
+<h3 id="换行">换行</h3><p>在文字的末尾使用两个或两个以上的空格来表示换行。</p>
+<h3 id="引用">引用</h3><p>行首使用<code>[大于号+空格]</code>表示引用段落，内部可以嵌套多个引用。</p>
+<p>语法：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="blockquote">&gt; 这是一个引用，</span></span><br><span class="line"><span class="blockquote">&gt; 这里木有换行，</span></span><br><span class="line"><span class="blockquote">&gt; 在这里换行了。</span></span><br><span class="line"><span class="blockquote">&gt; &gt; 内部嵌套</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<blockquote>
+<p>这是一个引用，<br>这里木有换行，<br>在这里换行了。</p>
+<blockquote>
+<p>内部嵌套</p>
+</blockquote>
+</blockquote>
+<h3 id="列表">列表</h3><ul>
+<li>无序列表使用 *、 + 或 - 后面加上空格来表示。</li>
+</ul>
+<p>语法：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">* <span class="keyword">Item </span><span class="number">1</span></span><br><span class="line">* <span class="keyword">Item </span><span class="number">2</span></span><br><span class="line">* <span class="keyword">Item </span><span class="number">3</span></span><br><span class="line"></span><br><span class="line">+ <span class="keyword">Item </span><span class="number">1</span></span><br><span class="line">+ <span class="keyword">Item </span><span class="number">2</span></span><br><span class="line">+ <span class="keyword">Item </span><span class="number">3</span></span><br><span class="line"></span><br><span class="line">- <span class="keyword">Item </span><span class="number">1</span></span><br><span class="line">- <span class="keyword">Item </span><span class="number">2</span></span><br><span class="line">- <span class="keyword">Item </span><span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ul>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li>
+</ul>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li><p>Item 3</p>
+</li>
+<li><p>有序列表使用数字加英文句号加空格表示。<br>语法：  </p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 列表前使用 [数字+空格]</span><br><span class="line"><span class="number">2.</span> 我们会自动帮你添加数字</span><br><span class="line"><span class="number">7.</span> 不用担心数字不对，显示的时候我们会自动把这行的 <span class="number">7</span> 纠正为 <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>效果：  </p>
+<ol>
+<li>列表前使用 [数字+空格]</li>
+<li>我们会自动帮你添加数字</li>
+<li>不用担心数字不对，显示的时候我们会自动把这行的 7 纠正为 3</li>
+</ol>
+<h3 id="强调">强调</h3><p>Markdown使用 * 或 _ 表示强调。</p>
+<p>语法：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">单星号 = <span class="keyword">*</span>斜体<span class="keyword">*</span></span><br><span class="line">单下划线 = _斜体_</span><br><span class="line">双星号 = <span class="keyword">*</span><span class="keyword">*</span>加粗<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line">双下划线 = __加粗__</span><br><span class="line">删除线 = ~~加粗~~</span><br></pre></td></tr></table></figure></p>
+<p>效果：<br>单星号 = <em>斜体</em><br>单下划线 = <em>斜体</em><br>双星号 = <strong>加粗</strong><br>双下划线 = <strong>加粗</strong><br>删除线 = <del>加粗</del></p>
+<h3 id="表格">表格</h3><p>语法：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">|<span class="string"> Tables        </span>|<span class="string"> Are           </span>|<span class="string"> Cool  </span>|</span><br><span class="line">|<span class="string"> ------------- </span>|<span class="string">:-------------:</span>|<span class="string"> -----:</span>|</span><br><span class="line">|<span class="string"> col 3 is      </span>|<span class="string"> right-aligned </span>|<span class="string"> $1600 </span>|</span><br><span class="line">|<span class="string"> col 2 is      </span>|<span class="string"> centered      </span>|<span class="string">   $12 </span>|</span><br><span class="line">|<span class="string"> zebra stripes </span>|<span class="string"> are neat      </span>|<span class="string">    $1 </span>|</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line"></span><br><span class="line">dog |<span class="string"> bird </span>|<span class="string"> cat</span><br><span class="line">----</span>|<span class="string">------</span>|<span class="string">----</span><br><span class="line">foo </span>|<span class="string"> foo  </span>|<span class="string"> foo</span><br><span class="line">bar </span>|<span class="string"> bar  </span>|<span class="string"> bar</span><br><span class="line">baz </span>|<span class="string"> baz  </span>|<span class="string"> baz</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：  </p>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th style="text-align:center">Are</th>
+<th style="text-align:right">Cool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>col 3 is</td>
+<td style="text-align:center">right-aligned</td>
+<td style="text-align:right">$1600</td>
+</tr>
+<tr>
+<td>col 2 is</td>
+<td style="text-align:center">centered</td>
+<td style="text-align:right">$12</td>
+</tr>
+<tr>
+<td>zebra stripes</td>
+<td style="text-align:center">are neat</td>
+<td style="text-align:right">$1</td>
+</tr>
+</tbody>
+</table>
+<p>或</p>
+<table>
+<thead>
+<tr>
+<th>dog</th>
+<th>bird</th>
+<th>cat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foo</td>
+<td>foo</td>
+<td>foo</td>
+</tr>
+<tr>
+<td>bar</td>
+<td>bar</td>
+<td>bar</td>
+</tr>
+<tr>
+<td>baz</td>
+<td>baz</td>
+<td>baz</td>
+</tr>
+</tbody>
+</table>
+<h3 id="链接">链接</h3><p>Markdown支持两种风格的链接：<code>Inline</code> 和 <code>Reference</code> 。</p>
+<p>Inline ：以中括号标记显示的链接文本，后面紧跟用小括号包围的链接。如果链接有title属性，则在链接中使用空格加”title属性”。<br>Reference ：一般应用于多个不同位置使用相同链接。通常分为两个部分，调用部分为<a href="http://sphenginx.github.io" title="可选的title">链接文本</a>；定义部分可以出现在文本中的其他位置，格式为 <a href="http://sphenginx.github.io" title="可选的title">ref</a>: <a href="http://some/link/address" target="_blank" rel="external">http://some/link/address</a> (可选的标题)。<br>注：ref中不区分大小写。<br>语法：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">这是一个Inline[<span class="link_label">示例</span>](<span class="link_url">http://sphenginx.github.io "可选的title"</span>)。</span><br><span class="line">这是一个Reference[<span class="link_label">示例</span>][<span class="link_reference">ref</span>]。</span><br><span class="line">[<span class="link_reference">ref</span>]:<span class="link_url">http://sphenginx.github.io (可选的title)</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：<br>这是一个Inline<a href="http://sphenginx.github.io" title="可选的title">示例</a>。<br>这是一个Reference<a href="http://sphenginx.github.io" title="可选的title">示例</a>。  </p>
+<h3 id="图片">图片</h3><p>图片的使用方法基本上和链接类似，只是在中括号前加叹号。</p>
+<p>语法:<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">![<span class="link_label">图片名称</span>](<span class="link_url">http://图片网址</span>)</span><br><span class="line">![<span class="link_label">GitHub头像</span>](<span class="link_url">https://avatars1.githubusercontent.com/u/1829395?v=3&amp;s=460</span>)</span><br></pre></td></tr></table></figure></p>
+<p>效果:  </p>
+<p><img src="https://avatars1.githubusercontent.com/u/1829395?v=3&amp;s=460" alt="GitHub头像"></p>
+<p>注：Markdown不能设置图片大小，如果必须设置则应使用HTML标记 <code>&lt;img&gt;</code>。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="tag">img</span> src=<span class="string">"https://avatars1.githubusercontent.com/u/1829395?v=3&amp;s=460"</span> <span class="attribute">width</span>=<span class="string">"400"</span> <span class="attribute">height</span>=<span class="string">"100"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="https://avatars1.githubusercontent.com/u/1829395?v=3&s=460" width="400" height="100"></p>
+<h3 id="分隔线">分隔线</h3><p>在一行中使用三个或三个以上的*、-或_可以添加分隔线，其中可以有空白，但是不能有其他字符。</p>
+<p>语法：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span></span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<hr>
+<h3 id="转义字符">转义字符</h3><p>Markdown中的转义字符为\，可以转义的有：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="command">\\</span> 反斜杠</span><br><span class="line"><span class="command">\`</span> 反引号</span><br><span class="line"><span class="command">\*</span> 星号</span><br><span class="line"><span class="command">\_</span> 下划线</span><br><span class="line"><span class="command">\&#123;</span><span class="command">\&#125;</span> 大括号</span><br><span class="line"><span class="command">\[</span><span class="command">\]</span> 中括号</span><br><span class="line"><span class="command">\(</span><span class="command">\)</span> 小括号</span><br><span class="line"><span class="command">\#</span> 井号</span><br><span class="line"><span class="command">\+</span> 加号</span><br><span class="line"><span class="command">\-</span> 减号</span><br><span class="line"><span class="command">\.</span> 英文句号</span><br><span class="line"><span class="command">\!</span> 感叹号</span><br></pre></td></tr></table></figure></p>
+<h3 id="颜色与字体">颜色与字体</h3><p>markdown 不支持颜色和字体，所以如果想添加颜色或字体，只能使用 html 标签来实现这些需求了。</p>
+<p>语法:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="attribute">font</span> <span class="attribute">color</span>=<span class="string">"red"</span>&gt;我是红色的&lt;/<span class="attribute">font</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>效果:  </p>
+<font color="red">我是红色的</font>
+
+<h2 id="高级技巧">高级技巧</h2><h3 id="制作一份待办事宜_Todo_列表">制作一份待办事宜 Todo 列表</h3><p>语法：  </p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> [ ] 支持以 <span class="constant">PDF</span> 格式导出文稿</span><br><span class="line"></span>-<span class="ruby"> [ ] 改进 <span class="constant">Cmd</span> 渲染算法，使用局部渲染技术提高渲染效率</span><br><span class="line"></span>-<span class="ruby"> [x] 新增 <span class="constant">Todo</span> 列表功能</span><br><span class="line"></span>-<span class="ruby"> [x] 修复 <span class="constant">LaTex</span> 公式渲染问题</span><br><span class="line"></span>-<span class="ruby"> [x] 新增 <span class="constant">LaTex</span> 公式编号功能</span></span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<ul>
+<li>[ ] 支持以 PDF 格式导出文稿</li>
+<li>[ ] 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li>[x] 新增 Todo 列表功能</li>
+<li>[x] 修复 LaTex 公式渲染问题</li>
+<li>[x] 新增 LaTex 公式编号功能</li>
+</ul>
+<h3 id="高效绘制_流程图">高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-流程图" target="_blank" rel="external">流程图</a></h3><p>不知道为啥Git pages 不支持这种写法，可以copy在最新的Markdown语法解析器里面试试</p>
+<figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: <span class="type">Start</span></span><br><span class="line"><span class="keyword">op</span>=&gt;operation: <span class="type">Your</span> <span class="type">Operation</span></span><br><span class="line">cond=&gt;condition: <span class="type">Yes</span> or <span class="type">No</span>?</span><br><span class="line">e=&gt;<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">st-&gt;<span class="keyword">op</span>-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;<span class="keyword">op</span></span><br></pre></td></tr></table></figure>
+<p>效果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">st=&#62;start: Start&#10;op=&#62;operation: Your Operation&#10;cond=&#62;condition: Yes or No?&#10;e=&#62;end&#10;&#10;st-&#62;op-&#62;cond&#10;cond(yes)-&#62;e&#10;cond(no)-&#62;op</span><br></pre></td></tr></table></figure>
+<h3 id="行内_HTML_元素">行内 HTML 元素</h3><p>目前只支持部分段内 HTML 元素效果，包括 <code>&lt;kdb&gt;</code> <code>&lt;b&gt;</code> <code>&lt;i&gt;</code> <code>&lt;em&gt;</code> <code>&lt;sup&gt;</code> <code>&lt;sub&gt;</code> <code>&lt;br&gt;</code> ，如</p>
+<ul>
+<li>键位显示<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 <span class="tag">&lt;<span class="title">kbd</span>&gt;</span>Ctrl<span class="tag">&lt;<span class="title">kbd</span>&gt;</span>+<span class="tag">&lt;<span class="title">kbd</span>&gt;</span>Alt<span class="tag">&lt;<span class="title">kbd</span>&gt;</span>+<span class="tag">&lt;<span class="title">kbd</span>&gt;</span>Del<span class="tag">&lt;<span class="title">kbd</span>&gt;</span> 重启电脑</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>效果:<br>使用  <kbd>Ctrl<kbd>+<kbd>Alt<kbd>+<kbd>Del<kbd>  重启电脑</kbd></kbd></kbd></kbd></kbd></kbd></p>
+<ul>
+<li><p>代码块</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 <span class="tag">&lt;<span class="title">pre</span>&gt;</span><span class="tag">&lt;/<span class="title">pre</span>&gt;</span> 元素同样可以形成代码块</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>粗斜体</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">&lt;b&gt;</span> Markdown 在此处同样适用，如 <span class="keyword">*</span>加粗<span class="keyword">*</span> <span class="variable">&lt;/b&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="扩展">扩展</h3><p>支持 jsfiddle、gist、runjs、优酷视频，直接填写 url，在其之后会自动添加预览点击会展开相关内容。<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="link_url">http://&#123;url_of_the_fiddle&#125;/embedded/</span>[<span class="link_label">&#123;tabs&#125;/[&#123;style&#125;</span>]]/</span><br><span class="line">https://gist.github.com/&#123;gist<span class="emphasis">_id&#125;</span><br><span class="line">http://runjs.cn/detail/&#123;id&#125;</span><br><span class="line">http://v.youku.com/v_</span>show/id<span class="emphasis">_&#123;video_</span>id&#125;.html</span><br></pre></td></tr></table></figure></p>
+<h3 id="公式">公式</h3><p>当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$$ x = &#123;-b \pm \<span class="built_in">sqrt</span>&#123;b^<span class="number">2</span>-<span class="number">4</span>ac&#125; \over <span class="number">2</span>a&#125;. $$</span><br><span class="line"></span><br><span class="line">$$</span><br><span class="line">x \href&#123;why-equal.html&#125;&#123;=&#125; y^<span class="number">2</span> + <span class="number">1</span></span><br><span class="line">$$</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：<br>$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a}. $$</p>
+<p>$$<br>x \href{why-equal.html}{=} y^2 + 1<br>$$</p>
+<h2 id="Markdown编辑器">Markdown编辑器</h2><ul>
+<li><a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">欢迎使用 Cmd Markdown 编辑阅读器</a></li>
+</ul>
+<p>Win平台</p>
+<ul>
+<li><a href="http://markdownpad.com/" target="_blank" rel="external">MarkdownPad</a></li>
+<li><a href="http://pad.haroopress.com/" target="_blank" rel="external">Haroopad - The next document processor</a><br>进入首页之后，点击用户进入下载界面</li>
+</ul>
+<p>Linux平台</p>
+<ul>
+<li><a href="http://sourceforge.net/p/retext/home/ReText/" target="_blank" rel="external">ReText</a></li>
+</ul>
+<p>Mac平台</p>
+<ul>
+<li><a href="http://mouapp.com/" target="_blank" rel="external">Mou</a></li>
+</ul>
+<h2 id="结语">结语</h2><p>以上几种格式是比较常用的格式，所以我们针对这些语法做了比较详细的说明。除这些之外，Markdown 还有其他语法，如想了解和学习更多，可以参考这篇<a href="(http://wowubuntu.com/markdown/">『Markdown 语法说明』</a>)。</p>
+<p>强烈建议您现在就立马用 Markdown 写一篇文章吧，体会一下 Markdown 的优雅之处！</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/01/php-new-features/" itemprop="url">
                   PHP5.3、5.4、5.5、5.6新特性
                 </a>
@@ -1569,119 +1864,6 @@ RSA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/17/bug-in-pay-no-ship/" itemprop="url">
-                  记一次PHP中$_REQUEST踩的坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-01-17T16:03:01+08:00" content="2015-01-17">
-              2015-01-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/No-Zuo-No-Die/" itemprop="url" rel="index">
-                    <span itemprop="name">No Zuo No Die</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/17/bug-in-pay-no-ship/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/17/bug-in-pay-no-ship/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="前记">前记</h2><p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
-<h2 id="排查">排查</h2><p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给你详细分析。</p>
-<p>先说下支付的逻辑：众所周知，不管是微信支付 还是 支付宝支付，都是异步进行的。也就是说用户在微信或者支付宝支付成功后，微信或者支付宝并不会第一时间把这个支付成功的消息返回给你，而是在接下来的一个小时或者更长时间内分N次给你支付成功的通知（有时候接收到第三方服务器返回success的时候还会发起多次的异步通知），所以一般业务逻辑在此处都会有一防止重复更新数据库的逻辑判断，在成功更新订单为已付款状态后，如果还收到异步通知，直接返回true。</p>
-<p>但是因为未付款发货这种逆天逻辑的存在，在网速慢或者服务器访问量大的时候，用户支付成功，服务器未收到支付成功的异步通知，这时候，脑残卖家点了发货，并且成功了更新了数据库的订单状态，这时候，服务器收到支付成功的通知（在收到支付成功时的业务逻辑是更新未付款的订单），这时候去更新数据表，发现数据不存在（因为订单状态为已发货，而不是未付款），更坑的是，订单表的类型居然是MyISAM类型的，居然不是InnoDB类型的，如此事务完全不能进行，在发现未更新数据的时候不能rollback，这样造成了，之前成功返回异步通知的逻辑不能执行，造成微信或者支付宝异步通知一次，则更新一次数据库…… </p>
-<p>这样的逻辑简直太坑爹了！！！以此提醒同僚们：<code>“ 程序有风险，入行需谨慎”</code> 啊！！！</p>
-<h2 id="解决方案">解决方案</h2><ul>
-<li>更新订单表以及订单相关表为Innodb类型（MyISAM不支持事务处理）；</li>
-<li>更新响应支付通知条件，只要支付方返回支付成功通知，这边就更新为已付款状态，而不关心订单状态是否是未付款；</li>
-</ul>
-<p>这种逻辑真的不要再出现了啊！！！</p>
-<p>不说了，继续修复脏数据了……o(╯□╰)o，囧…… </p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1728,7 +1910,7 @@ RSA
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1742,7 +1924,7 @@ RSA
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
