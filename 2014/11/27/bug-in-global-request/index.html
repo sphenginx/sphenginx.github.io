@@ -285,13 +285,13 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="前记">前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
-<h2 id="排查">排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
+<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
 <p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
 <blockquote>
 <p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
 </blockquote>
-<h2 id="结论">结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
+<h2 id="u7ED3_u8BBA"><a href="#u7ED3_u8BBA" class="headerlink" title="结论"></a>结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
 <p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
 <p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
 <p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
@@ -493,7 +493,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前记"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u524D_u8BB0"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6392_u67E5"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u7ED3_u8BBA"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

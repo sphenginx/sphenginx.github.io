@@ -282,9 +282,9 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="前记">前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
-<h2 id="排查">排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
-<h2 id="解决">解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
+<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
+<h2 id="u89E3_u51B3"><a href="#u89E3_u51B3" class="headerlink" title="解决"></a>解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        return false;&#10;    &#125;&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var real_true = true;&#10;$(&#34;.spec&#34;).each(function()&#123;&#10;    var s =$(this).val();&#10;    if(!s)&#123;&#10;        alert(&#39;&#35268;&#26684;&#19981;&#33021;&#20026;&#31354;&#39;);&#10;        real_true = false;&#10;        return false;&#10;    &#125;&#10;&#125;)&#10;if(!real_true)&#123;&#10;    return false;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
 </span>
@@ -476,7 +476,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前记"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排查"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#u524D_u8BB0"><span class="nav-number">1.</span> <span class="nav-text">前记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u6392_u67E5"><span class="nav-number">2.</span> <span class="nav-text">排查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u89E3_u51B3"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

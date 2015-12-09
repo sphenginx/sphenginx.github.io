@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/2015/01/17/bug-in-pay-no-ship/</loc>
+    <lastmod>2015-12-09T01:45:21.913Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2015/12/07/markdown/</loc>
     <lastmod>2015-12-08T10:45:35.972Z</lastmod>
   </url>
@@ -44,11 +49,6 @@
   <url>
     <loc>http://sphenginx.github.io/2015/06/01/api-discuss/</loc>
     <lastmod>2015-11-28T04:50:49.856Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/2015/01/17/bug-in-pay-no-ship/</loc>
-    <lastmod>2015-11-28T04:48:23.177Z</lastmod>
   </url>
   
   <url>
