@@ -59,7 +59,8 @@
 <meta property="og:url" content="http://sphenginx.github.io/2015/07/17/git/index.html">
 <meta property="og:site_name" content="小崔随想录">
 <meta property="og:description" content="Git 基础简单地说，Git 究竟是怎样的一个系统呢？请注意接下来的内容非常重要，若您理解了 Git 的思想和基本工作原理，用起来就会知其所以然，游刃有余。在开始学习 Git 的时候，请努力分清您对其它版本管理系统的已有认识，如 Subversion 和 Perforce 等；这么做能帮助您使用工具时避免发生混淆。Git 在保存和对待各种信息的时候与其它版本控制系统有很大差异，尽管操作起来的命令形">
-<meta property="og:updated_time" content="2015-12-07T05:06:51.095Z">
+<meta property="og:image" content="http://sphenginx.github.io/images/git_flow.png">
+<meta property="og:updated_time" content="2015-12-10T03:39:31.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="Git 基础简单地说，Git 究竟是怎样的一个系统呢？请注意接下来的内容非常重要，若您理解了 Git 的思想和基本工作原理，用起来就会知其所以然，游刃有余。在开始学习 Git 的时候，请努力分清您对其它版本管理系统的已有认识，如 Subversion 和 Perforce 等；这么做能帮助您使用工具时避免发生混淆。Git 在保存和对待各种信息的时候与其它版本控制系统有很大差异，尽管操作起来的命令形">
@@ -295,7 +296,11 @@
 <p>每个项目都有一个 Git 目录（译注：如果 git clone 出来的话，就是其中 .git 的目录；如果 git clone –bare 的话，新建的目录本身就是 Git 目录。），它是 Git 用来保存元数据和对象数据库的地方。该目录非常重要，每次克隆镜像仓库的时候，实际拷贝的就是这个目录里面的数据。</p>
 <p>从项目中取出某个版本的所有文件和目录，用以开始后续工作的叫做工作目录。这些文件实际上都是从 Git 目录中的压缩对象数据库中提取出来的，接下来就可以在工作目录中对这些文件进行编辑。</p>
 <p>所谓的暂存区域只不过是个简单的文件，一般都放在 Git 目录中。有时候人们会把这个文件叫做索引文件，不过标准说法还是叫暂存区域。</p>
-<h3 id="u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A"><a href="#u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A" class="headerlink" title="基本的 Git 工作流程如下："></a>基本的 Git 工作流程如下：</h3><ol>
+<h3 id="u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A"><a href="#u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A" class="headerlink" title="基本的 Git 工作流程如下："></a>基本的 Git 工作流程如下：</h3><p><img src="http://sphenginx.github.io/images/git_flow.png" alt="Git flow"></p>
+<blockquote>
+<p><strong>Workspace</strong>：工作区<br><strong>Index / Stage</strong>：暂存区<br><strong>Repository</strong>：仓库区（或本地仓库）<br><strong>Remote</strong>：远程仓库</p>
+</blockquote>
+<ol>
 <li>在工作目录中修改某些文件。  </li>
 <li>对修改后的文件进行快照，然后保存到暂存区域。  </li>
 <li>提交更新，将保存在暂存区域的文件快照永久转储到 Git 目录中。 </li>
@@ -394,7 +399,8 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitk</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="More_info"><a href="#More_info" class="headerlink" title="More info"></a>More info</h2><p><a href="http://git-scm.com/book/zh/v1/" target="_blank" rel="external">git-scm.com</a> .</p>
+<h2 id="More_info"><a href="#More_info" class="headerlink" title="More info"></a>More info</h2><p><a href="http://git-scm.com/book/zh/v1/" target="_blank" rel="external">git-scm.com</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">常用 Git 命令清单 - 阮一峰</a></p>
 <p><a href="http://xianglong.me/article/permanently-delete-a-commit-from-git/" target="_blank" rel="external">GIT永久删除commit</a></p>
 <p><a href="http://blog.jobbole.com/87700/" target="_blank" rel="external">如何在 Git 里撤销(几乎)任何操作</a></p>
 <p><a href="http://blog.jobbole.com/89302/" target="_blank" rel="external">开源项目的那点事</a></p>
