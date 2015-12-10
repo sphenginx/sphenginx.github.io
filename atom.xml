@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2015-12-09T03:42:24.814Z</updated>
+  <updated>2015-12-10T07:22:24.001Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://sphenginx.github.io/2015/12/07/markdown/"/>
     <id>http://sphenginx.github.io/2015/12/07/markdown/</id>
     <published>2015-12-07T09:03:01.000Z</published>
-    <updated>2015-12-09T03:42:24.814Z</updated>
+    <updated>2015-12-10T07:22:24.001Z</updated>
     <content type="html"><![CDATA[<h2 id="Markdown_u6982_u8FF0"><a href="#Markdown_u6982_u8FF0" class="headerlink" title="Markdown概述"></a>Markdown概述</h2><h3 id="u5B97_u65E8"><a href="#u5B97_u65E8" class="headerlink" title="宗旨"></a>宗旨</h3><p>Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们 <code>使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档</code>。</p>
 <p>可读性，无论如何，都是最重要的。一份使用 Markdown 格式撰写的文件应该可以直接以纯文本发布，并且看起来不会像是由许多标签或是格式指令所构成。Markdown 语法受到一些既有 text-to-HTML 格式的影响，包括 <em>Setext</em>、<em>atx</em>、<em>Textile</em>、<em>reStructuredText</em>、<em>Grutatext</em> 和 <em>EtText</em>，而最大灵感来源其实是纯文本电子邮件的格式。</p>
 <p>总之， Markdown 的语法全由一些符号所组成，这些符号经过精挑细选，其作用一目了然。比如：在文字两旁加上星号，看起来就像<em>强调</em>。Markdown 的列表看起来，嗯，就是列表。Markdown 的区块引用看起来就真的像是引用一段文字，就像你曾在电子邮件中见过的那样。</p>
@@ -209,7 +209,11 @@
 <ul>
 <li><a href="http://mouapp.com/" target="_blank" rel="external">Mou</a></li>
 </ul>
-<h2 id="u7ED3_u8BED"><a href="#u7ED3_u8BED" class="headerlink" title="结语"></a>结语</h2><p>以上几种格式是比较常用的格式，所以我们针对这些语法做了比较详细的说明。除这些之外，Markdown 还有其他语法，如想了解和学习更多，可以参考这篇<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">『Markdown 语法说明』</a>。</p>
+<h2 id="u7ED3_u8BED"><a href="#u7ED3_u8BED" class="headerlink" title="结语"></a>结语</h2><p>以上几种格式是比较常用的格式，所以我们针对这些语法做了比较详细的说明。除这些之外，Markdown 还有其他语法，如想了解和学习更多，可以参考这篇<a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">『Markdown 语法说明』</a>。:smile: (It seems the hexo does not support emoji)…… </p>
+<h2 id="u9644"><a href="#u9644" class="headerlink" title="附"></a>附</h2><ul>
+<li><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="external">Github markdown guide</a></li>
+<li><a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="external">emoji-cheat-sheet</a></li>
+</ul>
 <p>强烈建议您现在就立马用 Markdown 写一篇文章吧，体会一下 Markdown 的优雅之处！</p>
 ]]></content>
     <summary type="html">
