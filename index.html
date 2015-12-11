@@ -306,7 +306,14 @@
 <h2 id="Markdown_u57FA_u672C_u8BED_u6CD5"><a href="#Markdown_u57FA_u672C_u8BED_u6CD5" class="headerlink" title="Markdown基本语法"></a>Markdown基本语法</h2><h3 id="u4EE3_u7801_u533A_u57DF"><a href="#u4EE3_u7801_u533A_u57DF" class="headerlink" title="代码区域"></a>代码区域</h3><p>如果你只想高亮语句中的某个函数名或关键字，可以使用 <font color="red">`function_name()`</font>  实现</p>
 <p>通常编辑器根据代码片段适配合适的高亮方法，但你也可以用 ``` 包裹一段代码，并指定一种语言</p>
 <p>支持的语言：<code>actionscript</code>, <code>apache</code>, <code>bash</code>, <code>clojure</code>, <code>cmake</code>, <code>coffeescript</code>, <code>cpp</code>, <code>cs</code>, <code>css</code>, <code>d</code>, <code>delphi</code>, <code>django</code>, <code>erlang</code>, <code>go</code>, <code>haskell</code>, <code>html</code>, <code>http</code>, <code>ini</code>, <code>java</code>, <code>javascript</code>, <code>json</code>, <code>lisp</code>, <code>lua</code>, <code>matlab</code>, <code>nginx</code>, <code>objectivec</code>, <code>perl</code>, <code>php</code>, <code>python</code>, <code>r</code>, <code>ruby</code>, <code>scala</code>, <code>smalltalk</code>, <code>sql</code>, <code>tex</code>, <code>vbscript</code>, <code>xml</code></p>
-<p>``` javascript<br>$(document).ready(function () {<br>    alert(‘hello world’);<br>});<br>```</p>
+<pre><code>
+	&#96`` javascript
+	$(document).ready(function () {
+	    alert('hello world');
+	});
+	&#96``
+	
+</code></pre><p><a href="https://github.com/hexojs/hexo/issues/1636" target="_blank" rel="external">谢谢hexo漩涡的帮助</a>!<br><a href="https://github.com/hexojs/site/blame/master/source/docs/tag-plugins.md#L135-L139" target="_blank" rel="external">详见hexo tag plugins</a></p>
 <p>也可以使用 4 空格缩进，再贴上代码，实现相同的的效果</p>
 <pre>
     def g(x):
