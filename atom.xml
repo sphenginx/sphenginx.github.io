@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2015-12-11T04:58:31.391Z</updated>
+  <updated>2015-12-18T01:46:07.186Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -13,6 +13,52 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[我眼里的架构师]]></title>
+    <link href="http://sphenginx.github.io/2015/12/17/architect/"/>
+    <id>http://sphenginx.github.io/2015/12/17/architect/</id>
+    <published>2015-12-17T10:03:01.000Z</published>
+    <updated>2015-12-18T01:46:07.186Z</updated>
+    <content type="html"><![CDATA[<p><img src="http://sphenginx.github.io/images/architect.png" alt="architect"></p>
+<p>攻城狮，美其名曰架构师。相信每家公司对架构师的定义和要求都不一样，今天我仅以我的角度，聊一聊我眼里的架构狮。</p>
+<p>几年前，我对架构师的印象，停留在：画漂亮的设计图，研究高性能，技术攻关一把手。反正就是各种技术高手的标签都可以贴上去。最近两三年，和自己做的事情、职责多少有一点点关系，思路发生了一些变化，总结下来，我觉得架构师的关注点应该是：  </p>
+<ul>
+<li>架构团队</li>
+<li>架构技术</li>
+<li>架构流程规范</li>
+<li>架构产品</li>
+<li>架构客户</li>
+</ul>
+<h2 id="u67B6_u6784_u56E2_u961F"><a href="#u67B6_u6784_u56E2_u961F" class="headerlink" title="架构团队"></a>架构团队</h2><p>没有团队，就没有架构师。</p>
+<h3 id="u67B6_u6784_u5E08_u9700_u8981_u5173_u6CE8_u5E76_u4E0D_u65AD_u4F18_u5316_u56E2_u961F_u7684_u7ED3_u6784_u3002"><a href="#u67B6_u6784_u5E08_u9700_u8981_u5173_u6CE8_u5E76_u4E0D_u65AD_u4F18_u5316_u56E2_u961F_u7684_u7ED3_u6784_u3002" class="headerlink" title="架构师需要关注并不断优化团队的结构。"></a>架构师需要关注并不断优化团队的结构。</h3><p>一个20几个人的开发团队，架构师作为团队的主角，需要能最大化团队的效率：包括把什么样的人放到什么样的位置和哪些人做哪方面的对接；根据团队成员的特点如何做技术配比和责任分工，如何组织好团队协助自己完成技术攻关、技术研究和选型。</p>
+<h3 id="u67B6_u6784_u5E08_u8FD8_u9700_u8981_u65F6_u523B_u5173_u6CE8_u56E2_u961F_u7684_u6210_u957F_u8DEF_u7EBF_u3002"><a href="#u67B6_u6784_u5E08_u8FD8_u9700_u8981_u65F6_u523B_u5173_u6CE8_u56E2_u961F_u7684_u6210_u957F_u8DEF_u7EBF_u3002" class="headerlink" title="架构师还需要时刻关注团队的成长路线。"></a>架构师还需要时刻关注团队的成长路线。</h3><p>对每个开发组的lead，帮助他们在最短的时间内达到他们的下一个技术制高点，同时帮助他们筛选出组里的后备军，在合适的时间，给后备军独立攻关亦或带小团队成长的机会。</p>
+<h2 id="u67B6_u6784_u6280_u672F"><a href="#u67B6_u6784_u6280_u672F" class="headerlink" title="架构技术"></a>架构技术</h2><p>做为架构师的看家本领，架构师需要做到的当然是技术过硬、视野够广。至少在某一个领域有一技之长，同时不失对当前流行技术的了解、深入把控。主要体现在：</p>
+<h3 id="u6280_u672F_u9009_u578B"><a href="#u6280_u672F_u9009_u578B" class="headerlink" title="技术选型"></a>技术选型</h3><p>选择合适的技术，本身就是仁者见仁、智者见智。但是，对架构师的挑战，在于你是否是在任何项目、任何产品上都坚持只用自己熟悉的技术。接触过很多“架构师”，坚持的认为熟悉的就是最棒的、不管黑猫白猫抓到耗子就是好猫。这是我坚决反对的观点。既然是架构师，技术上必然有一技之长，要么编程牛逼可以从应用层写到内核层，要么对数据有很强的分析能力，要么对分布式高性能有很多的研究和经验，要么是客户端架构师对iOS/Android 有深入的研究，但是，不管是哪一个领域的高手，都不应该也不能够丢失对新技术的嗅觉敏感度。好的架构师，一定是在“老的技术”的保障下，逐步的研究、采用、推广当前流行的新技术，然后在合适的时间，完成新老技术方案的升级。同时，还需要考虑产品的特点、团队的结构以及自己对选用技术的把控能力。</p>
+<h3 id="u5E73_u53F0_u9009_u578B"><a href="#u5E73_u53F0_u9009_u578B" class="headerlink" title="平台选型"></a>平台选型</h3><p>我把平台选型拎出来，是因为最近两三年云的快速的发展和变革。做为“有追求的架构师”，你是坚持创造一切，还是拥抱云服务？我是一个云服务的坚决拥护者，道理很简单，让合适的团队做合适的事情，同时，对于中小规模的互联网产品线，利用远比创造成本更低。所以，我们自己的产品，能托管于云端的，坚决不自己构建。目前我们在用的云服务：阿里云托管所有的主机，阿里云RDS托管数据，阿里云OSS数据备份，阿里云ODPS大数据计算，七牛云文件存储和文件CDN，云片发SMS短信，Send Cloud发送邮件通知。</p>
+<h3 id="u6301_u7EED_u4EA4_u4ED8"><a href="#u6301_u7EED_u4EA4_u4ED8" class="headerlink" title="持续交付"></a>持续交付</h3><p>再牛的架构师，如果不能带领团队把产品交付出来，即使拥有再牛逼的技术、技术选型和平台选型再高大上，也于事无补。架构师需要平衡好架构设计、产品的交付周期、技术方案的难易程度。</p>
+<h3 id="u67B6_u6784_u5E08_u5931_u4E1A_u8BBA"><a href="#u67B6_u6784_u5E08_u5931_u4E1A_u8BBA" class="headerlink" title="架构师失业论"></a>架构师失业论</h3><p>今天和团队聊天的时候，提到了“架构师失业论”。我一直认为，当今技术和平台的变革，不出几年，架构师们都可以统统失业了。公司付给架构狮们高额的薪水，可以完全足够用来支付给云平台。未来，云将主导一切，托管一切。你看看AWS的Lambda，你看看现在活起来的Mesos，已经可以让开发者忘记内存、CPU、磁盘的存在了，随着访问量自动无限扩容。你说，还要你架构师有何用呢？</p>
+<h2 id="u67B6_u6784_u89C4_u8303"><a href="#u67B6_u6784_u89C4_u8303" class="headerlink" title="架构规范"></a>架构规范</h2><p>规范在很大程度上绝对了开发团队的开发效率、开发团队和产品团队的沟通效率。在我看来，规范包括但不限于：</p>
+<h3 id="u5F00_u53D1_u89C4_u8303"><a href="#u5F00_u53D1_u89C4_u8303" class="headerlink" title="开发规范"></a>开发规范</h3><p>包括代码的目录结构规范，编码规范，SCM管理规范，包管理和工具规范等等。</p>
+<h3 id="u53D1_u5E03_u89C4_u8303"><a href="#u53D1_u5E03_u89C4_u8303" class="headerlink" title="发布规范"></a>发布规范</h3><p>又包括代码版本管理规范，开发环境、测试环境、Staging环境以及生产环境要求，上线发布的流程等等。</p>
+<h3 id="u6C9F_u901A_u89C4_u8303"><a href="#u6C9F_u901A_u89C4_u8303" class="headerlink" title="沟通规范"></a>沟通规范</h3><p>包括团队沟通的工具、形式，代码review的方式方法等。</p>
+<p>我们目前在使用Git，同时，遵循 git flow，代码review走merge request，CI集成gitlab CI &amp; docker runner/Jenkins。合理利用工具，可以是开发效率事半功倍。</p>
+<h2 id="u67B6_u6784_u4EA7_u54C1"><a href="#u67B6_u6784_u4EA7_u54C1" class="headerlink" title="架构产品"></a>架构产品</h2><p>产品和架构师有什么关系？架构师除了对产品有100%的了解，还需要了解竞争对手的产品、功能，以及技术能力。同时，架构师做为产品团队和开发团队的沟通枢纽，需要协调好团队沟通、合作中出现的问题。当然第一的需要避免的发生的就是 “开发工程师拿刀砍了产品经理”！…</p>
+<h2 id="u5199_u5728_u6700_u540E"><a href="#u5199_u5728_u6700_u540E" class="headerlink" title="写在最后"></a>写在最后</h2><p>也有人问我，架构师有什么优秀的品质。</p>
+<p>第一，品质是人特有的特性，所以，好的品质并不需要区分架构师和非架构师。所以，那些你知道的优秀品质，对架构师统统适用。</p>
+<p>第二，我怎么知道，我又不是架构师……</p>
+<p>转自<a href="http://mp.weixin.qq.com/s?__biz=MzI4MjA4ODU0Ng==&amp;mid=401373742&amp;idx=1&amp;sn=e27102eda726a2a56ee097013c2754ac" target="_blank" rel="external">大房说眼里的架构师</a>.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><img src="http://sphenginx.github.io/images/architect.png" alt="architect"></p>
+<p>攻城狮，美其名曰架构师。相信每家公司对架构师的定义和要求都不一样，今天我仅以我的角度，聊一聊我眼里的架构狮。]]>
+    </summary>
+    
+      <category term="架构师" scheme="http://sphenginx.github.io/tags/%E6%9E%B6%E6%9E%84%E5%B8%88/"/>
+    
+      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Markdown学习笔记]]></title>
@@ -1013,6 +1059,28 @@ RSA
   </entry>
   
   <entry>
+    <title><![CDATA[jQuery中each如何跳出循环并终止后续代码执行？]]></title>
+    <link href="http://sphenginx.github.io/2014/12/24/jQuery-stop-each-jump-program/"/>
+    <id>http://sphenginx.github.io/2014/12/24/jQuery-stop-each-jump-program/</id>
+    <published>2014-12-24T09:02:50.000Z</published>
+    <updated>2015-12-09T01:50:39.939Z</updated>
+    <content type="html"><![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
+<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
+<h2 id="u89E3_u51B3"><a href="#u89E3_u51B3" class="headerlink" title="解决"></a>解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> real_true = <span class="literal">true</span>;</span><br><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        real_true = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">if</span>(!real_true)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，]]>
+    </summary>
+    
+      <category term="jquery" scheme="http://sphenginx.github.io/tags/jquery/"/>
+    
+      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[解决Unix-like、Windows系统之间文本换行符不同的问题]]></title>
     <link href="http://sphenginx.github.io/2014/12/24/CRLF-in-Unix-like_Windows-os/"/>
     <id>http://sphenginx.github.io/2014/12/24/CRLF-in-Unix-like_Windows-os/</id>
@@ -1074,28 +1142,6 @@ RSA
       <category term="CRLF" scheme="http://sphenginx.github.io/tags/CRLF/"/>
     
       <category term="unix" scheme="http://sphenginx.github.io/tags/unix/"/>
-    
-      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[jQuery中each如何跳出循环并终止后续代码执行？]]></title>
-    <link href="http://sphenginx.github.io/2014/12/24/jQuery-stop-each-jump-program/"/>
-    <id>http://sphenginx.github.io/2014/12/24/jQuery-stop-each-jump-program/</id>
-    <published>2014-12-24T09:02:50.000Z</published>
-    <updated>2015-12-09T01:50:39.939Z</updated>
-    <content type="html"><![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
-<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
-<h2 id="u89E3_u51B3"><a href="#u89E3_u51B3" class="headerlink" title="解决"></a>解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> real_true = <span class="literal">true</span>;</span><br><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        real_true = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">if</span>(!real_true)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，]]>
-    </summary>
-    
-      <category term="jquery" scheme="http://sphenginx.github.io/tags/jquery/"/>
     
       <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
     

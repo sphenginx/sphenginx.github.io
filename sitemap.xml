@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/2015/12/17/architect/</loc>
+    <lastmod>2015-12-18T01:46:07.186Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2015/12/01/php-new-features/</loc>
     <lastmod>2015-12-17T06:43:42.796Z</lastmod>
   </url>

@@ -232,6 +232,232 @@
             
               
                 
+                <a class="post-title-link" href="/2015/07/17/git/" itemprop="url">
+                  Git学习笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-07-17T16:03:01+08:00" content="2015-07-17">
+              2015-07-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/17/git/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/17/git/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="Git__u57FA_u7840"><a href="#Git__u57FA_u7840" class="headerlink" title="Git 基础"></a>Git 基础</h2><h3 id="u7B80_u5355_u5730_u8BF4_uFF0CGit__u7A76_u7ADF_u662F_u600E_u6837_u7684_u4E00_u4E2A_u7CFB_u7EDF_u5462_uFF1F"><a href="#u7B80_u5355_u5730_u8BF4_uFF0CGit__u7A76_u7ADF_u662F_u600E_u6837_u7684_u4E00_u4E2A_u7CFB_u7EDF_u5462_uFF1F" class="headerlink" title="简单地说，Git 究竟是怎样的一个系统呢？"></a>简单地说，Git 究竟是怎样的一个系统呢？</h3><p>请注意接下来的内容非常重要，若您理解了 Git 的思想和基本工作原理，用起来就会知其所以然，游刃有余。<br>在开始学习 Git 的时候，请努力分清您对其它版本管理系统的已有认识，如 Subversion 和 Perforce 等；这么做能帮助您使用工具时避免发生混淆。<br>Git 在保存和对待各种信息的时候与其它版本控制系统有很大差异，尽管操作起来的命令形式非常相近，理解这些差异将有助于防止您使用中的困惑。  </p>
+<h3 id="u76F4_u63A5_u8BB0_u5F55_u5FEB_u7167_uFF0C_u800C_u975E_u5DEE_u5F02_u6BD4_u8F83"><a href="#u76F4_u63A5_u8BB0_u5F55_u5FEB_u7167_uFF0C_u800C_u975E_u5DEE_u5F02_u6BD4_u8F83" class="headerlink" title="直接记录快照，而非差异比较"></a>直接记录快照，而非差异比较</h3><p>Git 和其它版本控制系统（包括 Subversion 和近似工具）的主要差别在于 Git 对待数据的方法。 概念上来区分，其它大部分系统以文件变更列表的方式存储信息。 这类系统（CVS、Subversion、Perforce、Bazaar 等等）将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。</p>
+<p>Git 存储项目随时间改变的快照。存储项目随时间改变的快照.这是 Git 与几乎所有其它版本控制系统的重要区别。 因此 Git 重新考虑了以前每一代版本控制系统延续下来的诸多方面。 Git 更像是一个小型的文件系统，提供了许多以此为基础构建的超强工具，而不只是一个简单的 VCS。</p>
+<h3 id="u8FD1_u4E4E_u6240_u6709_u64CD_u4F5C_u90FD_u662F_u672C_u5730_u6267_u884C"><a href="#u8FD1_u4E4E_u6240_u6709_u64CD_u4F5C_u90FD_u662F_u672C_u5730_u6267_u884C" class="headerlink" title="近乎所有操作都是本地执行"></a>近乎所有操作都是本地执行</h3><p>在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。如果您习惯于所有操作都有网络延时开销的集中式版本控制系统，Git 在这方面会让您感到速度之神赐给了 Git 超凡的能量。 因为您在本地磁盘上就有项目的完整历史，所以大部分操作看起来瞬间完成。   </p>
+<p>举个例子，要浏览项目的历史，Git 不需外连到服务器去获取历史，然后再显示出来——它只需直接从本地数据库中读取。 您能立即看到项目历史。 如果您想查看当前版本与一个月前的版本之间引入的修改，Git 会查找到一个月前的文件做一次本地的差异计算，而不是由远程服务器处理或从远程服务器拉回旧版本文件再来本地处理。</p>
+<p>这也意味着您离线或者没有 VPN 时，几乎可以进行任何操作。 如您在飞机或火车上想做些工作，您能愉快地提交，直到有网络连接时再上传。 如您回家后 VPN 客户端不正常，您仍能工作。 使用其它系统，做到如此是不可能或很费力的。 比如，用 Perforce，您没有连接服务器时几乎不能做什么事；用 Subversion 和 CVS，您能修改文件，但不能向数据库提交修改（因为您的本地数据库离线了）。 这看起来不是大问题，但是您可能会惊喜地发现它带来的巨大的不同。</p>
+<h3 id="Git__u4FDD_u8BC1_u5B8C_u6574_u6027"><a href="#Git__u4FDD_u8BC1_u5B8C_u6574_u6027" class="headerlink" title="Git 保证完整性"></a>Git 保证完整性</h3><p>Git 中所有数据在存储前都计算校验和，然后以校验和来引用。 这意味着不可能在 Git 不知情时更改任何文件内容或目录内容。 这个功能建构在 Git 底层，是构成 Git 哲学不可或缺的部分。 若您在传送过程中丢失信息或损坏文件，Git 就能发现。</p>
+<p>Git 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）。 这是一个由 40 个十六进制字符（0-9 和 a-f）组成字符串，基于 Git 中文件的内容或目录结构计算出来。 SHA-1 哈希看起来是这样：<br><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">24b9da<span class="number">6552252987</span>aa<span class="number">493b52f86</span>96cd<span class="number">6d3b00373</span></span><br></pre></td></tr></table></figure></p>
+<p>Git 中使用这种哈希值的情况很多，您将经常看到这种哈希值。 实际上，Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名。</p>
+<h3 id="Git__u4E00_u822C_u53EA_u6DFB_u52A0_u6570_u636E"><a href="#Git__u4E00_u822C_u53EA_u6DFB_u52A0_u6570_u636E" class="headerlink" title="Git 一般只添加数据"></a>Git 一般只添加数据</h3><p>您执行的 Git 操作，几乎只往 Git 数据库中增加数据。 很难让 Git 执行任何不可逆操作，或者让它以任何方式清除数据。 同别的 VCS 一样，未提交更新时有可能丢失或弄乱修改的内容；但是一旦您提交快照到 Git 中，就再难丢失数据，特别是如果您定期的推送数据库到其它仓库的话。</p>
+<p>这使得我们使用 Git 成为一个安心愉悦的过程，因为我们深知可以尽情做各种尝试，而没有把事情弄糟的危险。 更深度探讨 Git 如何保存数据及恢复丢失数据的话题，请参考“Undoing Things”。</p>
+<h3 id="u4E09_u79CD_u72B6_u6001"><a href="#u4E09_u79CD_u72B6_u6001" class="headerlink" title="三种状态"></a>三种状态</h3><p>好，请注意。 如果您希望后面的学习更顺利，记住下面这些关于 Git 的概念。<br>Git 有三种状态，您的文件可能处于其中之一：已提交（committed）、已修改（modified）和已暂存（staged）。 已提交表示数据已经安全的保存在本地数据库中。 已修改表示修改了文件，但还没保存到数据库中。 已暂存表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</p>
+<p>由此引入 Git 项目的三个工作区域的概念：Git 仓库、工作目录以及暂存区域。</p>
+<p>每个项目都有一个 Git 目录（译注：如果 git clone 出来的话，就是其中 .git 的目录；如果 git clone –bare 的话，新建的目录本身就是 Git 目录。），它是 Git 用来保存元数据和对象数据库的地方。该目录非常重要，每次克隆镜像仓库的时候，实际拷贝的就是这个目录里面的数据。</p>
+<p>从项目中取出某个版本的所有文件和目录，用以开始后续工作的叫做工作目录。这些文件实际上都是从 Git 目录中的压缩对象数据库中提取出来的，接下来就可以在工作目录中对这些文件进行编辑。</p>
+<p>所谓的暂存区域只不过是个简单的文件，一般都放在 Git 目录中。有时候人们会把这个文件叫做索引文件，不过标准说法还是叫暂存区域。</p>
+<h3 id="u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A"><a href="#u57FA_u672C_u7684_Git__u5DE5_u4F5C_u6D41_u7A0B_u5982_u4E0B_uFF1A" class="headerlink" title="基本的 Git 工作流程如下："></a>基本的 Git 工作流程如下：</h3><p><img src="http://sphenginx.github.io/images/git_flow.png" alt="Git flow"></p>
+<blockquote>
+<p><strong>Workspace</strong>：工作区<br><strong>Index / Stage</strong>：暂存区<br><strong>Repository</strong>：仓库区（或本地仓库）<br><strong>Remote</strong>：远程仓库</p>
+</blockquote>
+<ol>
+<li>在工作目录中修改某些文件。  </li>
+<li>对修改后的文件进行快照，然后保存到暂存区域。  </li>
+<li>提交更新，将保存在暂存区域的文件快照永久转储到 Git 目录中。 </li>
+</ol>
+<p>所以，我们可以从文件所处的位置来判断状态：如果是 Git 目录中保存着的特定版本文件，就属于已提交状态；如果作了修改并已放入暂存区域，就属于已暂存状态；如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。到第二章的时候，我们会进一步了解其中细节，并学会如何根据文件状态实施后续操作，以及怎样跳过暂存直接提交。</p>
+<h2 id="u5B89_u88C5Git"><a href="#u5B89_u88C5Git" class="headerlink" title="安装Git"></a>安装Git</h2><p>是时候动手尝试下 Git 了，不过得先安装好它。有许多种安装方式，主要分为两种，   </p>
+<ul>
+<li>一种是通过编译源代码来安装；   </li>
+<li>一种是使用为特定平台预编译好的安装包(yum | apt-get)。  </li>
+<li>WIN下自动Google，或去官网自行下载</li>
+</ul>
+<h3 id="u521D_u6B21_u8FD0_u884C_Git__u524D_u7684_u914D_u7F6E"><a href="#u521D_u6B21_u8FD0_u884C_Git__u524D_u7684_u914D_u7F6E" class="headerlink" title="初次运行 Git 前的配置"></a>初次运行 Git 前的配置</h3><p>一般在新的系统上，我们都需要先配置下自己的 Git 工作环境。配置工作只需一次，以后升级时还会沿用现在的配置。当然，如果需要，你随时可以用相同的命令修改已有的配置。</p>
+<p>Git 提供了一个叫做 <code>git config</code> 的工具（译注：实际是 git-config 命令，只不过可以通过 git 加一个名字来呼叫此命令。），专门用来配置或读取相应的工作环境变量。而正是由这些环境变量，决定了 Git 在各个环节的具体工作方式和行为。这些变量可以存放在以下三个不同的地方：</p>
+<p><code>/etc/gitconfig 文件</code>：系统中对所有用户都普遍适用的配置。若使用 git config 时用 –system 选项，读写的就是这个文件。<br><code>~/.gitconfig 文件</code>：用户目录下的配置文件只适用于该用户。若使用 git config 时用 –global 选项，读写的就是这个文件。<br>当前项目的 Git 目录中的配置文件（也就是工作目录中的 <code>.git/config</code> 文件）：这里的配置仅仅针对当前项目有效。每一个级别的配置都会覆盖上层的相同配置，所以 .git/config 里的配置会覆盖 /etc/gitconfig 中的同名变量。<br>在 Windows 系统上，Git 会找寻用户主目录下的 .gitconfig 文件。主目录即 $HOME 变量指定的目录，一般都是<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Documents and Settings\<span class="variable">$USER</span></span><br></pre></td></tr></table></figure></p>
+<p>此外，Git 还会尝试找寻 <code>/etc/gitconfig</code> 文件，只不过看当初 Git 装在什么目录，就以此作为根目录来定位。</p>
+<h3 id="u7528_u6237_u4FE1_u606F"><a href="#u7528_u6237_u4FE1_u606F" class="headerlink" title="用户信息"></a>用户信息</h3><p>第一个要配置的是你个人的用户名称和电子邮件地址。这两条配置很重要，每次 Git 提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user<span class="class">.name</span> <span class="string">"Little Cui"</span></span><br><span class="line">$ git config --global user<span class="class">.email</span> Little Cui@sphenginx.com</span><br></pre></td></tr></table></figure></p>
+<p>如果用了<code>--global</code>选项，那么更改的配置文件就是位于你用户主目录下的那个，以后你所有的项目都会默认使用这里配置的用户信息。如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 –global 选项重新配置即可，新的设定保存在当前项目的 .git/config 文件里。</p>
+<h3 id="u6587_u672C_u7F16_u8F91_u5668"><a href="#u6587_u672C_u7F16_u8F91_u5668" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><p>接下来要设置的是默认使用的文本编辑器。Git 需要你输入一些额外消息的时候，会自动调用一个外部文本编辑器给你用。默认会使用操作系统指定的默认编辑器，一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --<span class="keyword">global</span> core.<span class="keyword">editor</span> emacs</span><br></pre></td></tr></table></figure></p>
+<p>差异分析工具<br>还有一个比较常用的是，在解决合并冲突时使用哪种差异分析工具。比如要改用 vimdiff 的话：<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --<span class="keyword">global</span> <span class="keyword">merge</span>.tool vimdiff</span><br></pre></td></tr></table></figure></p>
+<p>Git 可以理解 kdiff3，tkdiff，meld，xxdiff，emerge，vimdiff，gvimdiff，ecmerge，和 opendiff 等合并工具的输出信息。当然，你也可以指定使用自己开发的工具，具体怎么做可以参阅第七章。</p>
+<h3 id="u67E5_u770B_u914D_u7F6E_u4FE1_u606F"><a href="#u67E5_u770B_u914D_u7F6E_u4FE1_u606F" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><p>要检查已有的配置信息，可以使用 <code>git config --list</code> 命令：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git config --list</span><br><span class="line">user.name=Scott Chacon</span><br><span class="line">user.email=schacon@gmail<span class="class">.com</span></span><br><span class="line"><span class="attribute">color</span>.status=<span class="attribute">auto</span></span><br><span class="line"><span class="attribute">color</span>.branch=<span class="attribute">auto</span></span><br><span class="line"><span class="attribute">color</span>.interactive=<span class="attribute">auto</span></span><br><span class="line"><span class="attribute">color</span>.diff=<span class="attribute">auto</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 /etc/gitconfig 和 ~/.gitconfig），不过最终 Git 实际采用的是最后一个。</p>
+<p><strong>https方式每次都要输入密码，按照如下设置即可输入一次就不用再手输入密码的困扰而且又享受https带来的极速:</strong></p>
+<p>设置记住密码（默认15分钟）：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper cache</span><br></pre></td></tr></table></figure></p>
+<p>如果想自己设置失效时间，可以这么设置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential.helper &#39;cache --timeout=3600&#39; //&#36825;&#26679;&#23601;&#35774;&#32622;&#19968;&#20010;&#23567;&#26102;&#20043;&#21518;&#22833;&#25928;</span><br></pre></td></tr></table></figure></p>
+<p>长期储存密码：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure></p>
+<p>注：This [git-credential-cache] doesn’t work for Windows systems as git-credential-cache communicates through a Unix socket</p>
+<p>The wincred helper was added in msysgit 1.8.1. Use it as follows:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper wincred</span><br></pre></td></tr></table></figure>
+<p>Finally, launch a command prompt and type:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper winstore</span><br></pre></td></tr></table></figure>
+<p>附：<a href="http://my.oschina.net/silentboy/blog/217766" target="_blank" rel="external">https 方式使用git@osc设置密码的方式</a></p>
+<h3 id="u603B_u7ED3_u4E00_u4E0Bcommit_u7684_u51E0_u79CD_u59FF_u52BF_uFF1A"><a href="#u603B_u7ED3_u4E00_u4E0Bcommit_u7684_u51E0_u79CD_u59FF_u52BF_uFF1A" class="headerlink" title="总结一下commit的几种姿势："></a>总结一下commit的几种姿势：</h3><p>传统姿势：先 “git add file” 再 “git commit -m ‘xxx’ “<br>快速提交当前所有文件的更改：”git commit -am ‘xxx’” 会先add所有的更改然后提交<br>快速提交单个文件的更改：”git commit file -m ‘xxx’ “ 只提交这个文件的更改<br>修改最后一次提交：”git commit –amend -am ‘xxx’ “将当前的更改加入最后一次commit中并更改最后一次commit的信息。   </p>
+<h2 id="Git_tips"><a href="#Git_tips" class="headerlink" title="Git tips"></a>Git tips</h2><ul>
+<li><p>设置config信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name sphenginx</span><br><span class="line">$ git config --global user.email sphenginx@sphenginx.com</span><br><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成ssh key</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"littleCui@gmail.com"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看config信息</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="comment">--list</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>彩色的 git 输出：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="attribute">color</span><span class="class">.ui</span> true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示历史记录时，只显示一行注释信息：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config format<span class="class">.pretty</span> oneline</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不替换win下的CRLF设置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> config core.autocrlf <span class="built_in">false</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>win下使用https地址的仓库不输入密码设置</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential<span class="class">.helper</span> wincred</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取我的bitbucket的笔记仓库</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置远程仓库地址</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br><span class="line">git remote <span class="comment">--help</span></span><br><span class="line">git remote <span class="built_in">set</span> origin <span class="keyword">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br><span class="line">git remote <span class="built_in">set</span>-url origin <span class="keyword">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>正常提交命令</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git pull origin <span class="keyword">master</span></span><br><span class="line"><span class="title">git</span> add .</span><br><span class="line">git commit -am '提交信息'</span><br><span class="line">git push origin <span class="literal">master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缓存某些修改的文件</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> stash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>恢复缓存的文件</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">pop</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取某个分支/恢复某个文件</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> checkout branchX/file_path</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>撤销某次修改</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="label">git</span> <span class="keyword">revert </span>HEAD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回退到某个版本</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">git</span> <span class="comment">reset</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">hard</span> <span class="comment">HEAD</span> <span class="comment">|</span> <span class="comment">git</span> <span class="comment">reset</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">hard</span> <span class="comment">origin/master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以在你的仓库根目录中添加一个叫”.gitignore”的文件，来告诉Git系统要忽略 掉哪些文件，下面是文件内容的示例:</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 以'#' 开始的行，被视为注释.</span></span><br><span class="line"><span class="preprocessor"># 忽略掉所有文件名是 foo.txt 的文件.</span></span><br><span class="line">foo.txt</span><br><span class="line"><span class="preprocessor"># 忽略所有生成的 html 文件,</span></span><br><span class="line">*.html</span><br><span class="line"><span class="preprocessor"># foo.html是手工维护的，所以例外.</span></span><br><span class="line">!foo.html</span><br><span class="line"><span class="preprocessor">#  忽略所有.o 和 .a文件.</span></span><br><span class="line">*.[oa]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除 untracked files</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean <span class="operator">-f</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连 untracked 的目录也一起删掉</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> clean -fd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> clean -xfd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在用上述 git clean 前，强烈建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">git</span> clean -nxfd</span><br><span class="line">git clean -nf</span><br><span class="line">git clean -nfd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内建的图形化 git</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitk</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="More_info"><a href="#More_info" class="headerlink" title="More info"></a>More info</h2><p><a href="http://git-scm.com/book/zh/v1/" target="_blank" rel="external">git-scm.com</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">常用 Git 命令清单 - 阮一峰</a></p>
+<p><a href="http://xianglong.me/article/permanently-delete-a-commit-from-git/" target="_blank" rel="external">GIT永久删除commit</a></p>
+<p><a href="http://blog.jobbole.com/87700/" target="_blank" rel="external">如何在 Git 里撤销(几乎)任何操作</a></p>
+<p><a href="http://blog.jobbole.com/89302/" target="_blank" rel="external">开源项目的那点事</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/06/29/body-building/" itemprop="url">
                   健身
                 </a>
@@ -1061,154 +1287,6 @@ RSA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/24/CRLF-in-Unix-like_Windows-os/" itemprop="url">
-                  解决Unix-like、Windows系统之间文本换行符不同的问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
-              2014-12-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/24/CRLF-in-Unix-like_Windows-os/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/24/CRLF-in-Unix-like_Windows-os/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
-<blockquote>
-<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
-</blockquote>
-<p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
-<h2 id="CRLF_u6765_u5386"><a href="#CRLF_u6765_u5386" class="headerlink" title="CRLF来历"></a>CRLF来历</h2><p>计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
-<p>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。</p>
-<p>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-<h2 id="Q_26amp_3BA"><a href="#Q_26amp_3BA" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="u95EE_u9898_u4E00_uFF1AWindows_u4E0B_u7F16_u5199_u7684_u7EAF_u6587_u672C_u6587_u6863_u5728Linux_u4E0B_u4F7F_u7528_uFF0C_u4F8B_u5982Windows_u4E0B_u7F16_u5199_u7684SH_u811A_u672C_uFF0C_u653E_u5230Linux_u4E0B_u6267_u884C_u53EF_u80FD_u4F1A_u51FA_u9519"><a href="#u95EE_u9898_u4E00_uFF1AWindows_u4E0B_u7F16_u5199_u7684_u7EAF_u6587_u672C_u6587_u6863_u5728Linux_u4E0B_u4F7F_u7528_uFF0C_u4F8B_u5982Windows_u4E0B_u7F16_u5199_u7684SH_u811A_u672C_uFF0C_u653E_u5230Linux_u4E0B_u6267_u884C_u53EF_u80FD_u4F1A_u51FA_u9519" class="headerlink" title="问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错"></a>问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错</h3><ul>
-<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
-</li>
-<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
-<p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
-<p>再保存即可。</p>
-<h3 id="u95EE_u9898_u4E8C_uFF1ALinux_u4E0B_u65B0_u5EFA_u7684_u6587_u6863_u5728Windows_u4E0B_u7528_u8BB0_u4E8B_u672C_u6253_u5F00_u5185_u5BB9_u4F1A_u6324_u5728_u4E00_u8D77_uFF08_u6CA1_u6709_u4E86_u6362_u884C_u7B26_uFF09_u3002_u539F_u56E0_u662F_u8BB0_u4E8B_u672C_u4E0D_u652F_u6301_5Cn_u6362_u884C_uFF08_u5B83_u53EA_u652F_u6301_5Cr_5Cn_u5F62_u5F0F_u7684_u6362_u884C_uFF09"><a href="#u95EE_u9898_u4E8C_uFF1ALinux_u4E0B_u65B0_u5EFA_u7684_u6587_u6863_u5728Windows_u4E0B_u7528_u8BB0_u4E8B_u672C_u6253_u5F00_u5185_u5BB9_u4F1A_u6324_u5728_u4E00_u8D77_uFF08_u6CA1_u6709_u4E86_u6362_u884C_u7B26_uFF09_u3002_u539F_u56E0_u662F_u8BB0_u4E8B_u672C_u4E0D_u652F_u6301_5Cn_u6362_u884C_uFF08_u5B83_u53EA_u652F_u6301_5Cr_5Cn_u5F62_u5F0F_u7684_u6362_u884C_uFF09" class="headerlink" title="问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）"></a>问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）</h3><ul>
-<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
-</li>
-<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
-</li>
-<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
-</li>
-<li><p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
-</li>
-</ul>
-<ol>
-<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
-<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
-<li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
-</ol>
-<p>PS：<br><code>\r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。</code></p>
-<p>\r和\n的区别看下面的例子就知道了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
-<p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
-<h3 id="u95EE_u9898_u4E09_uFF1AWindows_u4E0B_u7F16_u5199_u7684doc_u6587_u6863_uFF0C_u5728Linux_u4E0B_u67E5_u770B_uFF08_u7528Open_Office_uFF09_u4E00_u822C_u90FD_u4F1A_u4E71_u7801"><a href="#u95EE_u9898_u4E09_uFF1AWindows_u4E0B_u7F16_u5199_u7684doc_u6587_u6863_uFF0C_u5728Linux_u4E0B_u67E5_u770B_uFF08_u7528Open_Office_uFF09_u4E00_u822C_u90FD_u4F1A_u4E71_u7801" class="headerlink" title="问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码"></a>问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码</h3><ul>
-<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。</li>
-</ul>
-<h3 id="u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316"><a href="#u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316" class="headerlink" title="问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化"></a>问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</h3><ul>
-<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1255,7 +1333,7 @@ RSA
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1269,7 +1347,7 @@ RSA
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
