@@ -232,6 +232,136 @@
             
               
                 
+                <a class="post-title-link" href="/2015/12/18/ioc/" itemprop="url">
+                  如何在Lumen框架下写一个自己的Log类？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-18T16:03:01+08:00" content="2015-12-18">
+              2015-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/18/ioc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/18/ioc/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在使用<strong>lumen</strong>自带的类Log的时候，发现每次记录一个Log，总会在<code>storage/logs/lumen.log</code>文件末尾追加一条记录，那么问题来了，时间久了，lumen.log 这个文件就会非常大，而且也不利于管理，于是打算写一个自己的log类，在各位网友博客小伙伴的帮助下，终于完成了，记录一下写Log的历程，希望能帮助一些后来打算改造Log类的小伙伴吧。</p>
+<h2 id="Lumen"><a href="#Lumen" class="headerlink" title="Lumen"></a>Lumen</h2><p>开始前，先让我们了解下lumen：</p>
+<p>Lumen 是一个由 Laravel 元件搭建而成的微框架, 由 Laravel 官方维护. Lumen 为速度而生, 是当前最快的 PHP 框架之一, 甚至比类似的微框架 Silex 速度还要快.</p>
+<p>Lumen 比其他微框架的优点是, 构建在 Laravel 之上, 使其具备 Laravel 强大的功能, 如 路由, 依赖注入, Eloquent ORM, 数据库迁移管理, 队列和计划任务等.</p>
+<p>Laravel 本来就是一个功能齐全, 速度飞快的框架, 但是 Lumen 因为去除了很多 Laravel 的配置和可自定义的选项, 速度越加飞快, 毫秒必争.</p>
+<p>飞快的速度, 再加上 Laravel 非常方便的功能, 使用 Lumen 开发应用会是非常愉悦的体验.</p>
+<p>Lumen 专为微服务或者 API 设计, 举个例子, 如果你的应用里面有部分业务逻辑的请求频率比较高, 就可以单独把这部分业务逻辑拿出来, 使用 Lumen 来构建一个小 App.</p>
+<p>因为 Lumen 是对 Laravel 优化了框架的加载机制, 所以 Lumen 对资源的要求少很多.</p>
+<p>当然, 你可以使用 队列系统 与你的主 Laravel 应用进行交互. Laravel 和 Lumen 从一开始就是设计成能一起很好的工作, 并且, 配合使用, 允许你构架一个强大的, 以微服务为驱动的应用程序.</p>
+<p>Lumen 同时也非常适用于构建 API 接口, 此类型的应用通常情况下不需要具备 全栈框架 的所有功能, 如 HTTP 会话管理, Cookies, 和模版系统.</p>
+<h2 id="u5386_u7A0B"><a href="#u5386_u7A0B" class="headerlink" title="历程"></a>历程</h2><p>简单的了解了Lumen，那么接下来就来介绍Log的封装过程吧，在介绍前，各位看官如果对lumen的加载机制不清楚，不妨看下这篇文章：<a href="https://phphub.org/topics/769" target="_blank" rel="external">Laravel 架构中的 Container/ServiceProvider/Facade</a>。</p>
+<h3 id="u4E86_u89E3_u7CFB_u7EDF_u7684Log_u7C7B"><a href="#u4E86_u89E3_u7CFB_u7EDF_u7684Log_u7C7B" class="headerlink" title="了解系统的Log类"></a>了解系统的Log类</h3><p>Lumen文档 <a href="http://laravelacademy.org/post/465.html" target="_blank" rel="external">错误和日志</a> 介绍了如何使用Lumen的错误和日志类，而且该日志记录器提供了<a href="http://tools.ietf.org/html/rfc5424" target="_blank" rel="external">RFC 5424</a>中定义的七种日志级别：<code>alert, critical, error,warning, notice, info 和 debug</code>。我们看到以下代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Log</span>;</span><br></pre></td></tr></table></figure></p>
+<p>既然Log类可以直接应用，说明Lumen在初始化的时候就定义了 Log 的 <code>namespace</code> 或者 起了 Log的 <code>aliases</code>, 首先找namespace，没有找到定义Log 的 namespace的地方，那肯定是起了 Log 的别名，找了些资料，终于发现Log的加载流程：</p>
+<ol>
+<li>根目录下<code>bootstrap\app.php</code>文件有一行代码：<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$app</span>-&gt;withFacades();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这一行是调用 <code>vendor\laravel\lumen-framework\src\Application-&gt;withFacades()</code> 方法，会加载Lumen的一些Facades，下面列了 application的几个方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Create a new Lumen application instance.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@param</span>  string|null  $basePath</span><br><span class="line"> * <span class="doctag">@return</span> void</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(<span class="variable">$basePath</span> = null)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    date_default_timezone_set(env(<span class="string">'APP_TIMEZONE'</span>, <span class="string">'Asia/Chongqing'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="variable">$this</span>-&gt;basePath = <span class="variable">$basePath</span>;</span><br><span class="line">    <span class="variable">$this</span>-&gt;bootstrapContainer();</span><br><span class="line">    <span class="variable">$this</span>-&gt;registerErrorHandling();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Bootstrap the application container.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> void</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">bootstrapContainer</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>::setInstance(<span class="variable">$this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$this</span>-&gt;instance(<span class="string">'app'</span>, <span class="variable">$this</span>);</span><br><span class="line">    <span class="variable">$this</span>-&gt;instance(<span class="string">'path'</span>, <span class="variable">$this</span>-&gt;path());</span><br><span class="line"></span><br><span class="line">    <span class="variable">$this</span>-&gt;registerContainerAliases();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Register the facades for the application.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> void</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">withFacades</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Facade::setFacadeApplication(<span class="variable">$this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">static</span>::<span class="variable">$aliasesRegistered</span>) &#123;</span><br><span class="line">        <span class="keyword">static</span>::<span class="variable">$aliasesRegistered</span> = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\App'</span>, <span class="string">'App'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Auth'</span>, <span class="string">'Auth'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Bus'</span>, <span class="string">'Bus'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\DB'</span>, <span class="string">'DB'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Cache'</span>, <span class="string">'Cache'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Cookie'</span>, <span class="string">'Cookie'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Crypt'</span>, <span class="string">'Crypt'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Event'</span>, <span class="string">'Event'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Hash'</span>, <span class="string">'Hash'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Log'</span>, <span class="string">'Log'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Mail'</span>, <span class="string">'Mail'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Queue'</span>, <span class="string">'Queue'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Request'</span>, <span class="string">'Request'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Schema'</span>, <span class="string">'Schema'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Session'</span>, <span class="string">'Session'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Storage'</span>, <span class="string">'Storage'</span>);</span><br><span class="line">        class_alias(<span class="string">'Illuminate\Support\Facades\Validator'</span>, <span class="string">'Validator'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Register container bindings for the application.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> void</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerLogBindings</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="variable">$this</span>-&gt;singleton(<span class="string">'Psr\Log\LoggerInterface'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Logger(<span class="string">'lumen'</span>, [<span class="variable">$this</span>-&gt;getMonologHandler()]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Get the Monolog handler for the application.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> \Monolog\Handler\AbstractHandler</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getMonologHandler</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">new</span> StreamHandler(storage_path(<span class="string">'logs/lumen.log'</span>), Logger::DEBUG))</span><br><span class="line">                        -&gt;setFormatter(<span class="keyword">new</span> LineFormatter(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">true</span>, <span class="keyword">true</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Register the core container aliases.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> void</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerContainerAliases</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="variable">$this</span>-&gt;aliases = [</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Foundation\Application'</span> =&gt; <span class="string">'app'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Auth\Guard'</span> =&gt; <span class="string">'auth.driver'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Auth\PasswordBroker'</span> =&gt; <span class="string">'auth.password'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Cache\Factory'</span> =&gt; <span class="string">'cache'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Cache\Repository'</span> =&gt; <span class="string">'cache.store'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Config\Repository'</span> =&gt; <span class="string">'config'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Container\Container'</span> =&gt; <span class="string">'app'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Container\Container'</span> =&gt; <span class="string">'app'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Cookie\Factory'</span> =&gt; <span class="string">'cookie'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Cookie\QueueingFactory'</span> =&gt; <span class="string">'cookie'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Encryption\Encrypter'</span> =&gt; <span class="string">'encrypter'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Events\Dispatcher'</span> =&gt; <span class="string">'events'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Filesystem\Factory'</span> =&gt; <span class="string">'filesystem'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Hashing\Hasher'</span> =&gt; <span class="string">'hash'</span>,</span><br><span class="line">        <span class="string">'log'</span> =&gt; <span class="string">'Psr\Log\LoggerInterface'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Mail\Mailer'</span> =&gt; <span class="string">'mailer'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Queue\Factory'</span> =&gt; <span class="string">'queue'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Queue\Queue'</span> =&gt; <span class="string">'queue.connection'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Redis\Database'</span> =&gt; <span class="string">'redis'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\Redis\Database'</span> =&gt; <span class="string">'redis'</span>,</span><br><span class="line">        <span class="string">'request'</span> =&gt; <span class="string">'Illuminate\Http\Request'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Session\SessionManager'</span> =&gt; <span class="string">'session'</span>,</span><br><span class="line">        <span class="string">'Illuminate\Contracts\View\Factory'</span> =&gt; <span class="string">'view'</span>,</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * The available container bindings and their respective load methods.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@var</span> array</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="variable">$availableBindings</span> = [</span><br><span class="line">    <span class="string">'auth'</span> =&gt; <span class="string">'registerAuthBindings'</span>,</span><br><span class="line">    <span class="string">'auth.driver'</span> =&gt; <span class="string">'registerAuthBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Auth\Guard'</span> =&gt; <span class="string">'registerAuthBindings'</span>,</span><br><span class="line">    <span class="string">'auth.password'</span> =&gt; <span class="string">'registerAuthBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Auth\PasswordBroker'</span> =&gt; <span class="string">'registerAuthBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Broadcasting\Broadcaster'</span> =&gt; <span class="string">'registerBroadcastingBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Bus\Dispatcher'</span> =&gt; <span class="string">'registerBusBindings'</span>,</span><br><span class="line">    <span class="string">'cache'</span> =&gt; <span class="string">'registerCacheBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Cache\Factory'</span> =&gt; <span class="string">'registerCacheBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Cache\Repository'</span> =&gt; <span class="string">'registerCacheBindings'</span>,</span><br><span class="line">    <span class="string">'config'</span> =&gt; <span class="string">'registerConfigBindings'</span>,</span><br><span class="line">    <span class="string">'composer'</span> =&gt; <span class="string">'registerComposerBindings'</span>,</span><br><span class="line">    <span class="string">'cookie'</span> =&gt; <span class="string">'registerCookieBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Cookie\Factory'</span> =&gt; <span class="string">'registerCookieBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Cookie\QueueingFactory'</span> =&gt; <span class="string">'registerCookieBindings'</span>,</span><br><span class="line">    <span class="string">'db'</span> =&gt; <span class="string">'registerDatabaseBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Database\Eloquent\Factory'</span> =&gt; <span class="string">'registerDatabaseBindings'</span>,</span><br><span class="line">    <span class="string">'encrypter'</span> =&gt; <span class="string">'registerEncrypterBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Encryption\Encrypter'</span> =&gt; <span class="string">'registerEncrypterBindings'</span>,</span><br><span class="line">    <span class="string">'events'</span> =&gt; <span class="string">'registerEventBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Events\Dispatcher'</span> =&gt; <span class="string">'registerEventBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Debug\ExceptionHandler'</span> =&gt; <span class="string">'registerErrorBindings'</span>,</span><br><span class="line">    <span class="string">'files'</span> =&gt; <span class="string">'registerFilesBindings'</span>,</span><br><span class="line">    <span class="string">'filesystem'</span> =&gt; <span class="string">'registerFilesBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Filesystem\Factory'</span> =&gt; <span class="string">'registerFilesBindings'</span>,</span><br><span class="line">    <span class="string">'hash'</span> =&gt; <span class="string">'registerHashBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Hashing\Hasher'</span> =&gt; <span class="string">'registerHashBindings'</span>,</span><br><span class="line">    <span class="string">'log'</span> =&gt; <span class="string">'registerLogBindings'</span>,</span><br><span class="line">    <span class="string">'Psr\Log\LoggerInterface'</span> =&gt; <span class="string">'registerLogBindings'</span>,</span><br><span class="line">    <span class="string">'mailer'</span> =&gt; <span class="string">'registerMailBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Mail\Mailer'</span> =&gt; <span class="string">'registerMailBindings'</span>,</span><br><span class="line">    <span class="string">'queue'</span> =&gt; <span class="string">'registerQueueBindings'</span>,</span><br><span class="line">    <span class="string">'queue.connection'</span> =&gt; <span class="string">'registerQueueBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Queue\Factory'</span> =&gt; <span class="string">'registerQueueBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\Queue\Queue'</span> =&gt; <span class="string">'registerQueueBindings'</span>,</span><br><span class="line">    <span class="string">'redis'</span> =&gt; <span class="string">'registerRedisBindings'</span>,</span><br><span class="line">    <span class="string">'request'</span> =&gt; <span class="string">'registerRequestBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Http\Request'</span> =&gt; <span class="string">'registerRequestBindings'</span>,</span><br><span class="line">    <span class="string">'session'</span> =&gt; <span class="string">'registerSessionBindings'</span>,</span><br><span class="line">    <span class="string">'session.store'</span> =&gt; <span class="string">'registerSessionBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Session\SessionManager'</span> =&gt; <span class="string">'registerSessionBindings'</span>,</span><br><span class="line">    <span class="string">'translator'</span> =&gt; <span class="string">'registerTranslationBindings'</span>,</span><br><span class="line">    <span class="string">'url'</span> =&gt; <span class="string">'registerUrlGeneratorBindings'</span>,</span><br><span class="line">    <span class="string">'validator'</span> =&gt; <span class="string">'registerValidatorBindings'</span>,</span><br><span class="line">    <span class="string">'view'</span> =&gt; <span class="string">'registerViewBindings'</span>,</span><br><span class="line">    <span class="string">'Illuminate\Contracts\View\Factory'</span> =&gt; <span class="string">'registerViewBindings'</span>,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过看源码，我们发现有这么一个变量 <code>$availableBindings</code>, log最终是 <code>Monolog\Logger</code>类。如果看官不明白，可以参照上文中的<code>Facade</code>的原理链接，了解一下lumen的机制。</li>
+</ol>
+<h2 id="u96C6_u6210_u81EA_u5DF1_u7684Log_u7C7B"><a href="#u96C6_u6210_u81EA_u5DF1_u7684Log_u7C7B" class="headerlink" title="集成自己的Log类"></a>集成自己的Log类</h2><p>上文我们明白了Log既然是加载了 <code>Monolog\Logger</code> 类，那我们可以集成一个自己的Log类，最终代码如下<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">&lt;?php</span></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * To change this license header, choose License Headers in Project Properties.</span><br><span class="line"> * To change this template file, choose Tools | Templates</span><br><span class="line"> * and open the template in the editor.</span><br><span class="line"> * default log directory is storage/api/</span><br><span class="line"> * default log name format is YYYY-mm-dd.log</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Sphenginx</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Monolog</span>\<span class="title">Logger</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Monolog</span>\<span class="title">Handler</span>\<span class="title">StreamHandler</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Monolog</span>\<span class="title">Formatter</span>\<span class="title">LineFormatter</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * user defined Log class, with StreamHandler and LineFormatter </span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@author</span> Sphenginx</span><br><span class="line"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Log</span> </span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//define static log instance.</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="variable">$_log_instance</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 获取log实例</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> obj</span><br><span class="line">     * <span class="doctag">@author</span> Sphenginx</span><br><span class="line">     **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getLogInstance</span><span class="params">()</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">static</span>::<span class="variable">$_log_instance</span> === <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">static</span>::<span class="variable">$_log_instance</span> = <span class="keyword">new</span> Logger(<span class="string">'Sphenginx'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">static</span>::<span class="variable">$_log_instance</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * Handle dynamic, static calls to the object.</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@param</span>  string  $method 可用方法: debug|info|notice|warning|error|critical|alert|emergency 可调用的方法详见 Monolog\Logger 类</span><br><span class="line">     * <span class="doctag">@param</span>  array   $args 调用参数</span><br><span class="line">     * <span class="doctag">@return</span> mixed</span><br><span class="line">     * <span class="doctag">@author</span> Sphenginx</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">(<span class="variable">$method</span>, <span class="variable">$args</span>)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="variable">$instance</span> = <span class="keyword">static</span>::getLogInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//组织参数信息</span></span><br><span class="line">        <span class="variable">$message</span> = <span class="variable">$args</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="variable">$context</span> = <span class="keyword">isset</span>(<span class="variable">$args</span>[<span class="number">1</span>]) ? <span class="variable">$args</span>[<span class="number">1</span>] : [];</span><br><span class="line">        <span class="variable">$path</span>    = <span class="keyword">isset</span>(<span class="variable">$args</span>[<span class="number">2</span>]) ? <span class="variable">$args</span>[<span class="number">2</span>] : <span class="string">'api/'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置日志处理手柄，默认为写入文件（还有mail、console、db、redis等方式，详见Monolog\handler 目录）</span></span><br><span class="line">        <span class="variable">$handler</span> = <span class="keyword">new</span> StreamHandler(storage_path(<span class="variable">$path</span>) . date(<span class="string">'Y-m-d'</span>).<span class="string">'.log'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置输出格式LineFormatter(Monolog\Formatter\LineFormatter)， ignore context and extra</span></span><br><span class="line">        <span class="variable">$handler</span>-&gt;setFormatter(<span class="keyword">new</span> LineFormatter(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">true</span>, <span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$instance</span>-&gt;pushHandler(<span class="variable">$handler</span>);</span><br><span class="line">        <span class="variable">$instance</span>-&gt;<span class="variable">$method</span>(<span class="variable">$message</span>, <span class="variable">$context</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明下，<code>__callStatic</code>  方法是php5.3+以来 非常方便的一个魔术方法。</p>
+<h2 id="More_Info"><a href="#More_Info" class="headerlink" title="More Info"></a>More Info</h2><ul>
+<li><a href="http://laravelacademy.org/docs/lumen" target="_blank" rel="external">Lumen中文文档</a></li>
+<li><a href="http://coolshell.cn/articles/9949.html" target="_blank" rel="external">IoC/DIP其实是一种管理思想</a></li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/17/architect/" itemprop="url">
                   我眼里的架构师
                 </a>
@@ -1231,121 +1361,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/09/17/hexo/" itemprop="url">
-                  hexo
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-09-17T16:03:01+08:00" content="2015-09-17">
-              2015-09-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/09/17/hexo/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/17/hexo/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>!  Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<h2 id="More_Info"><a href="#More_Info" class="headerlink" title="More Info"></a>More Info</h2><ul>
-<li><a href="https://xuanwo.org/2014/08/14/hexo-usual-problem/" target="_blank" rel="external">Xuan Wo hexo usual problem</a></li>
-<li><a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">hexo你的博客</a></li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1392,7 +1407,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1406,7 +1421,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
