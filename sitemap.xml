@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sphenginx.github.io/about/index.html</loc>
+    <lastmod>2015-12-30T06:05:18.553Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sphenginx.github.io/2015/12/18/ioc/</loc>
     <lastmod>2015-12-18T08:31:47.016Z</lastmod>
   </url>
@@ -64,11 +69,6 @@
   <url>
     <loc>http://sphenginx.github.io/2015/11/29/train-vs-education/</loc>
     <lastmod>2015-12-02T01:02:49.768Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sphenginx.github.io/about/index.html</loc>
-    <lastmod>2015-12-02T00:55:19.535Z</lastmod>
   </url>
   
   <url>
