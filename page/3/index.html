@@ -232,6 +232,119 @@
             
               
                 
+                <a class="post-title-link" href="/2015/01/17/bug-in-pay-no-ship/" itemprop="url">
+                  记一次未付款发货的天坑逻辑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-01-17T16:03:01+08:00" content="2015-01-17">
+              2015-01-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/No-Zuo-No-Die/" itemprop="url" rel="index">
+                    <span itemprop="name">No Zuo No Die</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/17/bug-in-pay-no-ship/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/17/bug-in-pay-no-ship/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
+<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给你详细分析。</p>
+<p>先说下支付的逻辑：众所周知，不管是微信支付 还是 支付宝支付，都是异步进行的。也就是说用户在微信或者支付宝支付成功后，微信或者支付宝并不会第一时间把这个支付成功的消息返回给你，而是在接下来的一个小时或者更长时间内分N次给你支付成功的通知（有时候接收到第三方服务器返回success的时候还会发起多次的异步通知），所以一般业务逻辑在此处都会有一防止重复更新数据库的逻辑判断，在成功更新订单为已付款状态后，如果还收到异步通知，直接返回true。</p>
+<p>但是因为未付款发货这种逆天逻辑的存在，在网速慢或者服务器访问量大的时候，用户支付成功，服务器未收到支付成功的异步通知，这时候，脑残卖家点了发货，并且成功了更新了数据库的订单状态，这时候，服务器收到支付成功的通知（在收到支付成功时的业务逻辑是更新未付款的订单），这时候去更新数据表，发现数据不存在（因为订单状态为已发货，而不是未付款），更坑的是，订单表的类型居然是MyISAM类型的，居然不是InnoDB类型的，如此事务完全不能进行，在发现未更新数据的时候不能rollback，这样造成了，之前成功返回异步通知的逻辑不能执行，造成微信或者支付宝异步通知一次，则更新一次数据库…… </p>
+<p>这样的逻辑简直太坑爹了！！！以此提醒同僚们：<code>“ 程序有风险，入行需谨慎”</code> 啊！！！</p>
+<h2 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
+<li>更新订单表以及订单相关表为Innodb类型（MyISAM不支持事务处理）；</li>
+<li>更新响应支付通知条件，只要支付方返回支付成功通知，这边就更新为已付款状态，而不关心订单状态是否是未付款；</li>
+</ul>
+<p>这种逻辑真的不要再出现了啊！！！</p>
+<p>不说了，继续修复脏数据了……o(╯□╰)o，囧…… </p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/01/07/design-pattern/" itemprop="url">
                   设计模式
                 </a>
@@ -392,6 +505,113 @@
             
               
                 
+                <a class="post-title-link" href="/2014/12/24/jQuery-stop-each-jump-program/" itemprop="url">
+                  jQuery中each如何跳出循环并终止后续代码执行？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
+              2014-12-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2014/12/24/jQuery-stop-each-jump-program/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/24/jQuery-stop-each-jump-program/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
+<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
+<h2 id="u89E3_u51B3"><a href="#u89E3_u51B3" class="headerlink" title="解决"></a>解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> real_true = <span class="literal">true</span>;</span><br><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        real_true = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">if</span>(!real_true)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2014/12/24/CRLF-in-Unix-like_Windows-os/" itemprop="url">
                   解决Unix-like、Windows系统之间文本换行符不同的问题
                 </a>
@@ -498,113 +718,6 @@
 <h3 id="u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316"><a href="#u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316" class="headerlink" title="问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化"></a>问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</h3><ul>
 <li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。</li>
 </ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/24/jQuery-stop-each-jump-program/" itemprop="url">
-                  jQuery中each如何跳出循环并终止后续代码执行？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-12-24T17:02:50+08:00" content="2014-12-24">
-              2014-12-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/24/jQuery-stop-each-jump-program/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/24/jQuery-stop-each-jump-program/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天在表单提交验证的时候，需要检测商品是否有规格，因为商品有多个规格，所以用到了jquery的each，循环读取每个规格，如果值为空，则return false；但是，后来发现return false 表单还是提交了，百思不得其解。</p>
-<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>后来查看manual才发现：<code>jquery的each函数中，return false只能提前终止循环，相当于break；return true相当于 continue。</code></p>
-<h2 id="u89E3_u51B3"><a href="#u89E3_u51B3" class="headerlink" title="解决"></a>解决</h2><p>那么，如何才能阻止表单的提交呢，想了N久，想到在each循环前，先定义一个变量为true，然后在循环读取规格的时候，如果值为空，则把变量定义为false，同时return false，代码如下：<br>出现bug的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>这样return false，只是终止循环，并没有终止程序。<br>更新后的代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> real_true = <span class="literal">true</span>;</span><br><span class="line">$(<span class="string">".spec"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s =$(<span class="keyword">this</span>).val();</span><br><span class="line">    <span class="keyword">if</span>(!s)&#123;</span><br><span class="line">        alert(<span class="string">'规格不能为空'</span>);</span><br><span class="line">        real_true = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">if</span>(!real_true)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>暂时想到了这个方法，如果大家有更好的方法，欢迎一起探讨~</p>
 
             
           </span>
@@ -962,124 +1075,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2010/09/24/my-two-half-college-live/" itemprop="url">
-                  我的两年半聊大生活
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2010-09-24T15:15:00+08:00" content="2010-09-24">
-              2010-09-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/人生百态/" itemprop="url" rel="index">
-                    <span itemprop="name">人生百态</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2010/09/24/my-two-half-college-live/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2010/09/24/my-two-half-college-live/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>在聊大的这两年半，或许只是人生一个很小的片段，但是对于我们每一个人都是不可或缺，好似娘胎里带来的胎记。</p>
-<p>这是一群普通的人在一所年轻的高校一起走过的两年半，如青春的岁月并没有多少区别，时间也是如流水一样逝去。但在我们的内心，这是一个驿站，一个青春的驿站，一个梦想的驿站，一个不只是学更是问的驿站。</p>
-<p>我们原本并不熟悉，但并没有妨碍我们走在一起。现在，我们已经不是十八九的年纪，也少了许多激情与活力，但我们在思考人生的同时，也努力留住关于青春所有的记忆。<br>年龄让我们背负了更多的责任，这让我们更多的是努力规划自己人生的轨迹。虽然，我们并不能全部做主，但是我们也绝不能任其随意。</p>
-<p>这不是名校，也并非是一片神奇的土地。但是，勤劳的我们依然欣喜和努力，因为今天的每一个劳作总能期待一个丰收的美丽。因为，我们知道：不是每一个付出都有收获，但每一个收获都必须付出。这就是人生，这更是真谛。</p>
-<p>我们没有名师讲授，更没有外界推崇的华丽，但并没有阻碍朴实的老师和我们一起努力，或许他们正在培育未来的名师，更或许我们正在和未来的名师在一起。我们可能不能收获美丽，但是未来收获的每一份美丽都有我们拼搏的气息。</p>
-<p>这仅仅是江北一块平实的土地，我们也只是这块土地的过客，尝试着耕耘与收获，也经历挫折与失意。但是，我们不抛弃，因为我们正努力使这块土地镌刻我们所有的记忆。</p>
-<p>巍峨的光岳楼留给我们的并不仅是壮丽，更多的是这个城市关于历史的记忆；柔情的胭脂湖留给我们的并不仅是护城湖的遗迹，更多的是这个城市关于平和民风的一种写意；我们可能对这个城市说不上爱，但我们必须承认它留给了我们不可更替的记忆。</p>
-<p>长长的彩虹桥带来的并不仅是学习与生活的便利，更多的是品味我们走在上面时青春豪气；西校高高白桦树带来的并不仅是夏日的惬意，而是一个逐渐成长的校园关于学问的诸多墨迹；孔雀的鸣叫并不是多么悦耳，但是我们依然在旁边期待它开屏的美丽。</p>
-<p>我们可能对这个学校还不是很满意，甚至有些时候还有些怨气，我们可以不说爱，但我们确实很在意。也正是因为我们很在意，所以我们对这个学校是如此的苛求，就像眼里容不得沙粒。</p>
-<p>离开，并不是我们的本意，但这就是人生的轨迹。伤别的季节好像看不到我们的朝气，并不是我们在逃避与消极，而是希望凭借一些酒精保存更多关于这个学校的记忆。<br>背起行囊，我们就要远离，并努力带走这里一切的气息，何处是终点尚需再议。但每一个人生歇息的驿站，都连着聊城大学长长的记忆。<br>我不说爱你，更不说恨你，因为语言是如此的乏力。我只是告诉你，我永远记得你！</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1120,7 +1121,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1134,7 +1135,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -1195,7 +1196,7 @@
         <div class="copyright" >
   
   &copy;  2012 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
   </span>
