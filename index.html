@@ -232,6 +232,199 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/11/php-theory/" itemprop="url">
+                  PHP 底层的运行机制与原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-11T09:27:40+08:00" content="2016-07-11">
+              2016-07-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/11/php-theory/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/11/php-theory/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>PHP说简单，但是要精通也不是一件简单的事。我们除了会使用之外，还得知道它底层的工作原理。</p>
+<p>PHP是一种适用于web开发的动态语言。具体点说，就是一个用C语言实现包含大量组件的软件框架。更狭义点看，可以把它认为是一个强大的UI框架。</p>
+<p>了解PHP底层实现的目的是什么？动态语言要像用好首先得了解它，内存管理、框架模型值得我们借鉴，通过扩展开发实现更多更强大的功能，优化我们程序的性能。</p>
+<h2 id="PHP_u7684_u8BBE_u8BA1_u7406_u5FF5_u53CA_u7279_u70B9"><a href="#PHP_u7684_u8BBE_u8BA1_u7406_u5FF5_u53CA_u7279_u70B9" class="headerlink" title="PHP的设计理念及特点"></a>PHP的设计理念及特点</h2><ul>
+<li>多进程模型：由于PHP是多进程模型，不同请求间互不干涉，这样保证了一个请求挂掉不会对全盘服务造成影响，当然，随着时代发展，PHP也早已支持多线程模型。</li>
+<li>弱类型语言：和C/C++、Java、C#等语言不同，PHP是一门弱类型语言。一个变量的类型并不是一开始就确定不变，运行中才会确定并可能发生隐式或显式的类型转换，这种机制的灵活性在web开发中非常方便、高效，具体会在后面PHP变量中详述。</li>
+<li>引擎(Zend)+组件(ext)的模式降低内部耦合。</li>
+<li>中间层(sapi)隔绝web server和PHP。</li>
+<li>语法简单灵活，没有太多规范。缺点导致风格混杂，但再差的程序员也不会写出太离谱危害全局的程序。</li>
+</ul>
+<h2 id="PHP_u7684_u56DB_u5C42_u4F53_u7CFB"><a href="#PHP_u7684_u56DB_u5C42_u4F53_u7CFB" class="headerlink" title="PHP的四层体系"></a>PHP的四层体系</h2><p>PHP的核心架构如下图：</p>
+<p><img src="http://sphenginx.github.io/images/php/theory.jpg" alt="PHP 核心架构图"></p>
+<p>从图上可以看出，PHP从下到上是一个4层体系：</p>
+<ul>
+<li>Zend引擎：Zend整体用纯C实现，是PHP的内核部分，它将PHP代码翻译（词法、语法解析等一系列编译过程）为可执行opcode的处理并实现相应的处理方法、实现了基本的数据结构（如hashtable、oo）、内存分配及管理、提供了相应的api方法供外部调用，是一切的核心，所有的外围功能均围绕Zend实现。</li>
+<li>Extensions：围绕着Zend引擎，extensions通过组件式的方式提供各种基础服务，我们常见的各种内置函数（如array系列）、标准库等都是通过extension来实现，用户也可以根据需要实现自己的extension以达到功能扩展、性能优化等目的（如贴吧正在使用的PHP中间层、富文本解析就是extension的典型应用）。</li>
+<li>Sapi：Sapi全称是Server Application Programming Interface，也就是服务端应用编程接口，Sapi通过一系列钩子函数，使得PHP可以和外围交互数据，这是PHP非常优雅和成功的一个设计，通过sapi成功的将PHP本身和上层应用解耦隔离，PHP可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。</li>
+<li>上层应用：这就是我们平时编写的PHP程序，通过不同的sapi方式得到各种各样的应用模式，如通过webserver实现web应用、在命令行下以脚本方式运行等等。</li>
+</ul>
+<p>如果PHP是一辆车，那么车的框架就是PHP本身，Zend是车的引擎（发动机），Ext下面的各种组件就是车的轮子，Sapi可以看做是公路，车可以跑在不同类型的公路上，而一次PHP程序的执行就是汽车跑在公路上。因此，我们需要：性能优异的引擎+合适的车轮+正确的跑道。</p>
+<h2 id="Sapi"><a href="#Sapi" class="headerlink" title="Sapi"></a>Sapi</h2><p>如前所述，Sapi通过通过一系列的接口，使得外部应用可以和PHP交换数据并可以根据不同应用特点实现特定的处理方法，我们常见的一些sapi有：</p>
+<ul>
+<li>apache2handler：这是以apache作为webserver，采用mod_PHP模式运行时候的处理方式，也是现在应用最广泛的一种。</li>
+<li>cgi：这是webserver和PHP直接的另一种交互方式，也就是大名鼎鼎的fastcgi协议，在最近今年fastcgi+PHP得到越来越多的应用，也是异步webserver所唯一支持的方式。</li>
+<li>cli：命令行调用的应用模式</li>
+</ul>
+<h2 id="PHP_u7684_u6267_u884C_u6D41_u7A0B_26amp_3Bopcode"><a href="#PHP_u7684_u6267_u884C_u6D41_u7A0B_26amp_3Bopcode" class="headerlink" title="PHP的执行流程&amp;opcode"></a>PHP的执行流程&amp;opcode</h2><p>我们先来看看PHP代码的执行所经过的流程。</p>
+<p><img src="http://sphenginx.github.io/images/php/opcode.jpg" alt="opcode"></p>
+<p>从图上可以看到，PHP实现了一个典型的动态语言执行过程：拿到一段代码后，经过词法解析、语法解析等阶段后，源程序会被翻译成一个个指令(opcodes)，然后ZEND虚拟机顺次执行这些指令完成操作。PHP本身是用C实现的，因此最终调用的也都是C的函数，实际上，我们可以把PHP看做是一个C开发的软件。</p>
+<p>PHP的执行的核心是翻译出来的一条一条指令，也即opcode。</p>
+<p>Opcode是PHP程序执行的最基本单位。一个opcode由两个参数(op1,op2)、返回值和处理函数组成。PHP程序最终被翻译为一组opcode处理函数的顺序执行。</p>
+<p>常见的几个处理函数：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ZEND_ASSIGN_SPEC_CV_CV_HANDLER : 变量分配 （<span class="variable">$a</span>=<span class="variable">$b</span>）</span><br><span class="line">ZEND_DO_FCALL_BY_NAME_SPEC_HANDLER：函数调用</span><br><span class="line">ZEND_CONCAT_SPEC_CV_CV_HANDLER：字符串拼接 <span class="variable">$a</span>.<span class="variable">$b</span></span><br><span class="line">ZEND_ADD_SPEC_CV_CONST_HANDLER: 加法运算 <span class="variable">$a</span>+<span class="number">2</span></span><br><span class="line">ZEND_IS_EQUAL_SPEC_CV_CONST：判断相等 <span class="variable">$a</span>==<span class="number">1</span></span><br><span class="line">ZEND_IS_IDENTICAL_SPEC_CV_CONST：判断相等 <span class="variable">$a</span>===<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="HashTable__u2014__u6838_u5FC3_u6570_u636E_u7ED3_u6784"><a href="#HashTable__u2014__u6838_u5FC3_u6570_u636E_u7ED3_u6784" class="headerlink" title="HashTable — 核心数据结构"></a>HashTable — 核心数据结构</h2><p>HashTable是zend的核心数据结构，在PHP里面几乎并用来实现所有常见功能，我们知道的PHP数组即是其典型应用，此外，在zend内部，如函数符号表、全局变量等也都是基于hash table来实现。</p>
+<p>PHP的hash table具有如下特点：</p>
+<ul>
+<li>支持典型的key-&gt;value查询</li>
+<li>可以当做数组使用</li>
+<li>添加、删除节点是O（1）复杂度</li>
+<li>key支持混合类型：同时存在关联数组合索引数组</li>
+<li>Value支持混合类型：array (“string”,2332)</li>
+<li>支持线性遍历：如foreach</li>
+</ul>
+<p>Zend hash table实现了典型的hash表散列结构，同时通过附加一个双向链表，提供了正向、反向遍历数组的功能。其结构如下图：<br><img src="http://sphenginx.github.io/images/php/hashtable.jpg" alt="hashTable"></p>
+<ul>
+<li>可以看到，在hash table中既有key-&gt;value形式的散列结构，也有双向链表模式，使得它能够非常方便的支持快速查找和线性遍历。<br>散列结构：Zend的散列结构是典型的hash表模型，通过链表的方式来解决冲突。需要注意的是zend的hash table是一个自增长的数据结构，当hash表数目满了之后，其本身会动态以2倍的方式扩容并重新元素位置。初始大小均为8。另外，在进行key-&gt;value快速查找时候，zend本身还做了一些优化，通过空间换时间的方式加快速度。比如在每个元素中都会用一个变量nKeyLength标识key的长度以作快速判定。</li>
+<li>双向链表：Zend hash table通过一个链表结构，实现了元素的线性遍历。理论上，做遍历使用单向链表就够了，之所以使用双向链表，主要目的是为了快速删除，避免遍历。Zend hash table是一种复合型的结构，作为数组使用时，即支持常见的关联数组也能够作为顺序索引数字来使用，甚至允许2者的混合。</li>
+<li><p>PHP关联数组：关联数组是典型的hash_table应用。一次查询过程经过如下几步（从代码可以看出，这是一个常见的hash查询过程并增加一些快速判定加速查找。）：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">getKeyHashValue h;</span><br><span class="line">index = n &amp; nTableMask;</span><br><span class="line">Bucket *p = arBucket[index];</span><br><span class="line"><span class="keyword">while</span> (p) &#123;</span><br><span class="line">	<span class="keyword">if</span> ((p-&gt;h == h) &amp;&amp; (p-&gt;nKeyLength == nKeyLength)) &#123;</span><br><span class="line">		<span class="keyword">RETURN</span> p-&gt;data;   </span><br><span class="line">	&#125;</span><br><span class="line">	p=p-&gt;next;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">RETURN</span> FALTURE;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PHP索引数组：索引数组就是我们常见的数组，通过下标访问。例如 $arr[0]，Zend HashTable内部进行了归一化处理，对于index类型key同样分配了hash值和nKeyLength(为0)。内部成员变量nNextFreeElement就是当前分配到的最大id，每次push后自动加一。正是这种归一化处理，PHP才能够实现关联和非关联的混合。由于push操作的特殊性，索引key在PHP数组中先后顺序并不是通过下标大小来决定，而是由push的先后决定。例如 $arr[1] = 2; $arr[2] = 3;对于double类型的key，Zend HashTable会将他当做索引key处理。</p>
+</li>
+</ul>
+<h2 id="PHP_u53D8_u91CF"><a href="#PHP_u53D8_u91CF" class="headerlink" title="PHP变量"></a>PHP变量</h2><p>PHP是一门弱类型语言，本身不严格区分变量的类型。PHP在变量申明的时候不需要指定类型。PHP在程序运行期间可能进行变量类型的隐示转换。和其他强类型语言一样，程序中也可以进行显示的类型转换。PHP变量可以分为简单类型(int、string、bool)、集合类型(array resource object)和常量(const)。以上所有的变量在底层都是同一种结构 zval。</p>
+<p>Zval是zend中另一个非常重要的数据结构，用来标识并实现PHP变量，其数据结构如下：<br><img src="http://sphenginx.github.io/images/php/zval.jpg" alt="zval"></p>
+<p>Zval主要由三部分组成：</p>
+<ul>
+<li>type：指定了变量所述的类型（整数、字符串、数组等）</li>
+<li>refcount&amp;is_ref：用来实现引用计数(后面具体介绍)</li>
+<li>value：核心部分，存储了变量的实际数据</li>
+</ul>
+<p>Zvalue是用来保存一个变量的实际数据。因为要存储多种类型，所以zvalue是一个union，也由此实现了弱类型。</p>
+<p>PHP变量类型和其实际存储对应关系如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IS_LONG   -&gt; lvalue</span><br><span class="line">IS_DOUBLE -&gt; dvalue</span><br><span class="line">IS_ARRAY  -&gt; ht</span><br><span class="line">IS_STRING -&gt; str</span><br><span class="line">IS_RESOURCE -&gt; lvalue</span><br></pre></td></tr></table></figure></p>
+<p>引用计数在内存回收、字符串操作等地方使用非常广泛。PHP中的变量就是引用计数的典型应用。Zval的引用计数通过成员变量is_ref和ref_count实现，通过引用计数，多个变量可以共享同一份数据。避免频繁拷贝带来的大量消耗。</p>
+<p>在进行赋值操作时，zend将变量指向相同的zval同时ref_count++，在unset操作时，对应的ref_count-1。只有ref_count减为0时才会真正执行销毁操作。如果是引用赋值，则zend会修改is_ref为1。</p>
+<p>PHP变量通过引用计数实现变量共享数据，那如果改变其中一个变量值呢？当试图写入一个变量时，Zend若发现该变量指向的zval被多个变量共享，则为其复制一份ref_count为1的zval，并递减原zval的refcount，这个过程称为“zval分离”。可见，只有在有写操作发生时zend才进行拷贝操作，因此也叫copy-on-write(写时拷贝)</p>
+<p>对于引用型变量，其要求和非引用型相反，引用赋值的变量间必须是捆绑的，修改一个变量就修改了所有捆绑变量。</p>
+<p>整数、浮点数是PHP中的基础类型之一，也是一个简单型变量。对于整数和浮点数，在zvalue中直接存储对应的值。其类型分别是long和double。</p>
+<p>从zvalue结构中可以看出，对于整数类型，和c等强类型语言不同，PHP是不区分int、unsigned int、long、long long等类型的，对它来说，整数只有一种类型也就是long。由此，可以看出，在PHP里面，整数的取值范围是由编译器位数来决定而不是固定不变的。</p>
+<p>对于浮点数，类似整数，它也不区分float和double而是统一只有double一种类型。</p>
+<p>在PHP中，如果整数范围越界了怎么办？这种情况下会自动转换为double类型，这个一定要小心，很多trick都是由此产生。</p>
+<p>和整数一样，字符变量也是PHP中的基础类型和简单型变量。通过zvalue结构可以看出，在PHP中，字符串是由由指向实际数据的指针和长度结构体组成，这点和c++中的string比较类似。由于通过一个实际变量表示长度，和c不同，它的字符串可以是2进制数据（包含\0），同时在PHP中，求字符串长度strlen是O(1)操作。</p>
+<p>在新增、修改、追加字符串操作时，PHP都会重新分配内存生成新的字符串。最后，出于安全考虑，PHP在生成一个字符串时末尾仍然会添加\0</p>
+<p>常见的字符串拼接方式及速度比较：</p>
+<p>假设有如下4个变量：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$strA</span> = <span class="string">'123'</span>; </span><br><span class="line"><span class="variable">$strB</span> = <span class="string">'456'</span>; </span><br><span class="line"><span class="variable">$intA</span> = <span class="number">123</span>; </span><br><span class="line"><span class="variable">$intB</span> = <span class="number">456</span>;</span><br></pre></td></tr></table></figure></p>
+<p>现在对如下的几种字符串拼接方式做一个比较和说明：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$res</span> = <span class="variable">$strA</span>.<span class="variable">$strB</span>和<span class="variable">$res</span> = “<span class="variable">$strA</span><span class="variable">$strB</span>”</span><br><span class="line">这种情况下，zend会重新malloc一块内存并进行相应处理，其速度一般</span><br><span class="line"><span class="variable">$strA</span> = <span class="variable">$strA</span>.<span class="variable">$strB</span></span><br><span class="line">这种是速度最快的，zend会在当前strA基础上直接relloc，避免重复拷贝</span><br><span class="line"><span class="variable">$res</span> = <span class="variable">$intA</span>.<span class="variable">$intB</span></span><br><span class="line">这种速度较慢，因为需要做隐式的格式转换，实际编写程序中也应该注意尽量避免</span><br><span class="line"><span class="variable">$strA</span> = sprintf (“%s%s”,<span class="variable">$strA</span>.<span class="variable">$strB</span>);</span><br><span class="line">这会是最慢的一种方式，因为sprintf在PHP中并不是一个语言结构，本身对于格式识别和处理就需要耗费比较多时间，另外本身机制也是malloc。不过sprintf的方式最具可读性，实际中可以根据具体情况灵活选择。</span><br></pre></td></tr></table></figure></p>
+<p>PHP的数组通过Zend HashTable来天然实现。</p>
+<p>foreach操作如何实现？对一个数组的foreach就是通过遍历hashtable中的双向链表完成。对于索引数组，通过foreach遍历效率比for高很多，省去了key-&gt;value的查找。count操作直接调用HashTable-&gt;NumOfElements，O(1)操作。对于’123’这样的字符串，zend会转换为其整数形式。$arr[‘123’]和$arr[123]是等价的</p>
+<p>资源类型变量是PHP中最复杂的一种变量，也是一种复合型结构。</p>
+<p>PHP的zval可以表示广泛的数据类型，但是对于自定义的数据类型却很难充分描述。由于没有有效的方式描绘这些复合结构，因此也没有办法对它们使用传统的操作符。要解决这个问题，只需要通过一个本质上任意的标识符（label）引用指针，这种方式被称为资源。</p>
+<p>在zval中，对于resource，lval作为指针来使用，直接指向资源所在的地址。Resource可以是任意的复合结构，我们熟悉的mysqli、fsock、memcached等都是资源。</p>
+<p>如何使用资源：</p>
+<ul>
+<li>注册：对于一个自定义的数据类型，要想将它作为资源。首先需要进行注册，zend会为它分配全局唯一标示。</li>
+<li>获取一个资源变量：对于资源，zend维护了一个id-&gt;实际数据的hash_tale。对于一个resource，在zval中只记录了它的id。fetch的时候通过id在hash_table中找到具体的值返回。</li>
+<li>资源销毁：资源的数据类型是多种多样的。Zend本身没有办法销毁它。因此需要用户在注册资源的时候提供销毁函数。当unset资源时，zend调用相应的函数完成析构。同时从全局资源表中删除它。</li>
+</ul>
+<p>资源可以长期驻留，不只是在所有引用它的变量超出作用域之后，甚至是在一个请求结束了并且新的请求产生之后。这些资源称为持久资源，因为它们贯通SAPI的整个生命周期持续存在，除非特意销毁。很多情况下，持久化资源可以在一定程度上提高性能。比如我们常见的mysql_pconnect ,持久化资源通过pemalloc分配内存，这样在请求结束的时候不会释放。 对zend来说，对两者本身并不区分。</p>
+<p>PHP中的局部变量和全局变量是如何实现的？对于一个请求，任意时刻PHP都可以看到两个符号表(symbol_table和active_symbol_table)，其中前者用来维护全局变量。后者是一个指针，指向当前活动的变量符号表，当程序进入到某个函数中时，zend就会为它分配一个符号表x同时将active_symbol_table指向a。通过这样的方式实现全局、局部变量的区分。</p>
+<p>获取变量值：PHP的符号表是通过hash_table实现的，对于每个变量都分配唯一标识，获取的时候根据标识从表中找到相应zval返回。</p>
+<p>函数中使用全局变量：在函数中，我们可以通过显式申明global来使用全局变量。在active_symbol_table中创建symbol_table中同名变量的引用，如果symbol_table中没有同名变量则会先创建。</p>
+<h2 id="u5176_u4ED6"><a href="#u5176_u4ED6" class="headerlink" title="其他"></a>其他</h2><p>原文转自：<a href="http://www.nowamagic.net/librarys/veda/detail/102" target="_blank" rel="external">http://www.nowamagic.net/librarys/veda/detail/102</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/05/why-overtime-doesnt-work/" itemprop="url">
                   为了项目上线而加班，真有必要吗？
                 </a>
@@ -1389,153 +1582,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/29/train-vs-education/" itemprop="url">
-                  培训机构毕业的程序员被歧视的背后逻辑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-29T20:03:01+08:00" content="2015-11-29">
-              2015-11-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/29/train-vs-education/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/29/train-vs-education/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u73B0_u72B6"><a href="#u73B0_u72B6" class="headerlink" title="现状"></a>现状</h2><p>现在，像达内、华清远见、国嵌、北大青鸟、传播智客等等 IT 培训机构很多，为尚未毕业的大学生、毕业了一时找不到工作的大学生、工作后想转行的再就业者提供了一个掌握新技能的机会，通过三个月或半年或更久的培训， 你就可以掌握某一种技能，比如 Android 开发、Java Web 开发、iOS 开发、嵌入式 Linux 开发，然后，没然后了吗……</p>
-<p>Sorry，然后还是有的，只不过，“然后”并不是像培训机构的销售代表频频给你通电话时宣传的那样光明罢了。有的机构会推荐你就业直到你彻底失望他们推荐的单位，有的机构会放你出去闯荡江湖四处碰壁……形式不一，但，一段痛苦的旅程从此开始了，这倒是真的。</p>
-<p>很多单位歧视培训机构毕业的学员，你所在的单位是这样吗？或者你从 IT 培训机构毕业后，找工作时被鄙视了吗？</p>
-<p>为了弄明白为什么 IT 培训机构出来的程序员在找工作时经常遭遇不平等对待，我们需要弄明白“教育”和“培训”的差别。</p>
-<h2 id="u6559_u80B2_u548C_u57F9_u8BAD"><a href="#u6559_u80B2_u548C_u57F9_u8BAD" class="headerlink" title="教育和培训"></a>教育和培训</h2><p>大致上讲，我们所说的“教育”，指的是掌握一般性的原理与技巧的过程；而我们所说的“培训”，不过是学会某种特定技能的过程。</p>
-<p>上面是温伯格在《程序开发心理学》中说到的，符合大多数人对“教育”和“培训”的理解。</p>
-<p>你可以通过培训机构学会理发、做饭、修汽车、写代码、做蛋糕，这没什么稀奇的，当我们接受培训时，就是为了某项技能而去的，不是吗？我去蓝翔，难道不是为了开挖掘机吗？</p>
-<p>通常我们认为培训机构（学校）是学习某种不太复杂的谋生技能的摇篮。这种技能还有一个特点，就是相对稳定、变化不是特别频繁，能够在相当长一段时间内保持基本的稳定性。所以，一旦你获得了这项技能，就可以靠它吃饭吃上一阵子，一年半载，三年五年，十年八年，都有可能。</p>
-<p>而教育，我们通常认为是一项基础性的工作，重知识，重原理，周期长，见效慢，与社会脱节，有时还能把人变傻（注意我不是讽刺现行教育制度，也不是诋 毁我们伟大的大学教育）。虽然如此，很多 IT 公司的基础部门还是被受过正规大学教育的朋友们占据了重要岗位。因为大家普遍认为，虽然学校教育严重脱离社会现实，但名牌大学的学生的智力水平、学习能 力，平均来看还是高于未能考上大学的中学生，更适合于从事某种对智力、学习能力有些特别要求的技术岗位。</p>
-<p>没错，程序员正是这样的岗位。程序员的平均智力水平和学习能力高于大部分的其它行业从业者。</p>
-<p>然而，教育和培训的差别，并不是关键。关键是，出于某种原因，面试官或公司主管对出身“培训机构”的人有偏见。为了说明这一点，我们先要看看程序员需要的特殊能力。</p>
-<p>成为一个合格的程序员，需要以下“特殊”能力：</p>
-<ul>
-<li><p>自知之明</p>
-</li>
-<li><p>自我学习</p>
-</li>
-<li><p>努力</p>
-</li>
-</ul>
-<p>看起来没什么出奇之处，也许你会觉得一个程序员最重要的能力不是上面三项，没关系，知否知否，应是绿肥红瘦，随便怎么看，横看成岭侧成峰，一千个观众就有一千个哈姆雷特，嗯，开启口水模式……这里省略 500 字……</p>
-<p>大家公认程序员从事的是烧脑性工作，行业发展日新月异，各种新语言新技术新框架新概念层出不穷，需要程序员时刻保持归零的学习心态，持续不断地保持学习维持竞争能力和价值。所以，我也是从这个角度出发，选择了前面提到的三点，实际上这三点指向的是<strong>“[学习之道]”</strong>。</p>
-<h2 id="u81EA_u77E5_u4E4B_u660E"><a href="#u81EA_u77E5_u4E4B_u660E" class="headerlink" title="自知之明"></a>自知之明</h2><p>我们要了解自己拥有什么、缺乏什么，然后才能开始学习。</p>
-<p>通过不断地总结、回顾自己做过的事情，我们就可以慢慢了解自己的能力边界。哪些事情做好了，好在哪里，为什么好在那里而不是别处，是由你自身的哪种 行为、才干、能力决定的？哪些事情做得不好，坏在哪里，为什么坏在那个点而不是其它的点，改善你自身的哪种行为或能力可以改变事情的走向，还是说你没什么 能改变的那就是你的局限？</p>
-<p>当你了解了自己，就能发现自己应该做什么，就能决定自己的学习方向，而不是盲目地把自己交付给别人（学校、老师、家长、培训机构），因为，没有什么人真的可以为你负责，能为你负责的，只有你自己。</p>
-<p>当然，自知是最难的事，也不是一朝一夕的事，需要不断的自省和内视才可以做到。</p>
-<h2 id="u81EA_u6211_u5B66_u4E60"><a href="#u81EA_u6211_u5B66_u4E60" class="headerlink" title="自我学习"></a>自我学习</h2><p>知名的教育专家林格有两本非常著名的书，《教育是没有用的》和《学习是不需要教的》。林格有一个非常核心的观点：学习能力是人与生俱来的能力，是人 之天赋，是不需要教的，但这种能力会随着年龄的增长和家庭教育、学校教育的误导而萎缩或消失，所以，教育的方向就是营造一个环境，让人自己发现自己的学习 能力。</p>
-<p>六祖慧能一朝顿悟传承衣钵，佛性自在每人心中。只不过，世人多如神秀，认为“身是菩提树，心如明镜台，时时勤拂拭，勿使惹尘埃”，一定要借助外力和 各种各样的清规戒律，方可保持灵台清明，最终获得某种修行。这种扭曲了教育本质的说法、做法大行其道，导致中学教育（大学相对自由）重知识、重规矩、重技 能而轻发现、轻唤醒、轻因材施教、轻有教无类，最终扼杀了学生的自我学习能力。所以，很多人不是天生不会学习，而是在成长过程中在家庭、学校、社会的各种 外力撕扯中慢慢丧失了自我学习能力。更甚之，多数人不自知这种能力的丧失。</p>
-<p><strong>然而，程序员尤其需要自我学习能力。</strong></p>
-<p>学校会教你操作系统原理，会教你计算机组成原理，会教你算法，会教你C语言，会教你 Java，各种知识都会教你。然而你到工作中，能不能用你学到的知识解决问题，实在是个未知数。</p>
-<p>培训机构会教你怎么写 Java 代码，怎么安装某个 IDE，怎么完成一个个人博客或购物车之类的小项目。然而，你是在框好的架子下被动地按照老师的要求“完成”了这些事。到了工作中，面对巨大的未知和陌生的项目，你能不能举一反三灵活运用，充满了未知。</p>
-<p>一个程序员能不能自己学会一门技术、能不能自己解决一个问题特别重要</p>
-<p>因为，很少有主管会手把手的教会你编程和设计的实际技巧，也很少有主管会大发慈悲把你送去研习班学习工作需要的技能，在一个现实的环境里，一切都要 靠你自己。假如你自己不能独立习得某项必须的技术，真没有人能帮得上你。假如你自己不能独立解决问题，真没有人能始终拉扯着你。这也正合梁漱溟说的话： “任何一个人的学问成就，都是出于自学。学校教育不过给学生一个开端，使他更容易自学而已。青年于此，不可不勉。”</p>
-<p>很多人轻视培训机构，是认为培训机构的老师，多数脱产，没有丰富的一线工程实践，是业余选手，而这些“业余选手”却要通过短短的一期培训来为社会培 养“专业选手”，这基本是一个笑话。即便我们能举出不少从培训机构出来的优秀选手，那也只能说明，这个选手本身具有很好的学习能力。</p>
-<p>如果一个人意识到了自己还具备自我学习能力，那他完全没必要去培训机构浪费动辄六七千一两万的学费——他完全可以自己学到必须的知识和技能，假如他真有兴趣的话。</p>
-<p>而要检验你是否还有自我学习能力，先不要去培训机构，自己找本讲编程的书、找台电脑、连上网，花一两个月时间就能搞明白你是否适合做一个程序员。一旦你通过了这种自我学习实验，那时再挑一个培训机构系统地学习某条技术栈不迟。</p>
-<p>言而总之，你能不能成为合格的或优秀的程序员，取决于自我学习能力，而不是参加过专业培训。所以，很多公司在招募程序员时，不太愿意考虑培训机构毕 业的学员，因为在面试官的心里，觉得如果你有能力，自己就可以学会，完全没必要去培训机构，你接受了培训，他反倒认为你可能缺乏自我学习能力（以及对技术 的兴趣），担心你不能胜任将来的工作，他太了解了，你学的那点东西根本不够用，还有很多新东西等着你学，所以，他不愿意考虑你。</p>
-<p>而对于知名大学的毕业生，虽然可能和你一样是一张白纸，但别人会以为，能进得了大学当得了学霸，起码学习能力没问题的概率高一些。</p>
-<h2 id="u52AA_u529B"><a href="#u52AA_u529B" class="headerlink" title="努力"></a>努力</h2><p>有一句话是这么说的，“以大多数人的努力程度之低，根本还轮不到拼天赋”。其实，努力也是一种天赋。为什么有的人明知努力可以改变生活，可他还是不 努力呢？因为，臣妾做不到啊！为什么做不到，因为他缺乏“勤奋”、“努力”之类的天赋和才干。真的，勤奋、努力的人，多数是生就的，少数是被后妈（生活） 逼的。</p>
-<p>程序员白天要上班，晚上偶尔还要加个班，自由时间少，而新技术很多，什么时候去学呢？你以为实际的项目一定可以让你锻炼新技术吗？要知道，大部分的 项目在技术选型时，会考虑技术的成熟度和团队的技术储备，很少有冒险采用大家都不熟悉的技术的，不可控因素太多，风险太大，项目失败的概率很高。那这样的 话，你什么时间丰富自己呢？</p>
-<p>八小时之内是现在，八小时之外是将来。你可以用的，就是你的业余时间了。你看，人家都在打游戏、看电视、挎着女伴的胳膊去速8，你还要苦哈哈的学习，如果你没有“努力”这种天赋，是很难做到的。</p>
-<p>所以，很多面试官在面对培训机构毕业的人选时，也会有诸如“如果你有自我学习能力并且努力，其实没必要上什么培训班，完全可以自己搞定”之类的想 法，而你上了培训班，是不是反过来证明你不够努力咧……然后，他又会想，是不是因为你没自知之明不知道自己要干啥才被忽悠到培训机构去交学费了呢……也 许，他还会想，是不是因为你对技术其实不感兴趣只是想谋个事儿干呢……</p>
-<p>额，你看，面无表情之下，其实各种想法如同暗流漩涡，澎湃不息……所以，最后，你可能就只好“回去等消息”了……</p>
-<p>不知道说了这么多，你是否明白了个中原因——面试官会觉得培训出来的学员，可能对技术没有那么浓厚的兴趣、缺乏足够强的自我学习能力也不能很好的自 律和努力。但在我的观念里，其实应该这么看待 IT 培训机构的学员：他只是找了一个类似学校的地方系统学了一些东西，和别人并无什么不同，如果他对技术有兴趣，有自我学习能力，一样可以做一个优秀的程序员。</p>
-<p>原文转自：<a href="http://developer.51cto.com/art/201511/498403.htm" target="_blank" rel="external">http://developer.51cto.com/art/201511/498403.htm</a></p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1582,7 +1628,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1596,7 +1642,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
