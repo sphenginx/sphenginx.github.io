@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2016-07-12T03:20:46.147Z</updated>
+  <updated>2016-07-19T03:53:35.451Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -13,6 +13,161 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[如何用管理的思维，规划好自己的人生？]]></title>
+    <link href="http://sphenginx.github.io/2016/07/18/self-management/"/>
+    <id>http://sphenginx.github.io/2016/07/18/self-management/</id>
+    <published>2016-07-18T10:03:01.000Z</published>
+    <updated>2016-07-19T03:53:35.451Z</updated>
+    <content type="html"><![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>如果要我选出大学最应该掌握的一项技能，毫无疑问，一定是做规划的能力。</p>
+<p>为什么这么说呢？</p>
+<p>我在之前的一篇文章里说过，不要以为进入了大学就可以放松了，大学只是另一条起跑线，而且，比高中要严峻得多。</p>
+<p>原因很简单：不同于高中，大学里的一切，完全靠自己的主动性和驱动力。优秀的人，早在大一、大二，就已经清楚自己想要什么，开始集中精力往规划好的方向冲刺了。如果你等到大四才开始行动，其实就已经晚了。</p>
+<p>举个栗子，有些朋友想进广告公司，但如果你等到毕业才去投简历，你会发现：广告公司根本不要没有经验的人，尤其是国际4A。那么，你不得不先到其他行业曲线救国，或者干脆放弃这个方向——你看，比起大二、大三就在4A里面实习，毕业后顺利成章留下来的，你比别人晚了多少？</p>
+<p>再比如，有个朋友想进咨询行业（真事），结果到了临近毕业，才发现：优秀的咨询公司，不但对专业有着非常狭窄的要求（金融、计算机等），最低学历也是硕士，普通本科连面试的可能都没有，怎么办？如果早几年知道这件事，一早就可以转专业了，再不济，也可以提前准备考个研。</p>
+<p>所以，为什么要做好规划？<strong>因为，我们人生当中的许多决策和选择，都要点满许多前置技能才会出</strong>现。如果你没有事先做好准备，你要么就只能花更多的时间去弥补，要么就只能像所有平庸的人一样，在那些门槛最低的选择中挑选和徘徊。</p>
+<p>更进一步的是，很多时候，我们遇到的许多困境，乃至于使我们的人生变得平庸乏味的罪魁祸首，<strong>其实，都是因为我们活得太过随意。</strong></p>
+<p>比如，我经常收到这样的私信：</p>
+<ul>
+<li><p>「大学学了个不喜欢的专业，一直很抵触，毕业之后也不知道做什么，就这样晃荡了一年，好无奈……」</p>
+</li>
+<li><p>「是不是我太眼高手低了？一年里换了好几份工作，每一份都待不久，现在很焦虑……」</p>
+</li>
+<li><p>「我一点都不喜欢现在的工作，但是又没有能力跳出来，每天都很忙，觉得未来的日子好迷茫……」</p>
+</li>
+</ul>
+<p>其实，不满意现状并不可怕，可怕的是我们不知道该往什么方向改变。</p>
+<p>这样的后果是什么？就像身在一个巨大的迷宫里，看不见周围的路线，日复一日地活在焦虑和迷茫之中，不断地往左往右试探着迈出步子，到头来却发现兜了一个巨大的圈子。就算能走出去，也是靠着运气，回过头看，更不知道走了多少冤枉路。</p>
+<p>所以，每当遇到这种情况，我总会告诉他们，先尽最大的时间和精力，想清楚方向和规划。</p>
+<p>在你没有一个清晰的——至少是初步的规划之前，一切的努力都是无意义的。它们只会成为大量的试错成本，成为在迷宫里一次次兜圈子的脚印，徒耗精力。</p>
+<p>这篇文章，会结合项目管理的思维，谈谈如何做好人生里面，每一个阶段的规划。</p>
+<h2 id="u4E00_u3001_u613F_u666F_uFF1A_u6211_u60F3_u6210_u4E3A_u4EC0_u4E48_u6837_u7684_u4EBA_uFF1F"><a href="#u4E00_u3001_u613F_u666F_uFF1A_u6211_u60F3_u6210_u4E3A_u4EC0_u4E48_u6837_u7684_u4EBA_uFF1F" class="headerlink" title="一、愿景：我想成为什么样的人？"></a>一、愿景：我想成为什么样的人？</h2><p>讲一个故事吧。</p>
+<blockquote>
+<p>   「我在店里吃早餐，看见有个女人跟店主起了争执。好像是店主少放了一颗蛋，她要求退钱，店主不肯。旁边有个女人，估计是她的朋友，一直在劝解。</p>
+<p>   吵着吵着，那个女人突然坐下，捂住脸，哭了出来。</p>
+<p>   她朋友吓了一跳，忙不迭地跟她说：不就一个蛋嘛，哭什么，咱们不要就是了。</p>
+<p>   她抽泣着说，我不是哭这个，我是伤心，为什么我都30多了，却还要为了一个蛋跟别人吵架？这不是我想要的生活。」</p>
+</blockquote>
+<p>尽管作者的笔调多少带着一点促狭和调侃，但却给我留下了非常深刻的印象。</p>
+<p>有多少人就像这样，曾对生活怀着各种各样的梦想和憧憬，却被现实一次又一次地迎头棒击，磨蚀锐气，最终成为自己以前最讨厌的那种人？</p>
+<p>如果你不希望这样，如果你希望能够自己掌控自己的生活，那么，你可以先问自己这个问题：</p>
+<p><strong>10年以后，我想成为一个什么样的人？</strong></p>
+<p>你是想成为时尚前沿的焦点，出入时装周、酒会；还是想拥有自己的一间小店，一家工作室，享受充实而快节奏的事业；抑或是成为一名旅行美食撰稿人，天天飞往各地寻觅美食；又或者，是想安稳下来，拥有一间不大的房子，享受恬静的家庭生活？</p>
+<p>无须进行过多的思考，相信自己的内心，捕捉住第一时间浮现出来的碎片——可能是一些形容词，一个场景，一种氛围，一些物质——将它们写在纸上，作为主干，然后，填充进必要的脉络、骨架，慢慢完善，直至将这种生活状态勾勒完整。</p>
+<p>这个过程可能会花上几天，不要急，尽量遵从自己的内心。尽量写得更具体一些。</p>
+<p>然后，准备一本空白的笔记本，打开第一页，将它写上去。</p>
+<p>它将成为你往后一切努力的方向和根源。</p>
+<h2 id="u4E8C_u3001_u95E8_u69DB_uFF1A_u6211_u8BE5_u6EE1_u8DB3_u4EC0_u4E48_u6837_u7684_u6761_u4EF6_uFF1F"><a href="#u4E8C_u3001_u95E8_u69DB_uFF1A_u6211_u8BE5_u6EE1_u8DB3_u4EC0_u4E48_u6837_u7684_u6761_u4EF6_uFF1F" class="headerlink" title="二、门槛：我该满足什么样的条件？"></a>二、门槛：我该满足什么样的条件？</h2><p>第一步的结果，只是帮助我们梳理出了自己想达到的生活状态。需要将它明确下来，进行分解，才能落实到后续的行动之中。</p>
+<p>请打开笔记本，在第二页尽可能地罗列出你所知道的、达成目标需要满足的条件。</p>
+<p>以开一间咖啡店为例，你需要满足的条件，可能是这样的：（未必准确，只是一个参考）</p>
+<ul>
+<li><p>一笔至少30万元的启动资金（视城市和地段而定。包括租金、装修以及前几个月的必要开支等）。</p>
+</li>
+<li><p>咖啡的相关知识。</p>
+</li>
+<li><p>店铺运营、资金管理、会计等基本商业知识。</p>
+</li>
+<li><p>市场营销及推广的基本知识。</p>
+</li>
+<li><p>平面设计、空间设计的基本知识（店面、LOGO设计和店内布局）。</p>
+</li>
+<li><p>有竞争优势的媒体资源和人脉关系。</p>
+</li>
+<li><p>稳定可靠的供货渠道。</p>
+</li>
+<li><p>大量的成熟案例参考资料。</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<p>这样一来，你需要做什么，就非常清晰了。「能否在10年内开一家咖啡馆」，就变成「能否在10年内满足这些条件」。</p>
+<p>不要急于求成，一开始你列出的条件，可能很不完整、不严谨，慢慢来。有疑问的地方，就去网上搜索资料，去知乎提问，或者请教对这方面比较熟悉的人，对这一页反复修改、增补，直到趋于完善为止。</p>
+<h2 id="u4E09_u3001_u8DEF_u5F84_uFF1A_u6211_u8BE5_u5982_u4F55_u6EE1_u8DB3_u8FD9_u4E9B_u6761_u4EF6_uFF1F"><a href="#u4E09_u3001_u8DEF_u5F84_uFF1A_u6211_u8BE5_u5982_u4F55_u6EE1_u8DB3_u8FD9_u4E9B_u6761_u4EF6_uFF1F" class="headerlink" title="三、路径：我该如何满足这些条件？"></a>三、路径：我该如何满足这些条件？</h2><p>这是整个规划里面最重要的一步。</p>
+<p>第二步列出的条件中，每一个问题，都有不同的解决方法。比如：</p>
+<ul>
+<li><p>会计和账目管理是一项非常繁琐的工作，你可以自己来，也可以跟朋友合伙、由他来负责这部分，也可以雇佣一位员工帮你分担；</p>
+</li>
+<li><p>店面设计、LOGO设计，你可以请朋友帮忙，也可以委托给专业的设计公司；</p>
+</li>
+<li><p>一开始的启动资金，你可以向家里人求助，可以向银行贷款，也可以自己一步步攒齐</p>
+</li>
+</ul>
+<p>诸如此类。</p>
+<p>不同的解决方法，会有不同的要求，要根据你的实际情况来处理。</p>
+<ul>
+<li><p>如果你家境良好，没有太多资金方面的压力，那显然，你就可以挑选一份比较轻松的工作，把省下来的时间和精力，去看市场营销方面的书籍，学习推广和运营知识，甚至到咖啡馆里面打工、积累经验，都可以。</p>
+</li>
+<li><p>如果你家境一般，打算靠自己攒齐启动资金，那你可能就得选择比较辛苦、加班较多，但收入也相对较高的工作。或者在业余时间接一些外包和私单，平时也多注意开源节流，以攒齐存款为第一优先级。</p>
+</li>
+<li><p>如果你的朋友里面有管理和财务方面的专业人才，关系也足够好，你就可以把这一块完全交给他，把自己的精力聚集在其他方面。</p>
+</li>
+<li><p>又或者，如果你打算在推广上面花大力气，那是不是可以选择新媒体相关的行业，积累这方面的经验和人际资源，为将来打好铺垫？</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<p>翻开笔记本的第三页，把你的这些思考过程，详细地写下来。</p>
+<ul>
+<li><p>我拥有什么样的资源和优势？</p>
+</li>
+<li><p>我需要聚焦和关注哪些最核心的条件？</p>
+</li>
+<li><p>我可以采取什么方法解决它们？</p>
+</li>
+</ul>
+<p>仔细思考这些问题，大量地去查找信息，在这个基础上，提炼出一份概要的「计划」，并对它反复进行打磨。</p>
+<p>这一步的意义在于，<strong>只做那些对长远规划有益的事情。</strong></p>
+<p>比如，我在之前的文章里提过，不要把时间浪费在低回报的兼职上。但是，如果你的长远目标是开一家咖啡店，那么到咖啡店里兼职有何不可呢？这个时候，它的回报就不是简单的金钱了，而是成为你整个规划必不可少的一环。</p>
+<p>再比如，许多人一到周末，要么睡一天，要么逛街、玩游戏，这样没有什么问题，但是，如果你有一个长远的规划和方案，你是一定不会容忍自己这样的。你会去图书馆看书，会去练习技能，会早起去健身。</p>
+<p>因为你清楚地知道，按照你的计划，只有这样，才能离你的梦想更近一步。</p>
+<h2 id="u56DB_u3001_u91CF_u5316_uFF1A_u6211_u8981_u5B9E_u73B0_u4EC0_u4E48_u8FDB_u5EA6_uFF1F"><a href="#u56DB_u3001_u91CF_u5316_uFF1A_u6211_u8981_u5B9E_u73B0_u4EC0_u4E48_u8FDB_u5EA6_uFF1F" class="headerlink" title="四、量化：我要实现什么进度？"></a>四、量化：我要实现什么进度？</h2><p>为什么有些人制订了计划，却总是得不到落实，有些人却可以一步步朝着计划前进？</p>
+<p>很大程度上，是由于计划本身的「有效性」。</p>
+<p>什么是有效的计划呢？有一个通用的原则，叫做<strong>SMART原则</strong>。亦即<strong>「具体、可衡量、有可行性、有相关性、有时间期限」</strong>。</p>
+<p>刨去可行性和相关性这两个显而易见的原则（目标必须有可能实现、目标必须与整体规划和其他目标相关），可以看出，最核心的部分，就是「量化」。用一句话来概括就是：<strong>我需要在什么时间点，达成什么样的进度？</strong></p>
+<p>举个最简单的例子：</p>
+<ul>
+<li><p>「我要写一部小说」就不是一个计划；</p>
+</li>
+<li><p>「我要在3个月内完成一部60万字的小说，平均每周不少于5000字。」 就是一个初步的计划；</p>
+</li>
+<li><p>「我要在半年内完成一部小说，前3个月用于构思和准备素材，后3个月专注写作，平均每周不少于5000字，总字数不少于60万字。发布之后，在1个月内获得100个订阅，并且总体评价中好评需要超过60%。」 就是一个很完善的计划了。</p>
+</li>
+</ul>
+<p>同样，「我要学习市场营销知识」只是一句空洞的话，如果要使之成为计划，可以这样设置：</p>
+<blockquote>
+<p>   「我要在1年内读完20本市场营销相关的专业书籍；每晚至少读30页书，学习1-3个知识点；每周至少写一篇不少于3000字的学习心得。」</p>
+</blockquote>
+<p>这样，就是一份有效、可执行的计划了。</p>
+<p>请在笔记本上，翻开下一页，把确定下来的计划一条条列上去。</p>
+<p>如果你有兴趣，可以做一份表格：横轴是每一项计划，纵轴是每一天的日期，再标出相应的进度和时间点。然后，每一天按照计划去「打卡」：今天读了25页书，就写上25；今天背了30个单词，就写上30。诸如此类。让自己对自己的执行情况、进度实现情况都能一目了然。</p>
+<p>原则上，计划确立之后，不要频繁地去改动它。所以，一开始制订的时候，要根据实际情况控制好强度，最好设置在「需要付出一定努力就能够达到」的程度。这样才能对自己起到鞭策和激励的作用。</p>
+<h2 id="u4E94_u3001_u53CD_u9988_uFF1A_u6211_u7684_u89C4_u5212_u5408_u7406_u5417_uFF1F"><a href="#u4E94_u3001_u53CD_u9988_uFF1A_u6211_u7684_u89C4_u5212_u5408_u7406_u5417_uFF1F" class="headerlink" title="五、反馈：我的规划合理吗？"></a>五、反馈：我的规划合理吗？</h2><p>人毕竟不是全知全能的，不可能一蹴而就。所以，在按照计划执行的时候，做好每一天的记录。试行一段时间之后，再根据这段时间的实际情况，对下一段时间的计划进行调整。</p>
+<p>一般来说，1-3个月重新制订一次计划比较常见。以背单词为例，如果第一个月你给自己规定的计划是每天50个单词，1个月之后，你发现没有一天能达到目标，最多也不过30个单词，那么第二个月你就可以将目标设置为30，类似这样。</p>
+<p>同样，在实行前文所说的长远规划时，如果你发现规划有误，或者有更好的方式可以满足条件，都可以及时对规划进行修改和调整。</p>
+<p>末了，再多说几点。</p>
+<p>作者：Lachel<br>链接：<a href="https://zhuanlan.zhihu.com/p/21627399" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21627399</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>首先，这是一个思维方式，亦即<strong>「规划-列出条件-找出方案-分解量化-反馈检查」</strong>。你可以把它应用到生活中的方方面面。比如，10年能不能变成1年、3年、5年，甚至半年？当然都可以。按照你想解决的实际问题来调整就好。</p>
+<p>然后，如果你不知道开咖啡店需要多少钱，需要学习什么知识，怎么办？你可以在网上搜索资料，实在找不到的，去问身边的人（或者通过他们去问他们的朋友），去知乎和在行上找专业人士请教，或者，直接找一家咖啡店，跟老板搞好关系，跟他闲聊，都可以。获得信息的方法无穷无尽，不要止步于这个障碍上。</p>
+<p>最后，讲个故事，给大家一点信心吧。</p>
+<p>我有个朋友，大学的时候，每天回到宿舍就是玩游戏，周末也一直宅着。大四的时候，他去了一家游戏公司实习，做了两个月就辞职了。</p>
+<p>「我不喜欢那种环境。」他说。「团队，同事，办公室，每天做的事情，我都不喜欢。太混乱，太low。」</p>
+<p>后来呢？他回家休息了两年，学英语，考雅思，两年后，考进英国某排名前五的大学，读了个管理学硕士。回国之后，参加某跨国IT咨询公司的面试，在一片计算机专业的海归硕士和专业人士之中杀出重围，顺利拿到了助理顾问的职位。现在已经是某个team的leader。</p>
+<p><strong>种一棵树最好的时间是十年前，其次就是现在。</strong></p>
+<p>本文转自知乎专栏<a href="https://zhuanlan.zhihu.com/p/21627399" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/21627399</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>如果要我选出大学最应该掌握的一项技能，毫无疑问，一定是做规划的能力。</p>
+<p>为什么这么说呢？</]]>
+    </summary>
+    
+      <category term="plan" scheme="http://sphenginx.github.io/tags/plan/"/>
+    
+      <category term="管理" scheme="http://sphenginx.github.io/tags/%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[PHP 底层的运行机制与原理]]></title>
@@ -1525,73 +1680,6 @@ RSA
     </summary>
     
       <category term="jquery" scheme="http://sphenginx.github.io/tags/jquery/"/>
-    
-      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[解决Unix-like、Windows系统之间文本换行符不同的问题]]></title>
-    <link href="http://sphenginx.github.io/2014/12/24/CRLF-in-Unix-like_Windows-os/"/>
-    <id>http://sphenginx.github.io/2014/12/24/CRLF-in-Unix-like_Windows-os/</id>
-    <published>2014-12-24T09:02:50.000Z</published>
-    <updated>2015-12-01T05:44:48.465Z</updated>
-    <content type="html"><![CDATA[<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
-<blockquote>
-<p>   win                   用   \r\n<br>    linux/unix            用   \n<br>    Mac   OS              用   \r</p>
-</blockquote>
-<p>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以：<br>Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
-<h2 id="CRLF_u6765_u5386"><a href="#CRLF_u6765_u5386" class="headerlink" title="CRLF来历"></a>CRLF来历</h2><p>计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
-<p>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。</p>
-<p>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-<h2 id="Q_26amp_3BA"><a href="#Q_26amp_3BA" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="u95EE_u9898_u4E00_uFF1AWindows_u4E0B_u7F16_u5199_u7684_u7EAF_u6587_u672C_u6587_u6863_u5728Linux_u4E0B_u4F7F_u7528_uFF0C_u4F8B_u5982Windows_u4E0B_u7F16_u5199_u7684SH_u811A_u672C_uFF0C_u653E_u5230Linux_u4E0B_u6267_u884C_u53EF_u80FD_u4F1A_u51FA_u9519"><a href="#u95EE_u9898_u4E00_uFF1AWindows_u4E0B_u7F16_u5199_u7684_u7EAF_u6587_u672C_u6587_u6863_u5728Linux_u4E0B_u4F7F_u7528_uFF0C_u4F8B_u5982Windows_u4E0B_u7F16_u5199_u7684SH_u811A_u672C_uFF0C_u653E_u5230Linux_u4E0B_u6267_u884C_u53EF_u80FD_u4F1A_u51FA_u9519" class="headerlink" title="问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错"></a>问题一：Windows下编写的纯文本文档在Linux下使用，例如Windows下编写的SH脚本，放到Linux下执行可能会出错</h3><ul>
-<li><p>方法一：<br>不用系统记事本，自己下载一个Ultraedit或者Nodepad++文本编辑器，在Ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是将\r\n转换成\n。</p>
-</li>
-<li><p>方法二：<br>在windows下将txt文件保存为ANSI格式，然后在Linux终端输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ms.txt | col -b &#62; linux.txt</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>方法三：我的另一个方法<br>利用cat -v test.txt可以显示test.txt中的\r（显示为^M），然后去掉^M即可。<br>输入：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat -v test.txt &#62;te.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>然后cat te.txt可见行尾有^M，即\r。我们把^M去掉即可：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi te.txt</span><br></pre></td></tr></table></figure></p>
-<p>在vi中输入替换命令<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:%s/\^M//g</span><br></pre></td></tr></table></figure></p>
-<p>再保存即可。</p>
-<h3 id="u95EE_u9898_u4E8C_uFF1ALinux_u4E0B_u65B0_u5EFA_u7684_u6587_u6863_u5728Windows_u4E0B_u7528_u8BB0_u4E8B_u672C_u6253_u5F00_u5185_u5BB9_u4F1A_u6324_u5728_u4E00_u8D77_uFF08_u6CA1_u6709_u4E86_u6362_u884C_u7B26_uFF09_u3002_u539F_u56E0_u662F_u8BB0_u4E8B_u672C_u4E0D_u652F_u6301_5Cn_u6362_u884C_uFF08_u5B83_u53EA_u652F_u6301_5Cr_5Cn_u5F62_u5F0F_u7684_u6362_u884C_uFF09"><a href="#u95EE_u9898_u4E8C_uFF1ALinux_u4E0B_u65B0_u5EFA_u7684_u6587_u6863_u5728Windows_u4E0B_u7528_u8BB0_u4E8B_u672C_u6253_u5F00_u5185_u5BB9_u4F1A_u6324_u5728_u4E00_u8D77_uFF08_u6CA1_u6709_u4E86_u6362_u884C_u7B26_uFF09_u3002_u539F_u56E0_u662F_u8BB0_u4E8B_u672C_u4E0D_u652F_u6301_5Cn_u6362_u884C_uFF08_u5B83_u53EA_u652F_u6301_5Cr_5Cn_u5F62_u5F0F_u7684_u6362_u884C_uFF09" class="headerlink" title="问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）"></a>问题二：Linux下新建的文档在Windows下用记事本打开内容会挤在一起（没有了换行符）。原因是记事本不支持\n换行（它只支持\r\n形式的换行）</h3><ul>
-<li><p>解决方法：在Windows中使用Ultraedit或者Nodepad++文本编辑器，执行转换。</p>
-</li>
-<li><p>另外，有两个偏方：<br>1）在Windows中把txt后缀改成doc或者c，用Word或VC6.0来打开，然后复制到txt文件中。<br>2）在Linux下新建文本文档的时候，不要用Vim或者Gedit，用Open Office，保存成doc格式。  </p>
-</li>
-<li><p>打开文本文件可以用：<br>1）gedit xx.doc<br>2）vim xx.doc（vim可能不支持繁体字，如果不涉及繁体字以及古怪的符号，就可以用vim）<br>3）找到文件，直接用Open Office打开。选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：CR&amp;LF（或者LF）。   </p>
-</li>
-<li><p>注意：如果文件名是中文（比如vim 测试.txt），那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名。   </p>
-</li>
-</ul>
-<ol>
-<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）   </li>
-<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r；   </li>
-<li>LF，即\n，linux/unix系统下的换行符。（shell脚本就需要这个格式）   </li>
-</ol>
-<p>PS：<br><code>\r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行，而\n是回车，原本指打字机的纸张往下移动一位，后来在Unix-like系统下，\n成为了实际上的换行符。</code></p>
-<p>\r和\n的区别看下面的例子就知道了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"938517\r10086\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>无论是Linux系统还是Windows平台，输出均是<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10086</span><br></pre></td></tr></table></figure></p>
-<p>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
-<h3 id="u95EE_u9898_u4E09_uFF1AWindows_u4E0B_u7F16_u5199_u7684doc_u6587_u6863_uFF0C_u5728Linux_u4E0B_u67E5_u770B_uFF08_u7528Open_Office_uFF09_u4E00_u822C_u90FD_u4F1A_u4E71_u7801"><a href="#u95EE_u9898_u4E09_uFF1AWindows_u4E0B_u7F16_u5199_u7684doc_u6587_u6863_uFF0C_u5728Linux_u4E0B_u67E5_u770B_uFF08_u7528Open_Office_uFF09_u4E00_u822C_u90FD_u4F1A_u4E71_u7801" class="headerlink" title="问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码"></a>问题三：Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码</h3><ul>
-<li>解决方法：先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。</li>
-</ul>
-<h3 id="u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316"><a href="#u95EE_u9898_u56DB_uFF1A_u5728_u4E0D_u540C_u5E73_u53F0_u95F4_u4F7F_u7528FTP_u8F6F_u4EF6_u4F20_u9001_u6587_u4EF6_u65F6_2C__u5728ascii_u6587_u672C_u6A21_u5F0F_u4F20_u8F93_u6A21_u5F0F_u4E0B_2C__u4E00_u4E9BFTP_u5BA2_u6237_u7AEF_u7A0B_u5E8F_u4F1A_u81EA_u52A8_u5BF9_u6362_u884C_u683C_u5F0F_u8FDB_u884C_u8F6C_u6362_uFF0C_u7ECF_u8FC7_u8FD9_u79CD_u4F20_u8F93_u7684_u6587_u4EF6_u5B57_u8282_u6570_u53EF_u80FD_u4F1A_u53D1_u751F_u53D8_u5316" class="headerlink" title="问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化"></a>问题四：在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换，经过这种传输的文件字节数可能会发生变化</h3><ul>
-<li>解决方法：如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本。</li>
-</ul>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u7B80_u4ECB"><a href="#u7B80_u4ECB" class="headerlink" title="简介"></a>简介</h2><p>\r是回车符,\n是换行符，各个系统的换行标志：</p>
-<blockquote>
-<p>   win ]]>
-    </summary>
-    
-      <category term="CRLF" scheme="http://sphenginx.github.io/tags/CRLF/"/>
-    
-      <category term="unix" scheme="http://sphenginx.github.io/tags/unix/"/>
     
       <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
     

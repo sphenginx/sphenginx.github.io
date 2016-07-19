@@ -232,6 +232,131 @@
             
               
                 
+                <a class="post-title-link" href="/2015/06/01/api-discuss/" itemprop="url">
+                  API漫谈
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-06-01T09:27:40+08:00" content="2015-06-01">
+              2015-06-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/06/01/api-discuss/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/01/api-discuss/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>如何保证API的client来源是真实的，对于API的认证很重要,平时都是按别人的文档和别人通讯也没想过这事，一想还蛮有趣的，下面就让我们来一步步规划一个接口认证的吧。</p>
+<h2 id="u4FE1_u606F_u5339_u5BF9"><a href="#u4FE1_u606F_u5339_u5BF9" class="headerlink" title="信息匹对"></a>信息匹对</h2><p>认证不就是登陆么，用户给我发个身份和密码，我一匹对，正确，通过不久可以了么？</p>
+<h3 id="u65B9_u6CD5"><a href="#u65B9_u6CD5" class="headerlink" title="方法"></a>方法</h3><pre><code>用户发一个 user_id 和 user_key 过来，我们接收后匹对看是否存在。
+</code></pre><h3 id="u4E0D_u8DB3"><a href="#u4E0D_u8DB3" class="headerlink" title="不足"></a>不足</h3><pre><code>接口通过HTTP通讯，中间一旦被人窃听，以后就可以拿 user_id 和 user_key 给我们发请求，而我们无法分辨出到底是谁才是真的齐天大圣。看来，不可以把 user_key 这样子发送。
+
+就算认证是可靠的，黑客还是可以拦截住请求，对认证部分不修改但把参数修改了，然后让请求继续发送。例如把你准备给哈利文转账，但是请求在中间被拦截修改后，变成给变色龙转了。
+</code></pre><h2 id="u54C8_u5E0C"><a href="#u54C8_u5E0C" class="headerlink" title="哈希"></a>哈希</h2><p>我们密码存储的时候不是经常md5哈希后保存么，那么我们把 user_key 也哈希一下吧，嗯，正愁不知道拿user_key和谁哈希好，既然说参数会被替换，那么，我们拿 user_key 和 请求参数哈希后的字符串作为 auth_token 传输，而不发送 user_key不就可以了。这样参数也成为认证的一部分，就不会被替换掉了。</p>
+<h3 id="u505A_u6CD5"><a href="#u505A_u6CD5" class="headerlink" title="做法"></a>做法</h3><p>把参数按某个规则排好序后，连接成字符串，然后和 user_key 哈希后作为 auth_token，发送。接受端接到请求后，把参数排序后和 user_key 哈希后的字符串和 auth_token 比较。</p>
+<h3 id="u4E0D_u8DB3-1"><a href="#u4E0D_u8DB3-1" class="headerlink" title="不足"></a>不足</h3><p>当参数很少，而 user_key 不复杂的情况下， auto_token 有被碰撞出 user_key的可能</p>
+<h2 id="u52A0_u5F3A_u7248_u54C8_u5E0C"><a href="#u52A0_u5F3A_u7248_u54C8_u5E0C" class="headerlink" title="加强版哈希"></a>加强版哈希</h2><p>表示，这种情况对我们这种平时存密码都要多次哈希的孩子来说毫无鸭梨啊，我们可以分别对参数字符串哈希后取一定位数，然后把 user_key 哈希后取一定位数，再把两者连起来哈希作为 auth_token</p>
+<h3 id="u8BF7_u6C42_u975E_u6CD5__uFF01"><a href="#u8BF7_u6C42_u975E_u6CD5__uFF01" class="headerlink" title="请求非法 ！"></a>请求非法 ！</h3><p>什么转了9999次款？黑客大叔表示无法对我们请求下手了，不过他借你某次给他转款的时候拦截到了你的请求，然后不停的伪造一样的请求… 我们可以增加一些策略，防止这种请求重放，例如：在参数里面添加时间戳，最好精确到毫秒，然后把时间戳、user_id和接口方法作为唯一值检验，相同的值只能一次有效。</p>
+<h3 id="u4E0D_u8DB3-2"><a href="#u4E0D_u8DB3-2" class="headerlink" title="不足"></a>不足</h3><p>目前为止，我们能确保请求时持有user_key的user_id发出的，而且不会被修改，不会被重放，user_key也不会暴露，一切都很美好。但是我们的信息是明文的，会照成信息泄露。</p>
+<h2 id="u52A0_u5BC6"><a href="#u52A0_u5BC6" class="headerlink" title="加密"></a>加密</h2><h3 id="u53EF_u4EE5_u628A_u5185_u5BB9_u52A0_u5BC6_u8D77_u6765_u4F20_u8F93"><a href="#u53EF_u4EE5_u628A_u5185_u5BB9_u52A0_u5BC6_u8D77_u6765_u4F20_u8F93" class="headerlink" title="可以把内容加密起来传输"></a>可以把内容加密起来传输</h3><h3 id="u65B9_u6CD5-1"><a href="#u65B9_u6CD5-1" class="headerlink" title="方法"></a>方法</h3><pre><code>HTTPS  
+RSA  
+利用user_key对整个请求的内容进行异或后重新编码之类的加密
+</code></pre><h3 id="u4E0D_u8DB3-3"><a href="#u4E0D_u8DB3-3" class="headerlink" title="不足"></a>不足</h3><pre><code>成本高，操作麻烦，目前普通接口通讯一般不会有到这一步的处理。
+</code></pre><h3 id="u8FD9_u662F_u53CC_u5411_u7684"><a href="#u8FD9_u662F_u53CC_u5411_u7684" class="headerlink" title="这是双向的"></a>这是双向的</h3><pre><code>认证是接口双方都需要做的，不止指用户发给平台，还要包括用户接到平台应答后也应该进行相同的验证
+</code></pre><h2 id="u5176_u4ED6_u624B_u6BB5"><a href="#u5176_u4ED6_u624B_u6BB5" class="headerlink" title="其他手段"></a>其他手段</h2><blockquote>
+<p>   ip地址认证<br>    请求有效时间  </p>
+</blockquote>
+<h2 id="u603B_u4E4B"><a href="#u603B_u4E4B" class="headerlink" title="总之"></a>总之</h2><blockquote>
+<p>   来源正确，身份正确，内容正确，请求正确，信息安全</p>
+</blockquote>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/03/17/ssdb/" itemprop="url">
                   SSDB：高性能数据库服务器
                 </a>
@@ -1086,125 +1211,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/27/bug-in-global-request/" itemprop="url">
-                  记一次PHP中$_REQUEST踩的坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2014-11-27T09:27:40+08:00" content="2014-11-27">
-              2014-11-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
-                    <span itemprop="name">日薪越亿</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/11/27/bug-in-global-request/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/27/bug-in-global-request/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天测试返回一个API调用接口不对的bug，查看API发现变量是通过$_REQUEST来获取参数的，难道获取方法有问题？</p>
-<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>既然有了怀疑，那么我们来打印下变量吧，通过实验发现：<br> <strong>$_REQUEST获取的参数 和URL中的不一致</strong>，<br>为啥会不一致呢，请教了下Google大神，查看<code>ini</code>的设置，发现<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
-<p>打印EGPCS时发现cookie 和 get中有相同的变量，原来是cookie中的参数覆盖了get中的参数，囧~ </p>
-<blockquote>
-<p>（腹诽：cookie中应该加个前缀啥的吧……）：</p>
-</blockquote>
-<h2 id="u7ED3_u8BBA"><a href="#u7ED3_u8BBA" class="headerlink" title="结论"></a>结论</h2><p>php版本&lt; 5.3时 会 根据variables_order的设置读取参数；</p>
-<p>PHP版本 &gt; 5.3时 会根据request_order的设置读取参数；</p>
-<p>PHP version &lt; 5.3时默认读取顺序为：<strong>E G P C S</strong>，即 ：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ variables_order = &#34;EGPCS&#34;;</span><br></pre></td></tr></table></figure></p>
-<p>variables_order 系统在定义PHP预定义变量，EGPCS 是 <code>Environment, Get, Post, Cookie, and Server</code> 的简写。 </p>
-<p>这个变量主要是在php执行时，对超级变量创建的设置。EGPCS对应的超级变量为<code>$_ENV</code>, <code>$_GET</code>, <code>$_POST</code>, <code>$_COOKIE</code>, <code>$_SERVER</code>。如果variables_order被设置为””,则对应的超级全局变量的值都为空数组。</p>
-<p>所以，要想<code>$_REQUEST</code>包含的预定义变量的值，variables_order必须有对应的设置。例如，variables_order = “G”，则$_REQUEST中肯定不会有post的值。</p>
-<p>在<code>register_globals=on</code>的情况，这个配置的顺序将影响对应变量的值，重复key，后边的会覆盖前边的。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ request_order = &#34;PGC&#34;</span><br></pre></td></tr></table></figure></p>
-<p>这个变量，说明<code>$_REQUEST</code>包含哪些类型的外部数据、数据加载的顺序。这个是有顺序的，如果key重复，后边的就会覆盖前边的值。</p>
-<blockquote>
-<p>   比如:<br><code>$_GET</code>里面有个 <code>$_GET[&#39;id&#39;]=2</code> ,  <code>$_POST</code> 里有一个 <code>$_POST[&#39;id&#39;] =3</code>。<br>如果request_order = “PG”的形式设置，那么 <code>$_REQUEST[&#39;id&#39;]=2</code>。<br>如果request_order = “GP”的形式设置，则 <code>$_REQUEST[&#39;id&#39;]=3</code>。</p>
-</blockquote>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1251,7 +1257,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1265,7 +1271,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
