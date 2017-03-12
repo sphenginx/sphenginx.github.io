@@ -60,7 +60,7 @@
 <meta property="og:site_name" content="小崔随想录">
 <meta property="og:description" content="Git 基础简单地说，Git 究竟是怎样的一个系统呢？请注意接下来的内容非常重要，若您理解了 Git 的思想和基本工作原理，用起来就会知其所以然，游刃有余。在开始学习 Git 的时候，请努力分清您对其它版本管理系统的已有认识，如 Subversion 和 Perforce 等；这么做能帮助您使用工具时避免发生混淆。Git 在保存和对待各种信息的时候与其它版本控制系统有很大差异，尽管操作起来的命令形">
 <meta property="og:image" content="http://sphenginx.github.io/images/git_flow.png">
-<meta property="og:updated_time" content="2015-12-10T03:39:31.974Z">
+<meta property="og:updated_time" content="2017-03-11T14:40:13.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git学习笔记">
 <meta name="twitter:description" content="Git 基础简单地说，Git 究竟是怎样的一个系统呢？请注意接下来的内容非常重要，若您理解了 Git 的思想和基本工作原理，用起来就会知其所以然，游刃有余。在开始学习 Git 的时候，请努力分清您对其它版本管理系统的已有认识，如 Subversion 和 Perforce 等；这么做能帮助您使用工具时避免发生混淆。Git 在保存和对待各种信息的时候与其它版本控制系统有很大差异，尽管操作起来的命令形">
@@ -339,7 +339,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name sphenginx</span><br><span class="line">$ git config --global user.email sphenginx@sphenginx.com</span><br><span class="line">$ git config --list</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>生成ssh key</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"littleCui@gmail.com"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -<span class="keyword">C</span> <span class="string">"sphenginx@gmail.com"</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看config信息</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="comment">--list</span></span><br></pre></td></tr></table></figure>
@@ -357,10 +357,10 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential<span class="class">.helper</span> wincred</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>获取我的bitbucket的笔记仓库</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/sphenginx/sphenginx.git</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置远程仓库地址</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br><span class="line">git remote <span class="comment">--help</span></span><br><span class="line">git remote <span class="built_in">set</span> origin <span class="keyword">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br><span class="line">git remote <span class="built_in">set</span>-url origin <span class="keyword">https</span>://sphenginx@bitbucket.org/sphenginx/my-php.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote -<span class="keyword">v</span></span><br><span class="line">git remote --<span class="keyword">help</span></span><br><span class="line">git remote <span class="keyword">set</span> origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/sphenginx/sphenginx.git</span><br><span class="line">git remote <span class="keyword">set</span>-url origin http<span class="variable">s:</span>//github.<span class="keyword">com</span>/sphenginx/sphenginx.git</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>正常提交命令</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line">git pull origin <span class="keyword">master</span></span><br><span class="line"><span class="title">git</span> add .</span><br><span class="line">git commit -am '提交信息'</span><br><span class="line">git push origin <span class="literal">master</span></span><br></pre></td></tr></table></figure>
