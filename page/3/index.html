@@ -232,6 +232,162 @@
             
               
                 
+                <a class="post-title-link" href="/2015/09/27/js-qrcode/" itemprop="url">
+                  二维码图片生成器QRCode.js
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-09-27T16:03:01+08:00" content="2015-09-27">
+              2015-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/09/27/js-qrcode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/27/js-qrcode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u4E8C_u7EF4_u7801_u662F_u4EC0_u4E48_uFF1F"><a href="#u4E8C_u7EF4_u7801_u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="二维码是什么？"></a>二维码是什么？</h2><p>百度百科上是这样介绍二维码的：二维码（Quick Response Code），又称二维条码，它是用特定的几何图形按一定规律在平面（二维方向）上分布的黑白相间的图形，是所有信息数据的一把钥匙。在现代商业活动中，可实现的应用十分广泛，如：产品防伪/溯源、广告推送、网站链接、数据下载、商品交易、定位/导航、电子商务应用、车辆管理、信息传递等。如今智能手机扫一扫（简称313）功能的应用使得二维码更加普遍，随着国内物联网产业的蓬勃发展，更多的二维码技术应用解决方案被开发，二维码成为移动互联网入口真正成为现实。 </p>
+<h2 id="QRCode-js_u8BF4_u660E"><a href="#QRCode-js_u8BF4_u660E" class="headerlink" title="QRCode.js说明"></a>QRCode.js说明</h2><p>QRCode.js是一个实现生成二维码(QRCode)的js插件。 QRCode.js有着良好的跨浏览器兼容性（高版本使用HTML5的 Canvas，低版本IE使用table元素绘制），而且QRCode.js没有任何依赖。只需要引用一个QRCode.js。</p>
+<h2 id="u4F7F_u7528QRCode-js"><a href="#u4F7F_u7528QRCode-js" class="headerlink" title="使用QRCode.js"></a>使用QRCode.js</h2><h3 id="u5F15_u5165qrcode-js"><a href="#u5F15_u5165qrcode-js" class="headerlink" title="引入qrcode.js"></a>引入qrcode.js</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=”qrcode.js” <span class="built_in">type</span>=”text/javascript”&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="HTML_u4EE3_u7801"><a href="#HTML_u4EE3_u7801" class="headerlink" title="HTML代码"></a>HTML代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=”qrcode”&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="JS_u4EE3_u7801"><a href="#JS_u4EE3_u7801" class="headerlink" title="JS代码"></a>JS代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//初始化QRCode对象</span><br><span class="line">var qrcode = new QRCode(document.getElementById(“qrcode”));</span><br><span class="line"></span><br><span class="line">//也可以在初始化QRCode对象，传入更多参数</span><br><span class="line">var qrcode = new QRCode(document.getElementById(“qrcode”),&#123;</span><br><span class="line">	width: <span class="number">128</span>,</span><br><span class="line">	height: <span class="number">128</span>,</span><br><span class="line">	colorDark : “<span class="comment">#000000″,</span></span><br><span class="line">	colorLight : “<span class="comment">#ffffff”,</span></span><br><span class="line">	correctLevel : QRCode.CorrectLevel.H</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//需要生成二维码的字符串</span><br><span class="line">qrcode.makeCode(“http://www.leixuesong.cn”);</span><br><span class="line"></span><br><span class="line">//清除二维码</span><br><span class="line">qrcode.clear();</span><br></pre></td></tr></table></figure>
+<h3 id="u53C2_u6570_u8BF4_u660E"><a href="#u53C2_u6570_u8BF4_u660E" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>render</td>
+<td>string</td>
+<td>配置用哪个节点元素画二维码，选项有table、svg和canvas，默认的选择顺序为 canvas -&gt; svg -&gt; table</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>要编码的字符串，默认为空</td>
+</tr>
+<tr>
+<td>width</td>
+<td>number</td>
+<td>二维码的长，单位是px  需要注意的是，当使用table或者svg绘制二维码时，会适当减小，使得能够整除二维码矩阵的维度。  默认：256</td>
+</tr>
+<tr>
+<td>height</td>
+<td>number</td>
+<td>同width</td>
+</tr>
+<tr>
+<td>correctLevel</td>
+<td>number</td>
+<td>纠错级别，可取0、1、2、3，数字越大说明所需纠错级别越大，默认：3</td>
+</tr>
+<tr>
+<td>background</td>
+<td>color</td>
+<td>背景色，默认：<code>#FFFFFF</code></td>
+</tr>
+<tr>
+<td>foreground</td>
+<td>color</td>
+<td>前景色，默认：<code>#000000</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="u6D4F_u89C8_u5668_u517C_u5BB9_u6027"><a href="#u6D4F_u89C8_u5668_u517C_u5BB9_u6027" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h2><p>几乎支持所有浏览器： IE6~10, Chrome, Firefox, Safari, Opera, Mobile Safari, Android, Windows Mobile.</p>
+<p>到这里，js生成二维码插件-QRCode.js就介绍完了，QRCode.js非常的方便好用。需要注意的的是QRCode初始化传入DOM对象时，必须是js原生的DOM对象，不能是jQuery的DOM对象的，否则就会报错。</p>
+<h2 id="u9644"><a href="#u9644" class="headerlink" title="附"></a>附</h2><p>GitHub地址: <a href="https://github.com/davidshimjs/qrcodejs" target="_blank" rel="external">https://github.com/davidshimjs/qrcodejs</a><br>二维码生成原理：<a href="http://www.thonky.com/qr-code-tutorial/" target="_blank" rel="external">http://www.thonky.com/qr-code-tutorial/</a></p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/17/hexo/" itemprop="url">
                   hexo
                 </a>
@@ -1129,125 +1285,12 @@ RSA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/17/bug-in-pay-no-ship/" itemprop="url">
-                  记一次未付款发货的天坑逻辑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-01-17T16:03:01+08:00" content="2015-01-17">
-              2015-01-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/No-Zuo-No-Die/" itemprop="url" rel="index">
-                    <span itemprop="name">No Zuo No Die</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/17/bug-in-pay-no-ship/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/17/bug-in-pay-no-ship/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u524D_u8BB0"><a href="#u524D_u8BB0" class="headerlink" title="前记"></a>前记</h2><p>今天，收到一个bug fixed：用户在支付一个订单后收到N条短信提醒！</p>
-<h2 id="u6392_u67E5"><a href="#u6392_u67E5" class="headerlink" title="排查"></a>排查</h2><p>因为支付只能在生成环境调试，于是远程连接服务器，找到有返回值的地方，记录返回值，然后开始测试，支付了N次没有发现一个有问题，于是问测试部门，怎么出现这个问题的！测试部门问了下用户，是因为未付款，但是卖家点了发货，听到此消息，我不禁一呆，坑能不能有个底限啊！这种逆天的逻辑怎么能出现呢！！！为啥这么说呢，接下来洒家给你详细分析。</p>
-<p>先说下支付的逻辑：众所周知，不管是微信支付 还是 支付宝支付，都是异步进行的。也就是说用户在微信或者支付宝支付成功后，微信或者支付宝并不会第一时间把这个支付成功的消息返回给你，而是在接下来的一个小时或者更长时间内分N次给你支付成功的通知（有时候接收到第三方服务器返回success的时候还会发起多次的异步通知），所以一般业务逻辑在此处都会有一防止重复更新数据库的逻辑判断，在成功更新订单为已付款状态后，如果还收到异步通知，直接返回true。</p>
-<p>但是因为未付款发货这种逆天逻辑的存在，在网速慢或者服务器访问量大的时候，用户支付成功，服务器未收到支付成功的异步通知，这时候，脑残卖家点了发货，并且成功了更新了数据库的订单状态，这时候，服务器收到支付成功的通知（在收到支付成功时的业务逻辑是更新未付款的订单），这时候去更新数据表，发现数据不存在（因为订单状态为已发货，而不是未付款），更坑的是，订单表的类型居然是MyISAM类型的，居然不是InnoDB类型的，如此事务完全不能进行，在发现未更新数据的时候不能rollback，这样造成了，之前成功返回异步通知的逻辑不能执行，造成微信或者支付宝异步通知一次，则更新一次数据库…… </p>
-<p>这样的逻辑简直太坑爹了！！！以此提醒同僚们：<code>“ 程序有风险，入行需谨慎”</code> 啊！！！</p>
-<h2 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h2><ul>
-<li>更新订单表以及订单相关表为Innodb类型（MyISAM不支持事务处理）；</li>
-<li>更新响应支付通知条件，只要支付方返回支付成功通知，这边就更新为已付款状态，而不关心订单状态是否是未付款；</li>
-</ul>
-<p>这种逻辑真的不要再出现了啊！！！</p>
-<p>不说了，继续修复脏数据了……o(╯□╰)o，囧…… </p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1288,7 +1331,7 @@ RSA
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">29</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1302,7 +1345,7 @@ RSA
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
