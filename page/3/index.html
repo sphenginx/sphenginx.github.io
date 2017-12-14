@@ -232,6 +232,132 @@
             
               
                 
+                <a class="post-title-link" href="/2015/11/07/learn-php-composer/" itemprop="url">
+                  PHP依赖管理工具Composer入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-07T14:43:25+08:00" content="2015-11-07">
+              2015-11-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日薪越亿/" itemprop="url" rel="index">
+                    <span itemprop="name">日薪越亿</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/07/learn-php-composer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/07/learn-php-composer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <h2 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h2><p>Composer是PHP中的一个依赖管理工具. 它可以让你声明自己项目所依赖的库，然后它将会在项目中为你安装这些库。</p>
+<h2 id="u4F9D_u8D56_u7BA1_u7406"><a href="#u4F9D_u8D56_u7BA1_u7406" class="headerlink" title="依赖管理"></a>依赖管理</h2><p>Composer不是包管理器。是的，它实际上和”包”或者库打交道，但是它是以项目为单位进行管理，把它们安装到你项目中的一个目录（例如vendor）。默认情况下它不会以全局的方式安装任何东西。因此，它是一个依赖管理器。</p>
+<p>这个想法并不新鲜，Composer的灵感是来自于node的npm和ruby的bundler。但是目前PHP还没有一个这样的工具。<br><code>Composer</code>解决的问题是：</p>
+<ul>
+<li>你有一个依赖N多库的项目。</li>
+<li>这些库中一些又依赖于其他的库。</li>
+<li>你声明你所依赖的库。</li>
+<li>Composer找出哪些包的哪个版本将会被安装，然后安装它们（也就是把它们下载到你的项目中）。</li>
+</ul>
+<h2 id="u58F0_u660E_u4F9D_u8D56_u5173_u7CFB"><a href="#u58F0_u660E_u4F9D_u8D56_u5173_u7CFB" class="headerlink" title="声明依赖关系"></a>声明依赖关系</h2><p>假设你正在创建一个项目，然后你需要一个日志操作的库。你决定使用monolog。为了把它加入到你的项目中，你需要做的就是创建一个名为composer.json的文件，其描述这个项目的依赖关系。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"require"</span>: &#123;</span><br><span class="line">        <span class="string">"monolog/monolog"</span>: <span class="string">"1.2.*"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们简单的描述说我们的项目依赖某个monolog/monolog包，版本只要是以1.2开头的就行。</p>
+<h2 id="u7CFB_u7EDF_u8981_u6C42"><a href="#u7CFB_u7EDF_u8981_u6C42" class="headerlink" title="系统要求"></a>系统要求</h2><p>Composer需要PHP <strong>5.3.2+</strong> 才能运行。一些灵敏的PHP设置和编译选项也是必须的，不过安装程序 <code>installer</code> 会警告你任何不兼容的地方。<br>如果想要从源码而不是简单的从zip压缩包中安装软件包的话，你将需要git，svn或者hg，这依赖于软件包是通过什么进行版本控制的。<br>Composer是兼容多平台的，并且我们力争使其在Windows，Linux和OSX上的运行无差异。<br>安装 - *nix下载Composer可执行程序局部安装<br>为了获取Composer，我们需要做两件事。第一个是安装Composer（前面说过了，这意味下载它到你的项目中）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br></pre></td></tr></table></figure></p>
+<p>这只会检查一些PHP设置，然后下载<strong>composer.phar</strong>到你的工作目录中。这个文件是Composer二进制文件。它是一个PHAR <code>PHP archive</code>，PHP的归档格式，也可以像其他命令一样在命令行上运行。<br>你可以使用<code>--install-dir</code>选项，并且提供一个目标目录（可以是绝对或者相对路径）从而把Composer安装到一个指定的目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php -- --install-dir=bin</span><br></pre></td></tr></table></figure></p>
+<p>你可以把这个文件放到任何你想放的地方。如果你把它放到你的PATH中，你就可以全局访问它了。在类unix系统中你甚至可以使它可执行，并且调用的时候不需要php。<br>你可以执行这些命令从而能够在你的系统上简单的访问composer：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl <span class="operator">-s</span>S https://getcomposer.org/installer | php</span><br><span class="line">$ sudo mv composer.phar /usr/<span class="built_in">local</span>/bin/composer</span><br></pre></td></tr></table></figure></p>
+<p>然后，只需要执行composer命令来运行Composer，而不是php composer.phar。</p>
+<h2 id="Windows_u4F7F_u7528_u5B89_u88C5_u7A0B_u5E8F"><a href="#Windows_u4F7F_u7528_u5B89_u88C5_u7A0B_u5E8F" class="headerlink" title="Windows使用安装程序"></a>Windows使用安装程序</h2><p>这是在你的机器上安装Composer最简单的方法。<br>下载并运行<a href="https://getcomposer.org/Composer-Setup.exe" target="_blank" rel="external">Composer-Setup.exe</a>，它将会安装最新的Composer版本并且设置好PATH，然后你就可以在命令中的任何目录下调用composer了。<br>手动安装<br>切换到一个存在于PATH环境变量中的目录，然后执行安装代码片段来下载composer.phar：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&gt;<span class="built_in">cd</span> C:\bin</span><br><span class="line">C:\bin&gt;php -r <span class="string">"eval('?&gt;'.file_get_contents('https://getcomposer.org/installer'));"</span></span><br></pre></td></tr></table></figure></p>
+<p>创建一个新的以.bat结尾的composer文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\bin&gt;<span class="built_in">echo</span> @php <span class="string">"%~dp0composer.phar"</span> %*&gt;composer.bat</span><br></pre></td></tr></table></figure></p>
+<p>关闭你当前的终端。打开一个新的终端测试一下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\username&gt;composer -V</span><br><span class="line">Composer version <span class="number">27</span>d8904</span><br><span class="line"> </span><br><span class="line">C:\Users\username&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4F7F_u7528Composer"><a href="#u4F7F_u7528Composer" class="headerlink" title="使用Composer"></a>使用Composer</h2><p>我们接下来要使用Composer来安装项目的依赖。如果你在当前目录下没有一个叫作<strong>composer.json</strong>的文件，请跳到基本使用章节。<br>为了解决并下载依赖，运行install命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php composer.phar install</span><br></pre></td></tr></table></figure></p>
+<p>如果你是全局安装，并且目录下没有phar文件，那么运行这个：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer install</span><br></pre></td></tr></table></figure></p>
+<p>如果是上面的例子，这个操作将会下载monolog到vendor/monolog/monolog目录。<br>自动加载<br>除了下载库之外，Composer也会创建一个自动加载文件，这个文件能够自动加载Composer下载的库中所有的类。如果想使用它，只需要在你代码启动的地方加上如下代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require <span class="string">'vendor/autoload.php'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>哇哦！现在开始使用monolog吧! 如果想进一步学习Composer，继续阅读「基本使用」章节。 如果想要找需要的package，到Packagist。</p>
+<p>参考  英文原文：<a href="http://getcomposer.org/doc/00-intro.md" target="_blank" rel="external">http://getcomposer.org/doc/00-intro.md</a></p>
+<p>(完)</p>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/09/27/js-qrcode/" itemprop="url">
                   二维码图片生成器QRCode.js
                 </a>
@@ -1069,222 +1195,6 @@ RSA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/09/word-debris/" itemprop="url">
-                  闲言碎语
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-03-09T16:29:00+08:00" content="2015-03-09">
-              2015-03-09
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/闲言碎语/" itemprop="url" rel="index">
-                    <span itemprop="name">闲言碎语</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/03/09/word-debris/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/09/word-debris/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <h2 id="u788E_u8BED"><a href="#u788E_u8BED" class="headerlink" title="碎语"></a>碎语</h2><ul>
-<li><p>春有百花秋有月，夏有凉风冬有雪。若无闲事挂心头，便是人间好时节。</p>
-</li>
-<li><p>长大也许就是：学会了把亲情放在第一位、把友情放在第二位、把爱情放在够不到的位置；学会了不和父母顶嘴，学会为了维护友谊让步；学会了不想着依赖别人，做好自己，让别人依赖你；学会了认清自己，不是很好，也不算坏，不把头扬的很高，也不拿眼睛盯别人的脚；学会把喜欢的人放在心底，默默的不张扬。</p>
-</li>
-<li><p>爱自己最好的方式，就是成就自己!</p>
-</li>
-<li><p>这世界上，败给谁都可以释怀，败给自己最不能原谅!</p>
-</li>
-<li><p>启蒙就是有勇气去运用你自己的理性。</p>
-</li>
-<li><p>一件事你犹豫去不去做，那就是该立即动身做的。一个东西你犹豫买不买，那就是该买的。喜欢是非常难得的，尽管去争取你喜欢的，而不是费心找廉价点的替代品。对事物，对人都该如此。</p>
-</li>
-<li><p>I’d rather be a failure at something I love than a success at something I hate.</p>
-</li>
-<li><p>世间凡人皆慵于懒，天下才子皆毁于疏！ 困难，只是用来被击败的存在而已，只是因为现在的你不够强大。</p>
-</li>
-<li><p>如果懒惰暂时还未产生恶习或祸患，那通常也一定会产生沮丧。懒惰就像生锈一样，比操劳更能损害身体！</p>
-</li>
-<li><p>人应该是自己的主宰，主宰自己的身体和思想，而不应该让身体或者贪婪控制自己！！！</p>
-</li>
-<li><p>回归本质，学习编程语言还是为了低成本高效的解决实际的业务问题。</p>
-</li>
-<li><p>如果只看合乎自己口味的书，那你永远只能知道你已经知道的事情。</p>
-</li>
-<li><p>读万卷书不如行万里路，行万里路不如阅人无数！</p>
-</li>
-<li><p>怕什么真理无穷，进一寸有一寸的欢喜。</p>
-</li>
-<li><p>生活中真正的勇士向来是默默无闻的 喧哗不止的永远是自视清高的一群 。</p>
-</li>
-<li><p>黑暗既然一定要存在，就让阳光尽量多的普照大地吧。</p>
-</li>
-<li><p>声音比文字更能表达一个人的想法，和人花点时间坐下来交谈是不能代替的。</p>
-</li>
-<li><p>工作中积极发挥主观能动性是非常重要的，主动的去交流工作任务，完工后积极的去和同事进行反馈；这样可以减少一些交流或者说是等待成本，可以非常高效的完成任务！！！</p>
-</li>
-<li><p>迷茫的时候，才是学习的时候，才是认知世界的时候，才是真正走出自己的认知面见到世界的时候。</p>
-</li>
-<li><p>成熟的人需要面具。戴上，坚强面对社会；摘下，温柔面对家人。</p>
-</li>
-<li><p>当你知道了许多真实，虚假的东西，就没有那么多酸情了，你越来越沉默，越来越不想说。</p>
-</li>
-<li><p>最快的脚步不是跨越，而是持续；最慢的步伐不是小步，而是徘徊。</p>
-</li>
-<li><p>想要不再受人欺负，努力让自己变得更强大吧！ 想要保护身边的人，那就让自己变得更加强大吧！</p>
-</li>
-<li><p>你之所以一边埋怨自己，一边又安于现状，是因为你还没走到无路可走的时候。真正的选择，是别无选择！</p>
-</li>
-<li><p>以前很喜欢抱怨，后来每次抱怨前仔细想想，常发现其实最应该抱怨的对象是自己，是自己没能力改变这个状况，让自己脱困。… 这么想的好处是：抱怨频率少了，自己也努力要变得更强。</p>
-</li>
-<li><p>情怀就是，生活不只是眼前的苟且，还有诗（吃）和远方。</p>
-</li>
-<li><p>忙起来你觉得什么都不缺，空下来才知道你什么都没有。</p>
-</li>
-<li><p>穷在闹市无人问，富在深山有远亲。</p>
-</li>
-<li><p>岂能尽如人意，但求问心无愧！</p>
-</li>
-<li><p>你若笃定，社会便不浮躁！！！</p>
-</li>
-<li><p>想要不可替代,就必须与众不同！！！</p>
-</li>
-<li><p>真正的勇气是：无所畏惧地接受上天给你的一切！</p>
-</li>
-<li><p>进步，从鄙视自己开始。跟贱人吵架，不仅仅让人分不清谁是贱人，更容易让你停留在跟贱人一个层次；为烂事操心，不仅仅是对我们精力的一种浪费，更悲惨在这会麻痹神经，让我们误人为这就是生活常态并最终成为常态。</p>
-</li>
-<li><p>心情再差，也不要写在脸上，因为没有人喜欢看；日子再穷，也不要挂在嘴边，因为没有人无故给你钱；工作再累，也不要抱怨，因为没有人无条件替你干；生活再苦，也不要失去信念，因为美好将在明天； 品性再坏，也要孝顺父母，因为你也有老的那天。</p>
-</li>
-<li><p>人往往把自己看得过重才会患得患失，觉得别人必须理解自己。 其实，人要看轻自己，少一些自我，多一些换位，才能心生快乐。 所谓心有多大，快乐就有多少；包容越多，得到越多。</p>
-</li>
-<li><p>做人的最高境界不是一味低调，也不是一味张扬，而是始终如一的不卑不亢！</p>
-</li>
-<li><p>你是什么样的人，就会遇见什么样的人。让自己变得闪闪发光，努力站在人生的高处，自然会遇见更好的人和风景。</p>
-</li>
-<li><p>学会用一种幽默面对生活，不要把那些生命的历练当做生命的坎，记住一句忠告，生活因为感谢才倍加温暖，生活中的那些苦水，越吐才越苦，睁大眼睛去发现生活的光明与希望，内心多一些冷静与宽阔，不在乎苦难，苦难又奈何。</p>
-</li>
-<li><p>找伴侣就要找大度，大气的，一点亏都不肯吃的人，说一万遍“爱你”也别信。爱你的人会心甘情愿输给你。学会了迁就，懂得了忍让，才能证明深爱着你。他给你的或许不多，但有了宽容，就等于给了你全部!</p>
-</li>
-<li><p>我对全栈开发工程师的定义是，他们能够自己构建和部署一个完整的、可以工作的应用程序，而不需要其他任何人的帮助。那意味着他们能够编写前端、后端代码，能够配置服务器，当然还能够设计数据库表。</p>
-</li>
-</ul>
-<h2 id="u8BED_u5F55"><a href="#u8BED_u5F55" class="headerlink" title="语录"></a>语录</h2><ul>
-<li><p>“没手，没脚，没烦恼” ——尼克·胡哲</p>
-</li>
-<li><p>大胆假设，小心求证。 ——胡适</p>
-</li>
-<li><p>读书的目的是为了认识事物原理。为挑剔辩驳去读书是无聊。但也不可过于迷信书本。求知的目的不是为了吹嘘炫耀，而是为了寻找真理，启迪智慧。 ——培根</p>
-</li>
-<li><p>成长的很大一部分，是接受。接受分道扬镳，接受世事无常，接受孤独挫折，接受突如其来的无力感，接受自己的缺点。然后发自内心地去改变，找到一个平衡点。跟世界相处，首先是和自己相处。天黑开盏灯，落雨带把伞，难过先难过，但也不作死。—— 卢思浩</p>
-</li>
-<li><p>年轻人不要试图追求安全感，特别是年轻的时候，周遭环境从来都不会有绝对的安全感，如果你觉得安全，很可能暗藏危机。真正的安全感，来自你对自己的信心，是你每个阶段性目标的实现，而真正的归属感，在于你的内心深处，对自己命运的把控，因为你最大的对手永远都是自己。—— 李嘉诚</p>
-</li>
-<li><p>胜利迟早都属于有信心的人。换句话说，你若仅仅接受最好的，你最后得到的常常也就是最好的，只要你有自信。一个人胜任一件事，85%取决于态度，15%取决于智力，所以一个人的成败取决于他是否自信，假如这个人是自卑的，那自卑就会扼杀他的聪明才智，消磨他的意志。—— 杜根定律</p>
-</li>
-<li><p>你不应该给软件装后门，因为你不能保证这个后门只有好人能够使用。  —— 苹果CEO 库克</p>
-</li>
-<li><p>思考和知识应该是经常同步而行。不然，知识就是个死物，而且会毫无成果地消亡。—— 弗兰西斯.培根</p>
-</li>
-<li><p>阅读使人充实，会谈使人敏捷，写作使人精确。读史使人明智,读诗使人灵秀,演算使人精密,哲理使人深刻,伦理学使人庄重,逻辑修辞使人善辩. —— 培根</p>
-</li>
-<li><p>士人读书，第一要有志，第二要有识，第三要有恒。有志，则断不甘为下流。有识，则知学问无尽，不敢以一得自足；如河伯之观海，如井蛙之窥天，皆无见识也。有恒，则断无不成之事。此三者缺一不可。—— 曾国藩</p>
-</li>
-<li><p>好好珍惜身边的人，因为你不知道意外和明天哪一个会先到来。 —— 天津塘沽大爆炸。</p>
-</li>
-<li><p>人类面临有三大问题，顺序错不得。先要解决人和物之间的问题，接下来要解决人和人之间的问题，最后一定要解决人和自己内心之间的问题。 —— 梁漱溟</p>
-</li>
-<li><p>世界不是想象的那样，恐惧是世间最强大的武器！你是因为恐惧，所以你才愤怒；因为恐惧你才选择了逃避，让自己成为一个连是非都不分的人，你不知道，你永远不知道，要走在正确的路上需要多么大的勇气。别再因为害怕，找理由一次次为自己开脱。 —— 《痞子英雄》</p>
-</li>
-<li><p>我不敢休息，因为我没有存款；我不敢说累，因为我没有成就；我不敢偷懒，因为我还要生活；我能放弃选择，但是我不能选择放弃。所以坚强，拼搏是我唯一的选择！——  致此时的你。</p>
-</li>
-<li><p><a href="https://zh.wikiquote.org/zh-cn/%E5%BC%97%E8%98%AD%E8%A5%BF%E6%96%AF%C2%B7%E5%9F%B9%E6%A0%B9" target="_blank" rel="external">圣佛朗西斯·培根</a></p>
-</li>
-</ul>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1331,7 +1241,7 @@ RSA
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1345,7 +1255,7 @@ RSA
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

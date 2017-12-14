@@ -4,7 +4,7 @@
   <subtitle><![CDATA[独立之精神, 自由之思想！]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://sphenginx.github.io/"/>
-  <updated>2017-06-21T03:03:17.601Z</updated>
+  <updated>2017-12-14T06:18:29.630Z</updated>
   <id>http://sphenginx.github.io/</id>
   
   <author>
@@ -13,6 +13,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[MySQL 判断点是否在指定多边形区域内]]></title>
+    <link href="http://sphenginx.github.io/2017/12/13/mysql-polygon/"/>
+    <id>http://sphenginx.github.io/2017/12/13/mysql-polygon/</id>
+    <published>2017-12-13T12:03:01.000Z</published>
+    <updated>2017-12-14T06:18:29.630Z</updated>
+    <content type="html"><![CDATA[<p>近期接了个 <code>网格区域管理</code> 的需求， 具体实现为: 首先建立几个百度地图的坐标点， 其次可以在百度地图上画一个多边形，把需要的坐标点圈在多边形里面。  本文将介绍使用mysql判断点是否在指定多边形区域内的方法，提供完整流程。</p>
+<h2 id="1_u3001_u521B_u5EFA_u6D4B_u8BD5_u8868"><a href="#1_u3001_u521B_u5EFA_u6D4B_u8BD5_u8868" class="headerlink" title="1、创建测试表"></a>1、创建测试表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`zone`</span> (</span><br><span class="line"> <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line"> <span class="string">`polygongeo`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"> PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=MYISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：空间索引只能在存储引擎为MYISAM的表中创建（MySQL5.7版本以上可以用Innodb引擎）</p>
+</blockquote>
+<h2 id="2-_u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E"><a href="#2-_u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E" class="headerlink" title="2.插入多边形数据"></a>2.插入多边形数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> zone(polygongeo) <span class="keyword">values</span>(<span class="string">'POLYGON((1 1,1 5,5 5,5 1,1 1))'</span>);</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<code>polygongeo</code>包含的点必须是个闭环（第一个点 和 最后一个点必须一致） </p>
+</blockquote>
+<h2 id="3-_u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF"><a href="#3-_u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF" class="headerlink" title="3.判断点是否在多边形区域"></a>3.判断点是否在多边形区域</h2><h3 id="u6D4B_u8BD5_POINT_283_2C_4_29"><a href="#u6D4B_u8BD5_POINT_283_2C_4_29" class="headerlink" title="测试 POINT(3, 4)"></a>测试 POINT(3, 4)</h3><blockquote>
+<p><code>where</code> 查询可以用 <code>MBRWithin</code> 或者 <code>MBRCONTAINS</code>(参数位置交换)</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> AsText(polygongeo) <span class="keyword">from</span> zone <span class="keyword">where</span> MBRWithin(POLYGONFROMTEXT(<span class="string">'POINT(3 4)'</span>), GEOMFROMTEXT(polygongeo));</span></span><br></pre></td></tr></table></figure>
+<p>输出: POLYGON((1 1,1 5,5 5,5 1,1 1))<br>表示点 POINT(3, 4) 在多边形区域内 </p>
+<h3 id="u6D4B_u8BD5_POINT_286_2C_1_29"><a href="#u6D4B_u8BD5_POINT_286_2C_1_29" class="headerlink" title="测试 POINT(6, 1)"></a>测试 POINT(6, 1)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> AsText(polygongeo) <span class="keyword">from</span> zone <span class="keyword">where</span> MBRWithin(POLYGONFROMTEXT(<span class="string">'POINT(6 1)'</span>),  GEOMFROMTEXT(polygongeo));</span></span><br></pre></td></tr></table></figure>
+<p>输出: 空<br>表示点 POINT(6, 1) 在多边形区域外 </p>
+<h2 id="4_u3001_u53C2_u8003_u8D44_u6599"><a href="#4_u3001_u53C2_u8003_u8D44_u6599" class="headerlink" title="4、参考资料"></a>4、参考资料</h2><ul>
+<li><ol>
+<li><a href="http://blog.csdn.net/fdipzone/article/details/53896842" target="_blank" rel="external">mysql 判断点是否在指定多边形区域内</a>  </li>
+</ol>
+</li>
+<li><ol>
+<li><a href="http://www.voidcn.com/article/p-wpvigmsq-bkg.html" target="_blank" rel="external">mongodb 判断坐标是否在指定多边形区域内的方法</a>  </li>
+</ol>
+</li>
+<li><ol>
+<li><a href="http://www.voidcn.com/article/p-agdcdenf-da.html" target="_blank" rel="external">怎么判断一个点是否在多边形区域内</a></li>
+</ol>
+</li>
+</ul>
+<p>总结：mysql空间查询并不很适合地图坐标，因此查询地图坐标可以使用mongodb实现，参考：<a href="http://blog.csdn.net/fdipzone/article/details/52374630" target="_blank" rel="external">《mongodb 判断坐标是否在指定多边形区域内的方法》</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>近期接了个 <code>网格区域管理</code> 的需求， 具体实现为: 首先建立几个百度地图的坐标点， 其次可以在百度地图上画一个多边形，把需要的坐标点圈在多边形里面。  本文将介绍使用mysql判断点是否在指定多边形区域内的方法，提供完整流程。</p>
+<h2 id=]]>
+    </summary>
+    
+      <category term="MySQL" scheme="http://sphenginx.github.io/tags/MySQL/"/>
+    
+      <category term="polygon" scheme="http://sphenginx.github.io/tags/polygon/"/>
+    
+      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[成熟之解BY余秋雨]]></title>
@@ -1688,54 +1739,6 @@ RSA
       <category term="php" scheme="http://sphenginx.github.io/tags/php/"/>
     
       <category term="request" scheme="http://sphenginx.github.io/tags/request/"/>
-    
-      <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[SSDB：高性能数据库服务器]]></title>
-    <link href="http://sphenginx.github.io/2015/03/17/ssdb/"/>
-    <id>http://sphenginx.github.io/2015/03/17/ssdb/</id>
-    <published>2015-03-17T08:03:01.000Z</published>
-    <updated>2015-12-09T02:35:03.591Z</updated>
-    <content type="html"><![CDATA[<h2 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h2><p>SSDB是一个开源的<a href="http://ssdb.io/zh_cn/" target="_blank" rel="external">高性能数据库服务器</a>, 使用Google LevelDB作为存储引擎, 支持T级别的数据, 同时支持类似Redis中的zset和hash等数据结构, 在同时需求高性能和大数据的条件下, 作为Redis的替代方案.</p>
-<p>因为SSDB的最初目的是替代Redis, 所以SSDB会经常和Redis进行比较. 我们知道, Redis是经常的”主-从”架构, 虽然可以得到负载均衡以及数据跨地域备份的功能, 但无法实现高可用性. 考虑这种情况, Redis的主和从分别在两个IDC机房, 当主所在的机房出现故障时, 整个服务其实就相当于停止了. 因为所有写操作都失败, 而应用一般不会实现自动降级服务.</p>
-<p>而SSDB支持”双主”架构(SSDB分布式架构: <a href="https://github.com/ideawu/ssdb/wiki/Replication" target="_blank" rel="external">https://github.com/ideawu/ssdb/wiki/Replication</a>), 两个或者更多的主服务器. 当其中一部分出现故障时, 剩余的主服务器仍然能正常接受写请求, 从而保证服务正常可用, 再将DNS解析修改之后, 就能在机房故障后立即恢复100%可用.</p>
-<p>SSDB 被开发和开源出来后, 已经在生产环境经受了3个季度的考验,SSDB最先在”IT牛人博客聚合网站“进行尝试应用, 接着在360游戏部门得到大规模应用, 目前支撑的数据量已经达到数百G. 这些应用最初是使用Redis的, 迁移到SSDB的成本非常低, 涉及的代码改动极小.</p>
-<h2 id="u4F7F_u7528"><a href="#u4F7F_u7528" class="headerlink" title="使用"></a>使用</h2><h3 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h3><p>SSDB 的建议安装方式是源码编译安装, 建议运行环境是主流 Linux 发行版. 远程 SSH 登录你的服务器, 然后⽤用下⾯面的命令下载、编译、安装和运行:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[sphenginx@~]$ sudo wget --no-check-certificate https://github.com/ideawu/ssdb/archive/master.zip</span><br><span class="line">[sphenginx@~]$ sudo unzip master</span><br><span class="line">[sphenginx@~]$ <span class="built_in">cd</span> ssdb-master</span><br><span class="line">[sphenginx@~]$ sudo make</span><br><span class="line">[sphenginx@~]$ <span class="comment">#optional, install ssdb in /usr/local/ssdb</span></span><br><span class="line">[sphenginx@~]$ sudo make install</span><br><span class="line"><span class="comment"># start master</span></span><br><span class="line">[sphenginx@~]$ sudo ./ssdb-server ssdb.conf</span><br><span class="line"><span class="comment"># or start as daemon</span></span><br><span class="line">[sphenginx@~]$ sudo ./ssdb-server <span class="operator">-d</span> ssdb.conf</span><br><span class="line"><span class="comment"># ssdb command line</span></span><br><span class="line">[sphenginx@~]$ sudo ./ssdb-cli -p <span class="number">8888</span></span><br><span class="line"><span class="comment"># stop ssdb-server</span></span><br><span class="line">[sphenginx@~]$ sudo <span class="built_in">kill</span> `cat ./var/ssdb.pid`</span><br></pre></td></tr></table></figure>
-<p>SSDB 默认安装在 <code>/usr/local/ssdb</code> 目录下. ssdb-server 是服务器的程序, ssdb-cli 是命令行客户端.</p>
-<h3 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h3><p>SSDB配置文件: <a href="http://www.ideawu.net/blog/archives/733.html" target="_blank" rel="external">http://www.ideawu.net/blog/archives/733.html</a></p>
-<p>SSDB  附带的 ssdb.conf 你不用修改便可以使用. 如果你要高度定制, 还是需要修改一些配置的. 下面做介绍. SSDB 的配置文件是一种层级 key-value 的静态配置文件, 通过一个 TAB 缩进来表示层级关系. 以 ‘#’ 号开始的行是注释. 标准的配置文件如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ssdb-server config </span></span><br><span class="line"><span class="comment"># MUST indent by TAB!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># relative to path of this file, directory must exists </span></span><br><span class="line">work_dir = ./var </span><br><span class="line">pidfile = ./var/ssdb.pid</span><br><span class="line"></span><br><span class="line">server: </span><br><span class="line">        ip: <span class="number">127.0</span>.<span class="number">0.1</span> </span><br><span class="line">        port: <span class="number">8888</span> </span><br><span class="line">        <span class="comment"># bind to public ip </span></span><br><span class="line">        <span class="comment">#ip: 0.0.0.0 </span></span><br><span class="line">        <span class="comment"># format: allow|deny: all|ip_prefix </span></span><br><span class="line">        <span class="comment"># multiple allows or denys is supported </span></span><br><span class="line">        <span class="comment">#deny: all </span></span><br><span class="line">        <span class="comment">#allow: 127.0.0.1 </span></span><br><span class="line">        <span class="comment">#allow: 192.168</span></span><br><span class="line"></span><br><span class="line">replication: </span><br><span class="line">        slaveof: </span><br><span class="line">                <span class="comment"># to identify a master even if it moved(ip, port changed) </span></span><br><span class="line">                <span class="comment"># if set to empty or not defined, ip:port will be used. </span></span><br><span class="line">                <span class="comment">#id: svc_2 </span></span><br><span class="line">                <span class="comment"># sync|mirror, default is sync </span></span><br><span class="line">                <span class="comment">#type: sync </span></span><br><span class="line">                <span class="comment">#ip: 127.0.0.1 </span></span><br><span class="line">                <span class="comment">#port: 8889</span></span><br><span class="line"></span><br><span class="line">logger: </span><br><span class="line">        level: info </span><br><span class="line">        output: log.txt </span><br><span class="line">        rotate: </span><br><span class="line">                size: <span class="number">1000000000</span></span><br><span class="line"></span><br><span class="line">leveldb: </span><br><span class="line">        <span class="comment"># in MB </span></span><br><span class="line">        cache_size: <span class="number">500</span> </span><br><span class="line">        <span class="comment"># in KB </span></span><br><span class="line">        block_size: <span class="number">32</span> </span><br><span class="line">        <span class="comment"># in MB </span></span><br><span class="line">        write_buffer_size: <span class="number">64</span> </span><br><span class="line">        <span class="comment"># in MB </span></span><br><span class="line">        compaction_speed: <span class="number">1000</span> </span><br><span class="line">        <span class="comment"># yes|no </span></span><br><span class="line">        compression: no</span><br></pre></td></tr></table></figure>
-<p><strong>work_dir</strong>: ssdb-server 的工作目录, 启动后, 会在这个目录下生成 data 和 meta 两个目录, 用来保存 LevelDB 的数据库文件. 这个目录是相对于 ssdb.conf 的相对路径, 也可以指定绝对路径.</p>
-<p><strong>server</strong>: ip 和 port 指定了服务器要监听的 IP 和端口号. 如果 ip 是 0.0.0.0, 则表示绑定所有的 IP. 基于安全考虑, 可以将 ip 设置为 127.0.0.1, 这样, 只有本机可以访问了. 如果要做更严格的更多的网络安全限制, 就需要依赖操作系统的 iptables.</p>
-<p><strong>replication</strong>: 用于指定主从同步复制. slaveof.ip, slaveof.port 表示, 本台 SSDB 服务器将从这个目标机上同步数据(也即这个配置文件对应的服务器是 slave). 你可以参考 ssdb_slave.conf 的配制.</p>
-<p><strong>logger</strong>: 配置日志记录. level 是日志的级别, 可以是 trace|debug|info|error. output 是日志文件的名字, SSDB 支持日志轮转, 在日志文件达到一定大小后, 将 log.txt 改名, 然后创建一个新的 log.txt.</p>
-<p><strong>leveldb</strong>: 配置 LevelDB 的参数. 你一般想要修改的是 cache_size 参数, 用于指定缓存大小. 适当的缓存可以提高读性能, 但是过大的缓存会影响写性能.</p>
-<h3 id="u4F7F_u7528-1"><a href="#u4F7F_u7528-1" class="headerlink" title="使用"></a>使用</h3><p>在使用自带的 ssdb.conf 配置文件时, SSDB 生成的日志文件按体积进行分割, 仅此而已. 所以, 你需要编写自己的 crontab 进行日志压缩和定期清理.<br>如果出现服务器掉电, kernel panic 等系统故障, 在系统重新启动之后, 你需要⼿手动删除 ssdb的 PID 文件 ssdb.pid, 然后才能启动 ssdb-server.另外, 你可以参考下面的做法, 在系统启动和关机时, 启动和关闭 ssdb-server: </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /bin/sh </span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># chkconfig:345 98 98 </span></span><br><span class="line"><span class="comment"># description: SSDB is a fast NoSQL database for storing big list of billions of elements </span></span><br><span class="line"><span class="comment"># processname:ssdb</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span> </span><br><span class="line">  <span class="string">'start'</span>) </span><br><span class="line">    /usr/<span class="built_in">local</span>/ssdb/ssdb-server <span class="operator">-d</span> /usr/<span class="built_in">local</span>/ssdb/ssdb.conf </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ssdb started."</span> </span><br><span class="line">    ;; </span><br><span class="line">  <span class="string">'stop'</span>) </span><br><span class="line">    <span class="built_in">kill</span> `cat /usr/<span class="built_in">local</span>/ssdb/var/ssdb.pid` </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ssdb stopped."</span> </span><br><span class="line">    ;; </span><br><span class="line">  <span class="string">'restart'</span>) </span><br><span class="line">    <span class="built_in">kill</span> `cat /usr/<span class="built_in">local</span>/ssdb/var/ssdb.pid` </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ssdb stopped."</span> </span><br><span class="line">    sleep <span class="number">0.5</span> </span><br><span class="line">    /usr/<span class="built_in">local</span>/ssdb/ssdb-server <span class="operator">-d</span> /usr/<span class="built_in">local</span>/ssdb/ </span><br><span class="line">ssdb.conf </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"ssdb started."</span> </span><br><span class="line">    ;; </span><br><span class="line">  *) </span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"Usage: <span class="variable">$0</span> &#123;start|stop|restart&#125;"</span> </span><br><span class="line">    <span class="built_in">exit</span> <span class="number">1</span> </span><br><span class="line">  ;; </span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>把文件保存为 /etc/init.d/ssdb.sh(需要 root 权限), 然后执行:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[sphenginx@~]$ chmod ugo+x /etc/init.d/ssdb.sh</span><br></pre></td></tr></table></figure></p>
-<p>把 ssdb加入chkconfig，并设置开机启动。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[sphenginx@~]$ sudo chkconfig --add ssdb.sh </span><br><span class="line">[sphenginx@~]$ chkconfig ssdb.sh on</span><br></pre></td></tr></table></figure></p>
-<p>启动、停止的命令如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[sphenginx@~]$ sudo service ssdb.sh stop </span><br><span class="line">ssdb stopped. </span><br><span class="line">[sphenginx@~]$ sudo service ssdb.sh start </span><br><span class="line">ssdb <span class="number">1.6</span>.<span class="number">7</span> </span><br><span class="line">Copyright (c) <span class="number">2012</span>-<span class="number">2013</span> ideawu.com</span><br><span class="line">ssdb started.</span><br></pre></td></tr></table></figure></p>
-<h3 id="Win_platform"><a href="#Win_platform" class="headerlink" title="Win platform"></a>Win platform</h3><p>项目代码中已经加入PHP 的api，API地址：<a href="http://ssdb.io/docs/zh_cn/php/index.html" target="_blank" rel="external">http://ssdb.io/docs/zh_cn/php/index.html</a><br>也可以安装一下SSDB的管理软件：<a href="https://github.com/ssdb/phpssdbadmin" target="_blank" rel="external">PSA</a><br>另外, SSDB 提供了预编译的 Windows 下的可执行安装包, Windows 用户可以下载后直接运行 ssdb-server.exe. Windows 下的 SSDB 依赖 cygwin, 所以附带了几个 dll 文件. 使用方式:</p>
-<ol>
-<li>从 <a href="https://github.com/ideawu/ssdb-bin" target="_blank" rel="external">https://github.com/ideawu/ssdb-bin</a> 下载可执行文件 ssdb-server.exe 和相关 dll.  </li>
-<li>从 <a href="https://github.com/ideawu/ssdb" target="_blank" rel="external">https://github.com/ideawu/ssdb</a> 下载 ssdb.conf 配置文件.  </li>
-<li>解压, 然后从开始菜单中运行 cmd.exe.  </li>
-<li>在 cmd.exe 启动后, cd ssdb-server.exe 所在的目录.  </li>
-<li>执行 ssdb-server.exe ssdb.conf  </li>
-</ol>
-<h2 id="More_info"><a href="#More_info" class="headerlink" title="More info"></a>More info</h2><p>SSDB开源数据库项目地址: <a href="https://github.com/ideawu/ssdb" target="_blank" rel="external">https://github.com/ideawu/ssdb</a><br>作者博客地址： <a href="http://www.ideawu.net/blog/ssdb" target="_blank" rel="external">http://www.ideawu.net/blog/ssdb</a></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="u4ECB_u7ECD"><a href="#u4ECB_u7ECD" class="headerlink" title="介绍"></a>介绍</h2><p>SSDB是一个开源的<a href="http://ssdb.io/zh_cn/" target="_b]]>
-    </summary>
-    
-      <category term="NoSql" scheme="http://sphenginx.github.io/tags/NoSql/"/>
-    
-      <category term="SSDB" scheme="http://sphenginx.github.io/tags/SSDB/"/>
     
       <category term="日薪越亿" scheme="http://sphenginx.github.io/categories/%E6%97%A5%E8%96%AA%E8%B6%8A%E4%BA%BF/"/>
     
