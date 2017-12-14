@@ -293,22 +293,22 @@
           <span itemprop="articleBody">
             
               <p>近期接了个 <code>网格区域管理</code> 的需求， 具体实现为: 首先建立几个百度地图的坐标点， 其次可以在百度地图上画一个多边形，把需要的坐标点圈在多边形里面。  本文将介绍使用mysql判断点是否在指定多边形区域内的方法，提供完整流程。</p>
-<h2 id="1_u3001_u521B_u5EFA_u6D4B_u8BD5_u8868"><a href="#1_u3001_u521B_u5EFA_u6D4B_u8BD5_u8868" class="headerlink" title="1、创建测试表"></a>1、创建测试表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`zone`</span> (</span><br><span class="line"> <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line"> <span class="string">`polygongeo`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"> PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=MYISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span></span><br></pre></td></tr></table></figure>
+<h2 id="u521B_u5EFA_u6D4B_u8BD5_u8868"><a href="#u521B_u5EFA_u6D4B_u8BD5_u8868" class="headerlink" title="创建测试表"></a>创建测试表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`zone`</span> (</span><br><span class="line"> <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line"> <span class="string">`polygongeo`</span> <span class="built_in">text</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line"> PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=MYISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：空间索引只能在存储引擎为MYISAM的表中创建（MySQL5.7版本以上可以用Innodb引擎）</p>
 </blockquote>
-<h2 id="2-_u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E"><a href="#2-_u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E" class="headerlink" title="2.插入多边形数据"></a>2.插入多边形数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> zone(polygongeo) <span class="keyword">values</span>(<span class="string">'POLYGON((1 1,1 5,5 5,5 1,1 1))'</span>);</span></span><br></pre></td></tr></table></figure>
+<h2 id="u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E"><a href="#u63D2_u5165_u591A_u8FB9_u5F62_u6570_u636E" class="headerlink" title="插入多边形数据"></a>插入多边形数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">insert</span> <span class="keyword">into</span> zone(polygongeo) <span class="keyword">values</span>(<span class="string">'POLYGON((1 1,1 5,5 5,5 1,1 1))'</span>);</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意：<code>polygongeo</code>包含的点必须是个闭环（第一个点 和 最后一个点必须一致） </p>
 </blockquote>
-<h2 id="3-_u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF"><a href="#3-_u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF" class="headerlink" title="3.判断点是否在多边形区域"></a>3.判断点是否在多边形区域</h2><h3 id="u6D4B_u8BD5_POINT_283_2C_4_29"><a href="#u6D4B_u8BD5_POINT_283_2C_4_29" class="headerlink" title="测试 POINT(3, 4)"></a>测试 POINT(3, 4)</h3><blockquote>
+<h2 id="u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF"><a href="#u5224_u65AD_u70B9_u662F_u5426_u5728_u591A_u8FB9_u5F62_u533A_u57DF" class="headerlink" title="判断点是否在多边形区域"></a>判断点是否在多边形区域</h2><h3 id="u6D4B_u8BD5_POINT_283_2C_4_29"><a href="#u6D4B_u8BD5_POINT_283_2C_4_29" class="headerlink" title="测试 POINT(3, 4)"></a>测试 POINT(3, 4)</h3><blockquote>
 <p><code>where</code> 查询可以用 <code>MBRWithin</code> 或者 <code>MBRCONTAINS</code>(参数位置交换)</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> AsText(polygongeo) <span class="keyword">from</span> zone <span class="keyword">where</span> MBRWithin(POLYGONFROMTEXT(<span class="string">'POINT(3 4)'</span>), GEOMFROMTEXT(polygongeo));</span></span><br></pre></td></tr></table></figure>
 <p>输出: POLYGON((1 1,1 5,5 5,5 1,1 1))<br>表示点 POINT(3, 4) 在多边形区域内 </p>
 <h3 id="u6D4B_u8BD5_POINT_286_2C_1_29"><a href="#u6D4B_u8BD5_POINT_286_2C_1_29" class="headerlink" title="测试 POINT(6, 1)"></a>测试 POINT(6, 1)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">select</span> AsText(polygongeo) <span class="keyword">from</span> zone <span class="keyword">where</span> MBRWithin(POLYGONFROMTEXT(<span class="string">'POINT(6 1)'</span>),  GEOMFROMTEXT(polygongeo));</span></span><br></pre></td></tr></table></figure>
 <p>输出: 空<br>表示点 POINT(6, 1) 在多边形区域外 </p>
-<h2 id="4_u3001_u53C2_u8003_u8D44_u6599"><a href="#4_u3001_u53C2_u8003_u8D44_u6599" class="headerlink" title="4、参考资料"></a>4、参考资料</h2><ul>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><ol>
 <li><a href="http://blog.csdn.net/fdipzone/article/details/53896842" target="_blank" rel="external">mysql 判断点是否在指定多边形区域内</a>  </li>
 </ol>
@@ -319,6 +319,10 @@
 </li>
 <li><ol>
 <li><a href="http://www.voidcn.com/article/p-agdcdenf-da.html" target="_blank" rel="external">怎么判断一个点是否在多边形区域内</a></li>
+</ol>
+</li>
+<li><ol>
+<li><a href="https://www.chengxiaobai.cn/sql/mysql-according-to-the-latitude-and-longitude-search-sort.html" target="_blank" rel="external">mysql根据经纬度查找排序</a></li>
 </ol>
 </li>
 </ul>
