@@ -1,0 +1,44 @@
+<html data-dpr="1">
+<head>
+	<meta name="full-screen" content="yes">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>阴阳DIV+CSS</title>
+	<style type="text/css">
+	#yin-yang {
+		width: 96px;
+		height: 48px;
+		border-color: red;
+		border-style: solid;
+		border-radius: 100%;
+		border-width: 2px 2px 50px 2px;
+		background: #eee;
+		position: relative;
+	}
+	#yin-yang:before {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
+		background: #eee;
+		border: 18px solid red;
+		border-radius: 100%;
+		width: 12px;
+		height: 12px;
+	}
+	#yin-yang:after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		right: 0;
+		background: red;
+		border: 18px solid #eee;
+		border-radius: 100%;
+		width: 12px;
+		height: 12px;
+	}
+	</style>
+</head>
+<body>
+	<div id="yin-yang"></div>
+</body>
+</html>
