@@ -1,5 +1,5 @@
 #app {
-	width: 900px;
+	max-width: 800px;
 	overflow: hidden;
     border: 1px solid #58a2fb;
     background: #8ac7ff;
